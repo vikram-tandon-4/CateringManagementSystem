@@ -1,3 +1,39 @@
 <resources>
     <string name="app_name">Catering System</string>
+    <string name="request_event">Request Event</string>
+
+    <string-array name="category_array">
+        <item>Caterer</item>
+        <item>Caterer Staff</item>
+        <item>User</item>
+    </string-array>
+
+    <string-array name="meal_type_array">
+        <item>Meal Type</item>
+        <item>Breakfast</item>
+        <item>Lunch</item>
+        <item>Supper</item>
+    </string-array>
+
+    <string-array name="meal_formality_array">
+        <item>Meal Formality</item>
+        <item>Breakfast</item>
+        <item>Lunch</item>
+        <item>Supper</item>
+    </string-array>
+
+    <string-array name="drink_type_array">
+        <item>Drink</item>
+        <item>Breakfast</item>
+        <item>Lunch</item>
+        <item>Supper</item>
+    </string-array>
+
+    <string-array name="occasion_type_array">
+        <item>Occasion</item>
+        <item>Breakfast</item>
+        <item>Lunch</item>
+        <item>Supper</item>
+    </string-array>
+
 </resources>
