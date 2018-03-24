@@ -2,6 +2,7 @@
     <string name="app_name">Catering System</string>
     <string name="request_event">Request Event</string>
     <string name="registration">Registration</string>
+    <string name="available_halls">Available Halls</string>
 
     <string-array name="category_array">
         <item>Caterer</item>
