@@ -24,7 +24,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private Context mContext;
     private Spinner spinnerCategory;
-    private ArrayAdapter<String> simpleSpinnerAdaptor;
+    private ArrayAdapter<String> simpleSpinnerAdaptor ;
     private Toolbar toolbar;
     private TextView tvTbTitle;
 
@@ -65,12 +65,9 @@ Adding categories to dropdown
  */
     private void setSystemUserCategory(){
 
-
-
         ArrayList<String> systemUserCategory=new ArrayList<>();
 
         systemUserCategory= new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.category_array)));
-
 
         spinnerCategory.setSelection(0);
         simpleSpinnerAdaptor = new SimpleSpinnerAdaptor(mContext, android.R.layout.simple_spinner_item, systemUserCategory);

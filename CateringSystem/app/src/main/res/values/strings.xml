@@ -30,7 +30,7 @@
         <item>Supper</item>
     </string-array>
 
-    <string-array name="occasion_type_array">
+    <string-array name="ocassion_type_array">
         <item>Occasion</item>
         <item>Breakfast</item>
         <item>Lunch</item>
