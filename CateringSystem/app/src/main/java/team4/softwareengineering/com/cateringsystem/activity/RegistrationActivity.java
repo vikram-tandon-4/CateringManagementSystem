@@ -20,7 +20,7 @@ import team4.softwareengineering.com.cateringsystem.adapter.SimpleSpinnerAdaptor
  * Created by vikra on 3/24/2018.
  */
 
-public class RegisterationActivity extends AppCompatActivity {
+public class RegistrationActivity extends AppCompatActivity {
 
     private Context mContext;
     private Spinner spinnerCategory;
@@ -53,7 +53,7 @@ public class RegisterationActivity extends AppCompatActivity {
             }
         });
 
-        tvTbTitle.setText(R.string.request_event);
+        tvTbTitle.setText(R.string.registration);
 
         spinnerCategory = (Spinner) findViewById(R.id.spinnerCategory);
         setSystemUserCategory();

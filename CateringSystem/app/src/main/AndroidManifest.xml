@@ -15,7 +15,7 @@
 
         </activity>
 
-        <activity android:name=".activity.RegisterationActivity"
+        <activity android:name=".activity.RegistrationActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden">

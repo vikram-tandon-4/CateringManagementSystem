@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Catering System</string>
     <string name="request_event">Request Event</string>
+    <string name="registration">Registration</string>
 
     <string-array name="category_array">
         <item>Caterer</item>
