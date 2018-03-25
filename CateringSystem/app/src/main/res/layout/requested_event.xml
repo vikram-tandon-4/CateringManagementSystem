@@ -41,8 +41,9 @@
                 android:layout_below="@id/text1"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_alignBaseline="@id/review"
+
                 android:text="Create Event"/>
+            <!--android:layout_alignBaseline="@id/review"-->
             <Button
                 android:id="@+id/review"
                 android:layout_width="wrap_content"
@@ -74,9 +75,10 @@
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:layout_alignParentStart="true"
-            android:layout_alignBaseline="@id/text2"
+
             android:text="Birthday"
             />
+        <!--android:layout_alignBaseline="@id/text2"-->
         <TextView
             android:id="@+id/text4"
             android:layout_width="wrap_content"
@@ -93,8 +95,9 @@
             android:layout_below="@id/text3"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_alignBaseline="@id/review1"
+
             android:text="Create Event"/>
+        <!--android:layout_alignBaseline="@id/review1"-->
         <Button
             android:id="@+id/review1"
             android:layout_width="wrap_content"
