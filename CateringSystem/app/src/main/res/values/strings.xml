@@ -3,6 +3,8 @@
     <string name="request_event">Request Event</string>
     <string name="registration">Registration</string>
     <string name="available_halls">Available Halls</string>
+    <string name="reserved_events">Reserved Events</string>
+    <string name="assigned_events">Assigned Events</string>
 
     <string-array name="category_array">
         <item>Caterer</item>
