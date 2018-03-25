@@ -28,8 +28,6 @@ public class AssignedEventDetails extends AppCompatActivity {
     private Context mContext;
     private Toolbar toolbar;
     private TextView tvTbTitle;
-    private ReservedEventsAdapter mAdapter;
-    private RecyclerView rvReservedEvents;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,14 +54,6 @@ public class AssignedEventDetails extends AppCompatActivity {
 
         tvTbTitle.setText(R.string.assigned_events);
 
-        rvReservedEvents = (RecyclerView)findViewById(R.id.rvReservedEvents);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        rvReservedEvents.setLayoutManager(mLayoutManager);
-        rvReservedEvents.setItemAnimator(new DefaultItemAnimator());
-
-        mAdapter = new ReservedEventsAdapter(getEventsData(), mContext);
-        rvReservedEvents.setAdapter(mAdapter);
-
         toolbar.inflateMenu(R.menu.home);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -72,57 +62,10 @@ public class AssignedEventDetails extends AppCompatActivity {
                     case R.id.logout:
                         Toast.makeText(mContext, "Logout",Toast.LENGTH_LONG).show();
                         return true;
-
                 }
                 return false;
             }
         });
     }
 
-    private ArrayList<ReservedEventsModel> getEventsData(){
-
-        ArrayList<ReservedEventsModel> reserved = new ArrayList<>();
-
-        ReservedEventsModel reservedEventsModel = new ReservedEventsModel();
-        reservedEventsModel.setDate("03/03/2018");
-        reservedEventsModel.setEventId("E0103452018");
-        reservedEventsModel.setEventName("Birthday");
-        reservedEventsModel.setStatus("Status: Booked");
-        reservedEventsModel.setTime("4:00 PM");
-        reserved.add(reservedEventsModel);
-
-        reservedEventsModel = new ReservedEventsModel();
-        reservedEventsModel.setDate("03/05/2018");
-        reservedEventsModel.setEventId("E01034532018");
-        reservedEventsModel.setEventName("Farewell");
-        reservedEventsModel.setStatus("Status: Cancelled");
-        reservedEventsModel.setTime("5:00 PM");
-        reserved.add(reservedEventsModel);
-
-        reservedEventsModel = new ReservedEventsModel();
-        reservedEventsModel.setDate("04/03/2018");
-        reservedEventsModel.setEventId("E0105632018");
-        reservedEventsModel.setEventName("Christmas");
-        reservedEventsModel.setStatus("Status: Booked");
-        reservedEventsModel.setTime("6:00 PM");
-        reserved.add(reservedEventsModel);
-
-        reservedEventsModel = new ReservedEventsModel();
-        reservedEventsModel.setDate("04/03/2018");
-        reservedEventsModel.setEventId("E0563032018");
-        reservedEventsModel.setEventName("Birthday");
-        reservedEventsModel.setStatus("Status: Cancelled");
-        reservedEventsModel.setTime("7:00 PM");
-        reserved.add(reservedEventsModel);
-
-        reservedEventsModel = new ReservedEventsModel();
-        reservedEventsModel.setDate("03/03/2018");
-        reservedEventsModel.setEventId("E0103056018");
-        reservedEventsModel.setEventName("Farewell");
-        reservedEventsModel.setStatus("Status: Pending");
-        reservedEventsModel.setTime("8:00 PM");
-        reserved.add(reservedEventsModel);
-
-        return reserved;
-    }
 }
