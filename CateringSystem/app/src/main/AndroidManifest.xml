@@ -49,7 +49,14 @@
     </activity>
 
         <activity
-            android:name=".activity.AssignedEventsActivity"
+        android:name=".activity.AssignedEventsActivity"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme.NoActionBar">
+
+    </activity>
+
+        <activity
+            android:name=".activity.ForgotPasswordActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
 
