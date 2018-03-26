@@ -5,10 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import team4.softwareengineering.com.cateringsystem.R;
 
@@ -16,7 +14,7 @@ import team4.softwareengineering.com.cateringsystem.R;
  * Created by vikra on 3/24/2018.
  */
 
-public class UpdateProfileActivity extends AppCompatActivity {
+public class CatererHomePageActivity extends AppCompatActivity {
 
     private Context mContext;
     private Toolbar toolbar;
@@ -25,11 +23,10 @@ public class UpdateProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update_profile);
+        setContentView(R.layout.activity_caterer_homepage);
 
         mContext= this;
         init();
-
     }
 
     private void init() {
@@ -45,20 +42,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
             }
         });
 
-        tvTbTitle.setText("Update Profile");
+        tvTbTitle.setText("Caterer Home");
 
-        toolbar.inflateMenu(R.menu.home);
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.logout:
-                        Toast.makeText(mContext, "Logout",Toast.LENGTH_LONG).show();
-                        return true;
-                }
-                return false;
-            }
-        });
     }
-
 }
