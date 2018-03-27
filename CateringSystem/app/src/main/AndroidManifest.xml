@@ -34,9 +34,14 @@
         </activity>
 
         <activity
-            android:name=".activity.AvailableHalls"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        android:name=".activity.AvailableHalls"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme.NoActionBar">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
 
         <activity
             android:name=".activity.ReservedEventsActivity"
@@ -87,10 +92,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
 
         </activity>
 
@@ -108,11 +110,31 @@
 
         </activity>
         <activity
-            android:name=".activity.AssignedEventDetails"
+        android:name=".activity.AssignedEventDetails"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme.NoActionBar">
+
+    </activity>
+
+        <activity
+            android:name=".activity.CreatedEventListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
+        <activity
+        android:name=".activity.RequestedEventListActivity"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme.NoActionBar">
+
+    </activity>
+
+        <activity
+            android:name=".activity.AvailableStaffListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
     </application>
-
 </manifest>

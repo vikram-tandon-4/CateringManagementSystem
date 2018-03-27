@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_height="match_parent" android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<ScrollView android:layout_height="match_parent" android:layout_width="match_parent"-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android">-->
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
 
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:orientation="vertical">-->
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:gravity="center"
-        android:text="Assigned Events List"
-        android:textColor="#9e9ca3"
-        android:textSize="20dp"
-        android:textStyle="bold" />
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:layout_marginBottom="10dp"-->
+        <!--android:gravity="center"-->
+        <!--android:text="Assigned Events List"-->
+        <!--android:textColor="#9e9ca3"-->
+        <!--android:textSize="20dp"-->
+        <!--android:textStyle="bold" />-->
 
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -88,213 +89,213 @@
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 
-    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/card_view1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        android:baselineAligned="false">
+    <!--<android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
+        <!--android:id="@+id/card_view1"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--android:layout_marginRight="10dp"-->
+        <!--android:layout_marginBottom="10dp"-->
+        <!--android:baselineAligned="false">-->
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:padding="8dp"
-            >
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="8dp"-->
+            <!--android:padding="8dp"-->
+            <!--&gt;-->
 
-            <TextView
-                android:id="@+id/text6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:text="Wedding"
-                android:textSize="18dp"
-                android:textStyle="bold" />
+            <!--<TextView-->
+                <!--android:id="@+id/text6"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:text="Wedding"-->
+                <!--android:textSize="18dp"-->
+                <!--android:textStyle="bold" />-->
 
-            <TextView
-                android:id="@+id/text7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:text="E1201"
-                android:textSize="18dp"
-                android:textStyle="bold" />
+            <!--<TextView-->
+                <!--android:id="@+id/text7"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:text="E1201"-->
+                <!--android:textSize="18dp"-->
+                <!--android:textStyle="bold" />-->
 
-            <TextView
-                android:id="@+id/text8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/text6"
-                android:layout_alignParentLeft="true"
-                android:text="03/07/2018"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                />
+            <!--<TextView-->
+                <!--android:id="@+id/text8"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/text6"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:text="03/07/2018"-->
+                <!--android:textSize="18dp"-->
+                <!--android:textStyle="bold"-->
+                <!--/>-->
 
-            <TextView
-                android:id="@+id/text9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/text7"
-                android:layout_alignParentRight="true"
-                android:text="07:00 PM"
-                android:textSize="18dp"
-                android:textStyle="bold" />
+            <!--<TextView-->
+                <!--android:id="@+id/text9"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/text7"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:text="07:00 PM"-->
+                <!--android:textSize="18dp"-->
+                <!--android:textStyle="bold" />-->
 
-            <TextView
-                android:id="@+id/text10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/text8"
-                android:text="Status: Assigned"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-        </RelativeLayout>
-    </android.support.v7.widget.CardView>
-    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/card_view2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        android:baselineAligned="false">
+            <!--<TextView-->
+                <!--android:id="@+id/text10"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:layout_below="@+id/text8"-->
+                <!--android:text="Status: Assigned"-->
+                <!--android:textSize="18dp"-->
+                <!--android:textStyle="bold" />-->
+        <!--</RelativeLayout>-->
+    <!--</android.support.v7.widget.CardView>-->
+    <!--<android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
+        <!--android:id="@+id/card_view2"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--android:layout_marginRight="10dp"-->
+        <!--android:layout_marginBottom="10dp"-->
+        <!--android:baselineAligned="false">-->
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:padding="8dp"
-            >
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="8dp"-->
+            <!--android:padding="8dp"-->
+            <!--&gt;-->
 
-            <TextView
-                android:id="@+id/text11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:text="Engagement"
-                android:textSize="18dp"
-                android:textStyle="bold" />
+            <!--<TextView-->
+                <!--android:id="@+id/text11"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:text="Engagement"-->
+                <!--android:textSize="18dp"-->
+                <!--android:textStyle="bold" />-->
 
-            <TextView
-                android:id="@+id/text12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:text="E1202"
-                android:textSize="18dp"
-                android:textStyle="bold" />
+            <!--<TextView-->
+                <!--android:id="@+id/text12"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:text="E1202"-->
+                <!--android:textSize="18dp"-->
+                <!--android:textStyle="bold" />-->
 
-            <TextView
-                android:id="@+id/text13"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/text11"
-                android:layout_alignParentLeft="true"
-                android:text="03/11/2018"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                />
+            <!--<TextView-->
+                <!--android:id="@+id/text13"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/text11"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:text="03/11/2018"-->
+                <!--android:textSize="18dp"-->
+                <!--android:textStyle="bold"-->
+                <!--/>-->
 
-            <TextView
-                android:id="@+id/text14"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/text12"
-                android:layout_alignParentRight="true"
-                android:text="02:00 PM"
-                android:textSize="18dp"
-                android:textStyle="bold" />
+            <!--<TextView-->
+                <!--android:id="@+id/text14"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/text12"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:text="02:00 PM"-->
+                <!--android:textSize="18dp"-->
+                <!--android:textStyle="bold" />-->
 
-            <TextView
-                android:id="@+id/text15"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/text13"
-                android:text="Status: Assigned"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-        </RelativeLayout>
-    </android.support.v7.widget.CardView>
-    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/card_view3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        android:baselineAligned="false">
+            <!--<TextView-->
+                <!--android:id="@+id/text15"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:layout_below="@+id/text13"-->
+                <!--android:text="Status: Assigned"-->
+                <!--android:textSize="18dp"-->
+                <!--android:textStyle="bold" />-->
+        <!--</RelativeLayout>-->
+    <!--</android.support.v7.widget.CardView>-->
+    <!--<android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
+        <!--android:id="@+id/card_view3"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--android:layout_marginRight="10dp"-->
+        <!--android:layout_marginBottom="10dp"-->
+        <!--android:baselineAligned="false">-->
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:padding="8dp"
-            >
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="8dp"-->
+            <!--android:padding="8dp"-->
+            <!--&gt;-->
 
-            <TextView
-                android:id="@+id/text16"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:text="Farewell Party"
-                android:textSize="18dp"
-                android:textStyle="bold" />
+            <!--<TextView-->
+                <!--android:id="@+id/text16"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:text="Farewell Party"-->
+                <!--android:textSize="18dp"-->
+                <!--android:textStyle="bold" />-->
 
-            <TextView
-                android:id="@+id/text17"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:text="E1203"
-                android:textSize="18dp"
-                android:textStyle="bold" />
+            <!--<TextView-->
+                <!--android:id="@+id/text17"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:text="E1203"-->
+                <!--android:textSize="18dp"-->
+                <!--android:textStyle="bold" />-->
 
-            <TextView
-                android:id="@+id/text18"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/text16"
-                android:layout_alignParentLeft="true"
-                android:text="03/21/2018"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                />
+            <!--<TextView-->
+                <!--android:id="@+id/text18"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/text16"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:text="03/21/2018"-->
+                <!--android:textSize="18dp"-->
+                <!--android:textStyle="bold"-->
+                <!--/>-->
 
-            <TextView
-                android:id="@+id/text19"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/text17"
-                android:layout_alignParentRight="true"
-                android:text="06:00 PM"
-                android:textSize="18dp"
-                android:textStyle="bold" />
+            <!--<TextView-->
+                <!--android:id="@+id/text19"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/text17"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:text="06:00 PM"-->
+                <!--android:textSize="18dp"-->
+                <!--android:textStyle="bold" />-->
 
-            <TextView
-                android:id="@+id/text20"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/text18"
-                android:text="Status: Cancelled"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-        </RelativeLayout>
-    </android.support.v7.widget.CardView>
+            <!--<TextView-->
+                <!--android:id="@+id/text20"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:layout_below="@+id/text18"-->
+                <!--android:text="Status: Cancelled"-->
+                <!--android:textSize="18dp"-->
+                <!--android:textStyle="bold" />-->
+        <!--</RelativeLayout>-->
+    <!--</android.support.v7.widget.CardView>-->
 
-</LinearLayout>
-</ScrollView>
+<!--</LinearLayout>-->
+<!--</ScrollView>-->
