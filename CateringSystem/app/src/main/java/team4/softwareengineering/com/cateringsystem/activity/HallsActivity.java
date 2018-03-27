@@ -16,19 +16,19 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import team4.softwareengineering.com.cateringsystem.R;
-import team4.softwareengineering.com.cateringsystem.adapter.AvailableHallsAdapter;
+import team4.softwareengineering.com.cateringsystem.adapter.HallsAdapter;
 import team4.softwareengineering.com.cateringsystem.model.HallModel;
 
 /**
  * Created by vikra on 3/24/2018.
  */
 
-public class AvailableHalls extends AppCompatActivity {
+public class HallsActivity extends AppCompatActivity {
 
     private Context mContext;
     private Toolbar toolbar;
     private TextView tvTbTitle;
-    private AvailableHallsAdapter mAdapter;
+    private HallsAdapter mAdapter;
     private RecyclerView rvAvailableHall;
 
     @Override
@@ -54,14 +54,14 @@ public class AvailableHalls extends AppCompatActivity {
             }
         });
 
-        tvTbTitle.setText(R.string.available_halls);
+        tvTbTitle.setText("Halls");
 
         rvAvailableHall = (RecyclerView)findViewById(R.id.rvAvailableHall);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         rvAvailableHall.setLayoutManager(mLayoutManager);
         rvAvailableHall.setItemAnimator(new DefaultItemAnimator());
 
-        mAdapter = new AvailableHallsAdapter(getHallData(), mContext);
+        mAdapter = new HallsAdapter(getHallData(), mContext);
         rvAvailableHall.setAdapter(mAdapter);
 
         toolbar.inflateMenu(R.menu.home);

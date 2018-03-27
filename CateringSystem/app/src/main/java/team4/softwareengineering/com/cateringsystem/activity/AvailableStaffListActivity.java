@@ -56,7 +56,7 @@ public class AvailableStaffListActivity extends AppCompatActivity {
             }
         });
 
-        tvTbTitle.setText("Available Staff List");
+        tvTbTitle.setText("Available Staff");
 
         rvReservedEvents = (RecyclerView)findViewById(R.id.rvReservedEvents);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -66,13 +66,17 @@ public class AvailableStaffListActivity extends AppCompatActivity {
         mAdapter = new AvailableStaffAdapter(getStaff(), mContext);
         rvReservedEvents.setAdapter(mAdapter);
 
-        toolbar.inflateMenu(R.menu.home);
+        toolbar.inflateMenu(R.menu.assign_staff_menu);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.logout:
                         Toast.makeText(mContext, "Logout",Toast.LENGTH_LONG).show();
+                        return true;
+
+                    case R.id.assignStaff:
+                        Toast.makeText(mContext, "Assign Staff",Toast.LENGTH_LONG).show();
                         return true;
 
                 }

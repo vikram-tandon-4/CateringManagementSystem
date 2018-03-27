@@ -111,7 +111,7 @@ public class AssignedEventsActivity extends AppCompatActivity {
         reservedEventsModel.setDate("04/03/2018");
         reservedEventsModel.setEventId("E0563032018");
         reservedEventsModel.setEventName("Birthday");
-        reservedEventsModel.setStatus("Status: Cancelled");
+        reservedEventsModel.setStatus("Status: Booked");
         reservedEventsModel.setTime("7:00 PM");
         reserved.add(reservedEventsModel);
 
@@ -119,7 +119,7 @@ public class AssignedEventsActivity extends AppCompatActivity {
         reservedEventsModel.setDate("03/03/2018");
         reservedEventsModel.setEventId("E0103056018");
         reservedEventsModel.setEventName("Farewell");
-        reservedEventsModel.setStatus("Status: Pending");
+        reservedEventsModel.setStatus("Status: Booked");
         reservedEventsModel.setTime("8:00 PM");
         reserved.add(reservedEventsModel);
 

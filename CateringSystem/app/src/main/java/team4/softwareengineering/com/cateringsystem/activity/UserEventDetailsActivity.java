@@ -54,13 +54,17 @@ public class UserEventDetailsActivity extends AppCompatActivity {
             }
         });
 
-        toolbar.inflateMenu(R.menu.home);
+        toolbar.inflateMenu(R.menu.cancel_event_menu);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.logout:
                         Toast.makeText(mContext, "Logout",Toast.LENGTH_LONG).show();
+                        return true;
+
+                    case R.id.cancelEvent:
+                        Toast.makeText(mContext, "Cancel",Toast.LENGTH_LONG).show();
                         return true;
 
                 }

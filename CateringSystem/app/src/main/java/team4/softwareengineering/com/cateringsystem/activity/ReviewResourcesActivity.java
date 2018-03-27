@@ -16,7 +16,7 @@ import team4.softwareengineering.com.cateringsystem.R;
  * Created by vikra on 3/24/2018.
  */
 
-public class UserHomePageActivity extends AppCompatActivity {
+public class ReviewResourcesActivity extends AppCompatActivity {
 
     private Context mContext;
     private Toolbar toolbar;
@@ -25,10 +25,11 @@ public class UserHomePageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_homepage);
+        setContentView(R.layout.review_resources);
 
         mContext= this;
         init();
+
     }
 
     private void init() {
@@ -36,21 +37,28 @@ public class UserHomePageActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tvTbTitle = (TextView) findViewById(R.id.tvTbTitle);
 
-        tvTbTitle.setText("User Home");
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+        tvTbTitle.setText("Review Resources");
 
         toolbar.inflateMenu(R.menu.home);
-        toolbar.setOnMenuItemClickListener(new android.support.v7.widget.Toolbar.OnMenuItemClickListener() {
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.logout:
                         Toast.makeText(mContext, "Logout",Toast.LENGTH_LONG).show();
                         return true;
-
                 }
                 return false;
             }
         });
-
     }
+
 }

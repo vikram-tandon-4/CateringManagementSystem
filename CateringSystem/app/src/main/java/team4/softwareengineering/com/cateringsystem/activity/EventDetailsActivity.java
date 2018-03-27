@@ -54,13 +54,16 @@ public class EventDetailsActivity extends AppCompatActivity {
             }
         });
 
-        toolbar.inflateMenu(R.menu.home);
+        toolbar.inflateMenu(R.menu.delete_event_menu);
         toolbar.setOnMenuItemClickListener(new android.support.v7.widget.Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.logout:
                         Toast.makeText(mContext, "Logout",Toast.LENGTH_LONG).show();
+                        return true;
+                    case R.id.deleteEvent:
+                        Toast.makeText(mContext, "Delete",Toast.LENGTH_LONG).show();
                         return true;
 
                 }
