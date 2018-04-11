@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,10 @@ public class EventDetailsActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TextView tvTbTitle;
 
+    private Button btnAvailableHalls, btnAvailableStaff;
+    private TextView tvEventName, tvEventId, tvPlace, tvPartySize, tvDate, tvTime, tvDuration, tvOcassionType, tvMealType, tvDrinks, tvEntertainment;
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +37,21 @@ public class EventDetailsActivity extends AppCompatActivity {
     }
 
     private void init() {
+
+        btnAvailableHalls = (Button) findViewById(R.id.btnAvailableHalls);
+        btnAvailableStaff = (Button) findViewById(R.id.btnAvailableStaff);
+
+        tvEventName = (TextView) findViewById(R.id.tvEventName);
+        tvEventId = (TextView) findViewById(R.id.tvEventId);
+        tvPlace = (TextView) findViewById(R.id.tvPlace);
+        tvDate = (TextView) findViewById(R.id.tvDate);
+        tvTime = (TextView) findViewById(R.id.tvTime);
+        tvDuration = (TextView) findViewById(R.id.tvDuration);
+        tvPartySize = (TextView) findViewById(R.id.tvPartySize);
+        tvOcassionType = (TextView) findViewById(R.id.tvOcassionType);
+        tvMealType = (TextView) findViewById(R.id.tvMealType);
+        tvDrinks = (TextView) findViewById(R.id.tvDrinks);
+        tvEntertainment = (TextView) findViewById(R.id.tvEntertainment);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tvTbTitle = (TextView) findViewById(R.id.tvTbTitle);

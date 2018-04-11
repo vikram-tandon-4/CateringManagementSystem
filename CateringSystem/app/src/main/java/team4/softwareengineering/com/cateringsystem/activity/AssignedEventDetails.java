@@ -29,6 +29,8 @@ public class AssignedEventDetails extends AppCompatActivity {
     private Toolbar toolbar;
     private TextView tvTbTitle;
 
+    private TextView tvEventName,tvEventId, tvPlace, tvCapacity, tvDate, tvTime, tvDuration, tvOcassionType;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +42,15 @@ public class AssignedEventDetails extends AppCompatActivity {
     }
 
     private void init() {
+
+        tvEventName =(TextView) findViewById(R.id.tvEventName);
+        tvEventId =(TextView) findViewById(R.id.tvEventId);
+        tvPlace =(TextView) findViewById(R.id.tvPlace);
+        tvCapacity =(TextView) findViewById(R.id.tvCapacity);
+        tvDate =(TextView) findViewById(R.id.tvDate);
+        tvTime =(TextView) findViewById(R.id.tvTime);
+        tvDuration =(TextView) findViewById(R.id.tvDuration);
+        tvOcassionType =(TextView) findViewById(R.id.tvOcassionType);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tvTbTitle = (TextView) findViewById(R.id.tvTbTitle);
