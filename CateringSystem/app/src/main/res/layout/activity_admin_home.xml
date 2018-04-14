@@ -16,7 +16,33 @@
         android:gravity="center"
         android:layout_height="match_parent">
 
-        <!--Admin layout code-->
+
+        <TextView
+            android:id="@+id/btnViewAssignedEvents"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View Registeration Request"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:layout_marginTop="50dp"
+            android:textAllCaps="false"
+            android:padding="10dp"
+            style="@style/Base.TextAppearance.AppCompat.Button"
+            android:background="@color/colorPrimary"/>
+
+
+        <TextView
+            android:id="@+id/btnUpdateProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Search Users"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:layout_marginTop="50dp"
+            android:padding="10dp"
+            android:textAllCaps="false"
+            style="@style/Base.TextAppearance.AppCompat.Button"
+            android:background="@color/colorPrimary"/>
 
 
     </LinearLayout>

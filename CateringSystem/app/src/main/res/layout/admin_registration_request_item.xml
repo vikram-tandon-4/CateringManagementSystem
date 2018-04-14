@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nameContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dp2"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?selectableItemBackground"
+    app:cardCornerRadius="@dimen/dp4"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp15">
+
+        <TextView
+            android:id="@+id/tvUserName"
+            style="@style/TextAppearance.AppCompat.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold"
+            android:text="Xyz"
+            android:textColor="@android:color/black" />
+
+
+        <TextView
+            android:id="@+id/tvDate"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tvUserName"
+            android:text="12/12/2018"
+            android:layout_marginTop="@dimen/dp10"
+            android:textColor="@android:color/black" />
+
+
+        <TextView
+            android:id="@+id/tvTime"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:text="12:00 PM"
+            android:layout_marginTop="@dimen/dp10"
+            android:layout_below="@+id/tvUserName"
+            android:textColor="@android:color/black" />
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
