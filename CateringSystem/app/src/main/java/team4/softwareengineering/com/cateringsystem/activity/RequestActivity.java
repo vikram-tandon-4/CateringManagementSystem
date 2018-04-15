@@ -55,8 +55,6 @@ public class RequestActivity extends AppCompatActivity {
             }
         });
 
-
-
         tvTbTitle.setText(R.string.request_event);
 
         toolbar.inflateMenu(R.menu.home);

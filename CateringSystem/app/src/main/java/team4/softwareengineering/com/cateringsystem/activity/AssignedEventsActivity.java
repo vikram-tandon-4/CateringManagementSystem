@@ -16,6 +16,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import team4.softwareengineering.com.cateringsystem.R;
+import team4.softwareengineering.com.cateringsystem.adapter.AssignedEventsAdapter;
 import team4.softwareengineering.com.cateringsystem.adapter.ReservedEventsAdapter;
 import team4.softwareengineering.com.cateringsystem.model.ReservedEventsModel;
 
@@ -28,7 +29,7 @@ public class AssignedEventsActivity extends AppCompatActivity {
     private Context mContext;
     private Toolbar toolbar;
     private TextView tvTbTitle;
-    private ReservedEventsAdapter mAdapter;
+    private AssignedEventsAdapter mAdapter;
     private RecyclerView rvReservedEvents;
 
     @Override
@@ -61,7 +62,7 @@ public class AssignedEventsActivity extends AppCompatActivity {
         rvReservedEvents.setLayoutManager(mLayoutManager);
         rvReservedEvents.setItemAnimator(new DefaultItemAnimator());
 
-        mAdapter = new ReservedEventsAdapter(getEventsData(), mContext);
+        mAdapter = new AssignedEventsAdapter(getEventsData(), mContext);
         rvReservedEvents.setAdapter(mAdapter);
 
         toolbar.inflateMenu(R.menu.home);

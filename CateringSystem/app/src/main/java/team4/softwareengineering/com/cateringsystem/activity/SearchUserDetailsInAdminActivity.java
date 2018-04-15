@@ -19,18 +19,17 @@ import team4.softwareengineering.com.cateringsystem.utils.Utils;
  * Created by vikra on 3/24/2018.
  */
 
-public class CatererHomePageActivity extends AppCompatActivity implements View.OnClickListener {
+public class SearchUserDetailsInAdminActivity extends AppCompatActivity {
 
     private Context mContext;
     private Toolbar toolbar;
     private TextView tvTbTitle;
     private Dialog confirmDialog;
-    private TextView tvViewRequestedEvents, tvViewEventCalender,tvUpdateProfile;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_caterer_homepage);
+        setContentView(R.layout.activity_search_user_details);
 
         mContext= this;
         init();
@@ -38,26 +37,42 @@ public class CatererHomePageActivity extends AppCompatActivity implements View.O
 
     private void init() {
 
-        tvUpdateProfile = (TextView) findViewById(R.id.tvUpdateProfile);
-        tvViewRequestedEvents = (TextView) findViewById(R.id.tvViewRequestedEvents);
-        tvViewEventCalender = (TextView) findViewById(R.id.tvViewEventCalender);
-
-        tvViewRequestedEvents.setOnClickListener(this);
-        tvViewEventCalender.setOnClickListener(this);
-        tvUpdateProfile.setOnClickListener(this);
-
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tvTbTitle = (TextView) findViewById(R.id.tvTbTitle);
 
-        tvTbTitle.setText("Caterer Home");
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
-        toolbar.inflateMenu(R.menu.home);
-        toolbar.setOnMenuItemClickListener(new android.support.v7.widget.Toolbar.OnMenuItemClickListener() {
+        tvTbTitle.setText(R.string.user_event_details);
+
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+        toolbar.inflateMenu(R.menu.delete_edit_user_menu);
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.logout:
                         Toast.makeText(mContext, "Logout",Toast.LENGTH_LONG).show();
+                        return true;
+
+                    case R.id.edit:
+                        startActivity(new Intent(SearchUserDetailsInAdminActivity.this,EditUserActivity.class));
+                        return true;
+
+                    case R.id.delete:
+                        Toast.makeText(mContext, "Delete",Toast.LENGTH_LONG).show();
                         confirmationDialog();
                         return true;
 
@@ -72,8 +87,11 @@ public class CatererHomePageActivity extends AppCompatActivity implements View.O
         confirmDialog = Utils.showConfirmationDialog(mContext);
         confirmDialog.show();
 
+        final TextView tvConfirmationText = (TextView) confirmDialog.findViewById(R.id.tvConfirmationText);
         final TextView btnYes = (TextView) confirmDialog.findViewById(R.id.okLogout);
         final TextView btnNo = (TextView) confirmDialog.findViewById(R.id.cancelLogout);
+
+        tvConfirmationText.setText("Are you sure you want to delete this user?");
 
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,22 +105,5 @@ public class CatererHomePageActivity extends AppCompatActivity implements View.O
                 confirmDialog.dismiss();
             }
         });
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId() /*to get clicked view id**/) {
-            case R.id.tvViewEventCalender:
-                startActivity(new Intent(CatererHomePageActivity.this,CreatedEventListActivity.class));
-                break;
-            case R.id.tvViewRequestedEvents:
-                startActivity(new Intent(CatererHomePageActivity.this,RequestedEventListActivity.class));
-                break;
-            case R.id.tvUpdateProfile:
-                startActivity(new Intent(CatererHomePageActivity.this,UpdateProfileActivity.class));
-                break;
-            default:
-                break;
-        }
     }
 }

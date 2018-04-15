@@ -18,7 +18,7 @@
 
 
         <TextView
-            android:id="@+id/btnViewAssignedEvents"
+            android:id="@+id/tvViewregistrationRequest"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="View Registeration Request"
@@ -32,7 +32,7 @@
 
 
         <TextView
-            android:id="@+id/btnUpdateProfile"
+            android:id="@+id/tvSearchUsers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Search Users"

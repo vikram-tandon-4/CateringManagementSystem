@@ -18,7 +18,7 @@
 
 
         <TextView
-            android:id="@+id/btnViewAssignedEvents"
+            android:id="@+id/tvViewAssignedEvents"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="View Assigned Events"
@@ -30,7 +30,7 @@
 
 
         <TextView
-            android:id="@+id/btnUpdateProfile"
+            android:id="@+id/tvUpdateProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Update Profile"

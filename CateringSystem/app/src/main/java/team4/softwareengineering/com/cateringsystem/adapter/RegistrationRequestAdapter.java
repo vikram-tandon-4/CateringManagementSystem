@@ -2,6 +2,7 @@ package team4.softwareengineering.com.cateringsystem.adapter;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +15,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import team4.softwareengineering.com.cateringsystem.R;
+import team4.softwareengineering.com.cateringsystem.activity.AdminHomeActivity;
+import team4.softwareengineering.com.cateringsystem.activity.RegistrationRequestActivity;
+import team4.softwareengineering.com.cateringsystem.activity.UserDetailsAdminActivity;
 import team4.softwareengineering.com.cateringsystem.model.AdminRegistrationRequestModel;
 import team4.softwareengineering.com.cateringsystem.model.HallModel;
 
@@ -63,7 +67,12 @@ public class RegistrationRequestAdapter extends RecyclerView.Adapter<Registratio
         holder.tvUserName.setText(adminRegistrationRequestModels.get(position).getName());
         holder.tvDate.setText(adminRegistrationRequestModels.get(position).getDate());
         holder.tvTime.setText(adminRegistrationRequestModels.get(position).getTime());
-
+        holder.container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mContext.startActivity(new Intent(mContext,UserDetailsAdminActivity.class));
+            }
+        });
         setAnimation(holder.container, position);
     }
 

@@ -17,7 +17,7 @@ android:layout_height="match_parent">
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/btnRequestEvent"
+        android:id="@+id/tvRequestEvent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Request Event"
@@ -29,7 +29,7 @@ android:layout_height="match_parent">
         android:background="@color/colorPrimary"/>
 
     <TextView
-        android:id="@+id/btnViewReservedEvents"
+        android:id="@+id/tvViewReservedEvents"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="View Reserved Events"
@@ -42,7 +42,7 @@ android:layout_height="match_parent">
         android:background="@color/colorPrimary"/>
 
     <TextView
-        android:id="@+id/btnViewAvailableHalls"
+        android:id="@+id/tvViewAvailableHalls"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="View Available Halls"
@@ -56,7 +56,7 @@ android:layout_height="match_parent">
 
 
     <TextView
-        android:id="@+id/btnUpdateProfile"
+        android:id="@+id/tvUpdateProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Update Profile"

@@ -2,6 +2,7 @@ package team4.softwareengineering.com.cateringsystem.activity;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -18,11 +19,11 @@ import team4.softwareengineering.com.cateringsystem.utils.Utils;
  * Created by vikra on 3/24/2018.
  */
 
-public class AdminHomeActivity extends AppCompatActivity {
+public class AdminHomeActivity extends AppCompatActivity  implements View.OnClickListener{
 
     private Context mContext;
     private Toolbar toolbar;
-    private TextView tvTbTitle;
+    private TextView tvTbTitle,tvViewregistrationRequest,tvSearchUsers;
     private Dialog confirmDialog;
 
     @Override
@@ -36,8 +37,15 @@ public class AdminHomeActivity extends AppCompatActivity {
 
     private void init() {
 
+
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tvTbTitle = (TextView) findViewById(R.id.tvTbTitle);
+        tvSearchUsers = (TextView) findViewById(R.id.tvSearchUsers);
+        tvViewregistrationRequest = (TextView) findViewById(R.id.tvViewregistrationRequest);
+
+        tvViewregistrationRequest.setOnClickListener(this);
+        tvSearchUsers.setOnClickListener(this);
 
         tvTbTitle.setText("Admin Home");
 
@@ -77,5 +85,22 @@ public class AdminHomeActivity extends AppCompatActivity {
                 confirmDialog.dismiss();
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId() /*to get clicked view id**/) {
+            case R.id.tvViewregistrationRequest:
+                startActivity(new Intent(AdminHomeActivity.this,RegistrationRequestActivity.class));
+                break;
+            case R.id.tvSearchUsers:
+
+                startActivity(new Intent(AdminHomeActivity.this,SearchUserActivity.class));
+
+                break;
+
+            default:
+                break;
+        }
     }
 }

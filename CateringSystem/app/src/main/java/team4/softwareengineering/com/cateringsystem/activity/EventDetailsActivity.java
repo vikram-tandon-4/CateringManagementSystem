@@ -1,6 +1,7 @@
 package team4.softwareengineering.com.cateringsystem.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -17,7 +18,7 @@ import team4.softwareengineering.com.cateringsystem.R;
  * Created by vikra on 3/24/2018.
  */
 
-public class EventDetailsActivity extends AppCompatActivity {
+public class EventDetailsActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Context mContext;
     private Toolbar toolbar;
@@ -40,6 +41,8 @@ public class EventDetailsActivity extends AppCompatActivity {
 
         btnAvailableHalls = (Button) findViewById(R.id.btnAvailableHalls);
         btnAvailableStaff = (Button) findViewById(R.id.btnAvailableStaff);
+        btnAvailableHalls.setOnClickListener(this);
+        btnAvailableStaff.setOnClickListener(this);
 
         tvEventName = (TextView) findViewById(R.id.tvEventName);
         tvEventId = (TextView) findViewById(R.id.tvEventId);
@@ -91,5 +94,21 @@ public class EventDetailsActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId() /*to get clicked view id**/) {
+            case R.id.btnAvailableHalls:
+                startActivity(new Intent(EventDetailsActivity.this,AvailableHallsActivity.class));
+                break;
+
+            case R.id.btnAvailableStaff:
+                startActivity(new Intent(EventDetailsActivity.this,AvailableStaffListActivity.class));
+                break;
+
+            default:
+                break;
+        }
     }
 }

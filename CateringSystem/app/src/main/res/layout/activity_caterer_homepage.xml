@@ -17,7 +17,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/btnViewRequestedEvents"
+            android:id="@+id/tvViewRequestedEvents"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="View Requested Events"
@@ -29,7 +29,7 @@
             android:background="@color/colorPrimary"/>
 
         <TextView
-            android:id="@+id/btnViewEventCalender"
+            android:id="@+id/tvViewEventCalender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="View Event Calender"
@@ -43,11 +43,11 @@
 
 
         <TextView
-        android:id="@+id/btnUpdateProfile"
+        android:id="@+id/tvUpdateProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Update Profile"
-            android:textAllCaps="false"
+        android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:gravity="center"
         android:layout_marginTop="50dp"

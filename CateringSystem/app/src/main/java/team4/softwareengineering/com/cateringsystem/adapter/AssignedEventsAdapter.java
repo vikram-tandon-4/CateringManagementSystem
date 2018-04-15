@@ -15,20 +15,20 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import team4.softwareengineering.com.cateringsystem.R;
+import team4.softwareengineering.com.cateringsystem.activity.AssignedEventDetails;
 import team4.softwareengineering.com.cateringsystem.activity.EventDetailsActivity;
-import team4.softwareengineering.com.cateringsystem.model.CreatedEventModel;
 import team4.softwareengineering.com.cateringsystem.model.ReservedEventsModel;
 
 
-public class CreatedEventsListAdapter extends RecyclerView.Adapter<CreatedEventsListAdapter.MyViewHolder> {
+public class AssignedEventsAdapter extends RecyclerView.Adapter<AssignedEventsAdapter.MyViewHolder> {
 
-    private ArrayList<CreatedEventModel> createdEventsListModels;
+    private ArrayList<ReservedEventsModel> reservedEventsModels;
 
     private Context mContext;
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvEventName, tvEventId, tvStatus;
+        public TextView tvEventName, tvEventId, tvStatus, tvDate, tvTime;
         CardView container;
 
         public MyViewHolder(View view) {
@@ -36,6 +36,8 @@ public class CreatedEventsListAdapter extends RecyclerView.Adapter<CreatedEvents
             tvEventName = (TextView) view.findViewById(R.id.tvEventName);
             tvEventId = (TextView) view.findViewById(R.id.tvEventId);
             tvStatus = (TextView) view.findViewById(R.id.tvStatus);
+            tvDate = (TextView) view.findViewById(R.id.tvDate);
+            tvTime  = (TextView) view.findViewById(R.id.tvTime);
             container = (CardView) view.findViewById(R.id.nameContainer);
         }
 
@@ -45,15 +47,15 @@ public class CreatedEventsListAdapter extends RecyclerView.Adapter<CreatedEvents
     }
 
 
-    public CreatedEventsListAdapter(ArrayList<CreatedEventModel> createdEventModels, Context mContext) {
-        this.createdEventsListModels = createdEventModels;
+    public AssignedEventsAdapter(ArrayList<ReservedEventsModel> reservedEventsModels, Context mContext) {
+        this.reservedEventsModels = reservedEventsModels;
         this.mContext = mContext;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.created_events_list, parent, false);
+                .inflate(R.layout.reserved_events_item, parent, false);
         return new MyViewHolder(itemView);
     }
 
@@ -62,23 +64,25 @@ public class CreatedEventsListAdapter extends RecyclerView.Adapter<CreatedEvents
 
 
 
-        holder.tvEventName.setText(createdEventsListModels.get(position).getEvent());
-        holder.tvEventId.setText(createdEventsListModels.get(position).getEventId());
-        holder.tvStatus.setText(createdEventsListModels.get(position).getStatus());
+        holder.tvEventName.setText(reservedEventsModels.get(position).getEventName());
+        holder.tvEventId.setText(reservedEventsModels.get(position).getEventId());
+        holder.tvStatus.setText(reservedEventsModels.get(position).getStatus());
+        holder.tvDate.setText(reservedEventsModels.get(position).getDate());
+        holder.tvTime.setText(reservedEventsModels.get(position).getTime());
 
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mContext.startActivity(new Intent(mContext, EventDetailsActivity.class));
+                mContext.startActivity(new Intent(mContext,AssignedEventDetails.class));
             }
         });
 
-      setAnimation(holder.container, position);
+        setAnimation(holder.container, position);
     }
 
     @Override
     public int getItemCount() {
-        return createdEventsListModels.size();
+        return reservedEventsModels.size();
     }
 
 

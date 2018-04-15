@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/delete"
+        app:showAsAction="always"
+        android:title="Delete"
+        />
+
+    <item
+        android:id="@+id/edit"
+        android:icon="@android:drawable/ic_menu_edit"
+        app:showAsAction="always"
+        android:title="" />
+
+    <item
+        android:id="@+id/logout"
+        android:icon="@drawable/ic_power_settings_new_white_24dp"
+        app:showAsAction="always"
+        android:title="" />
+
+</menu>

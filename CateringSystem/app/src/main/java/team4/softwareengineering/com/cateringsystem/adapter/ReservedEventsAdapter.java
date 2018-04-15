@@ -2,6 +2,7 @@ package team4.softwareengineering.com.cateringsystem.adapter;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import team4.softwareengineering.com.cateringsystem.R;
+import team4.softwareengineering.com.cateringsystem.activity.UserEventDetailsActivity;
 import team4.softwareengineering.com.cateringsystem.model.HallModel;
 import team4.softwareengineering.com.cateringsystem.model.ReservedEventsModel;
 
@@ -67,6 +69,13 @@ public class ReservedEventsAdapter extends RecyclerView.Adapter<ReservedEventsAd
         holder.tvStatus.setText(reservedEventsModels.get(position).getStatus());
         holder.tvDate.setText(reservedEventsModels.get(position).getDate());
         holder.tvTime.setText(reservedEventsModels.get(position).getTime());
+
+        holder.container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mContext.startActivity(new Intent(mContext,UserEventDetailsActivity.class));
+            }
+        });
 
         setAnimation(holder.container, position);
     }

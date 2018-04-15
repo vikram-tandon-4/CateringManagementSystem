@@ -2,6 +2,7 @@ package team4.softwareengineering.com.cateringsystem.adapter;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import team4.softwareengineering.com.cateringsystem.R;
+import team4.softwareengineering.com.cateringsystem.activity.EventDetailsActivity;
+import team4.softwareengineering.com.cateringsystem.activity.SelectedEventDetailsActivity;
 import team4.softwareengineering.com.cateringsystem.model.RequestedEventModel;
 
 
@@ -60,6 +63,13 @@ public class RequestedEventsListAdapter extends RecyclerView.Adapter<RequestedEv
 
         holder.tvEventName.setText(requestedEventModels.get(position).getEvent());
         holder.tvEventId.setText(requestedEventModels.get(position).getEventId());
+
+        holder.container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mContext.startActivity(new Intent(mContext,SelectedEventDetailsActivity.class));
+            }
+        });
 
         setAnimation(holder.container, position);
     }
