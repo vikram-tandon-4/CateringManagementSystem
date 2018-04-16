@@ -16,10 +16,12 @@
         android:layout_marginEnd="@dimen/dp10"
         android:layout_height="wrap_content">
         <EditText
-            android:id="@+id/etStartTime"
+            android:id="@+id/etDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Date"
+            android:focusable="false"
+            android:clickable="true"
             android:inputType="date" />
     </android.support.design.widget.TextInputLayout>
 
