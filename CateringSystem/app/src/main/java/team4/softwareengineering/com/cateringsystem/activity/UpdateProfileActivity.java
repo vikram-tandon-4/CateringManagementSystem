@@ -7,8 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import team4.softwareengineering.com.cateringsystem.R;
 
@@ -22,6 +25,9 @@ public class UpdateProfileActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TextView tvTbTitle;
 
+    private EditText etFirstName,etLastName, etEmail,etPhoneNumber,etAddress,etPassword;
+    private TextView btnUpdateProfile;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +39,15 @@ public class UpdateProfileActivity extends AppCompatActivity {
     }
 
     private void init() {
+
+        etFirstName = (EditText) findViewById(R.id.etFirstName);
+        etLastName = (EditText) findViewById(R.id.etLastName);
+        etEmail = (EditText) findViewById(R.id.etEmail);
+        etPhoneNumber = (EditText) findViewById(R.id.etPhoneNumber);
+        etAddress = (EditText) findViewById(R.id.etAddress);
+        etPassword = (EditText) findViewById(R.id.etPassword);
+        btnUpdateProfile = (TextView) findViewById(R.id.btnUpdateProfile);
+
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tvTbTitle = (TextView) findViewById(R.id.tvTbTitle);

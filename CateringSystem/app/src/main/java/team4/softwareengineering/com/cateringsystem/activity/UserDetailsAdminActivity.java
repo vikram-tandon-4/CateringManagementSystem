@@ -7,8 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import team4.softwareengineering.com.cateringsystem.R;
 
@@ -22,6 +25,9 @@ public class UserDetailsAdminActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TextView tvTbTitle;
 
+    private Button btnApprove, btnReject;
+    private TextView tvUserName, tvFirstName, tvLastName, tvEmailId,tvPassword, tvAddress,tvCategory;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +38,16 @@ public class UserDetailsAdminActivity extends AppCompatActivity {
     }
 
     private void init() {
+
+        btnApprove = (Button) findViewById(R.id.btnApprove);
+        btnReject = (Button) findViewById(R.id.btnReject);
+        tvUserName = (TextView) findViewById(R.id.tvUserName);
+        tvFirstName = (TextView) findViewById(R.id.tvFirstName);
+        tvLastName = (TextView) findViewById(R.id.tvLastName);
+        tvEmailId = (TextView) findViewById(R.id.tvEmailId);
+        tvPassword = (TextView) findViewById(R.id.tvPassword);
+        tvAddress = (TextView) findViewById(R.id.tvAddress) ;
+        tvCategory = (TextView) findViewById(R.id.tvCategory);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tvTbTitle = (TextView) findViewById(R.id.tvTbTitle);

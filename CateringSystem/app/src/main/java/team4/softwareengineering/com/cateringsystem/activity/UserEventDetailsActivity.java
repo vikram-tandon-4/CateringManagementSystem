@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,10 @@ public class UserEventDetailsActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TextView tvTbTitle;
 
+    private TextView textView, textView1,textView2,textView3,textView4,textView5,textView6;
+    private TextView textView7, textView8, textView9, textView10, textView11,textView12,textView13;
+    private TextView textView14, textView15,textView16;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +37,23 @@ public class UserEventDetailsActivity extends AppCompatActivity {
     }
 
     private void init() {
+
+    textView =  (TextView) findViewById(R.id.textView);
+    textView1 = (TextView) findViewById(R.id.textView1);
+    textView2 = (TextView) findViewById(R.id.textView2);
+    textView3 = (TextView) findViewById(R.id.textView3);
+    textView4 = (TextView) findViewById(R.id.textView4);
+    textView5 = (TextView) findViewById(R.id.textView5);
+    textView6 = (TextView) findViewById(R.id.textView6);
+    textView7 = (TextView) findViewById(R.id.textView7);
+    textView9 = (TextView) findViewById(R.id.textView9);
+    textView10 = (TextView) findViewById(R.id.textView10);
+    textView11 = (TextView) findViewById(R.id.textView11);
+    textView12 = (TextView) findViewById(R.id.textView12);
+    textView13 = (TextView) findViewById(R.id.textView13);
+    textView14 = (TextView) findViewById(R.id.textView14);
+    textView15 = (TextView) findViewById(R.id.textView15);
+    textView16 = (TextView) findViewById(R.id.textView16);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tvTbTitle = (TextView) findViewById(R.id.tvTbTitle);

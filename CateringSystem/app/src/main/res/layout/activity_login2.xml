@@ -13,146 +13,146 @@
         android:layout_height="match_parent"
         android:fillViewport="true">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:padding="40dp"
-        android:gravity="center"
-        android:layout_height="match_parent">
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/etUserName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="User Name" />
-    </android.support.design.widget.TextInputLayout>
-
-    <!--for Edit text copy this portion of code-->
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp">
-
-        <EditText
-            android:id="@+id/etPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:hint="Password" />
-    </android.support.design.widget.TextInputLayout>
-
-    <!--for Edit text copy this portion of code-->
-
-
-    <TextView
-        android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Log in"
-        android:textColor="@android:color/white"
-        android:gravity="center"
-        android:layout_marginTop="50dp"
-        android:padding="10dp"
-        style="@style/Base.TextAppearance.AppCompat.Button"
-        android:background="@color/colorPrimary"/>
-
-
-    <TextView
-        android:id="@+id/tvForgotPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="Forgot Password"
-        android:layout_marginTop="20dp"
-        android:textAllCaps="false"
-        style="@style/Base.TextAppearance.AppCompat.Widget.Button"
-        android:gravity="center" />
-
-
-        <TextView
-            android:id="@+id/tvRegister"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="Register"
-            android:layout_marginTop="20dp"
-            android:textAllCaps="false"
-            style="@style/Base.TextAppearance.AppCompat.Widget.Button"
-            android:gravity="center" />
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="40dp">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/etUserName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="User Name" />
+            </android.support.design.widget.TextInputLayout>
+
+            <!--for Edit text copy this portion of code-->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp">
+
+                <EditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Password"
+                    android:inputType="textPassword" />
+            </android.support.design.widget.TextInputLayout>
+
+            <!--for Edit text copy this portion of code-->
+
 
             <TextView
-                android:id="@+id/btnAdmin"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="Admin"
-                android:textColor="@android:color/white"
-                android:gravity="center"
-                android:layout_marginTop="50dp"
-                android:padding="10dp"
+                android:id="@+id/btnLogin"
                 style="@style/Base.TextAppearance.AppCompat.Button"
-                android:background="@color/colorPrimary"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Log in"
+                android:textColor="@android:color/white" />
+
 
             <TextView
-                android:id="@+id/btnCaterer"
-                android:layout_width="0dp"
-                android:layout_weight="1"
+                android:id="@+id/tvForgotPassword"
+                style="@style/Base.TextAppearance.AppCompat.Widget.Button"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Caterer"
-                android:textColor="@android:color/white"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="20dp"
                 android:gravity="center"
-                android:layout_marginLeft="@dimen/dp5"
-                android:layout_marginTop="50dp"
-                android:padding="10dp"
-                style="@style/Base.TextAppearance.AppCompat.Button"
-                android:background="@color/colorPrimary"/>
+                android:text="Forgot Password"
+                android:textAllCaps="false" />
+
+
+            <TextView
+                android:id="@+id/tvRegister"
+                style="@style/Base.TextAppearance.AppCompat.Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="Register"
+                android:textAllCaps="false" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/btnAdmin"
+                    style="@style/Base.TextAppearance.AppCompat.Button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorPrimary"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="Admin"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/btnCaterer"
+                    style="@style/Base.TextAppearance.AppCompat.Button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp5"
+                    android:layout_marginTop="50dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorPrimary"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="Caterer"
+                    android:textColor="@android:color/white" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp5"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/btnStaff"
+                    style="@style/Base.TextAppearance.AppCompat.Button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/colorPrimary"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="Staff"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/btnUser"
+                    style="@style/Base.TextAppearance.AppCompat.Button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp5"
+                    android:layout_weight="1"
+                    android:background="@color/colorPrimary"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="User"
+                    android:textColor="@android:color/white" />
+
+            </LinearLayout>
 
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp5"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/btnStaff"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="Staff"
-                android:textColor="@android:color/white"
-                android:gravity="center"
-                android:padding="10dp"
-                style="@style/Base.TextAppearance.AppCompat.Button"
-                android:background="@color/colorPrimary"/>
-
-            <TextView
-                android:id="@+id/btnUser"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="User"
-                android:layout_marginLeft="@dimen/dp5"
-                android:textColor="@android:color/white"
-                android:gravity="center"
-                android:padding="10dp"
-                style="@style/Base.TextAppearance.AppCompat.Button"
-                android:background="@color/colorPrimary"/>
-
-        </LinearLayout>
-
-</LinearLayout>
     </ScrollView>
 </LinearLayout>
