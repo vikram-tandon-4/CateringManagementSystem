@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import team4.softwareengineering.com.cateringsystem.R;
@@ -22,7 +23,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     Check flow
      */
 
-    private TextView btnAdmin,btnCaterer,btnStaff,btnUser;
+    private TextView btnAdmin,btnCaterer,btnStaff,btnUser,btnLogin;
+    private EditText etUserName,etPassword;
     private TextView tvRegister,tvForgotPassword;
 
     @Override
@@ -41,7 +43,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btnUser = (TextView) findViewById(R.id.btnUser);
         tvRegister = (TextView) findViewById(R.id.tvRegister);
         tvForgotPassword = (TextView) findViewById(R.id.tvForgotPassword);
-
+        etUserName = (EditText) findViewById(R.id.etUserName);
+        etPassword = (EditText) findViewById(R.id.etPassword);
+        btnLogin = (TextView) findViewById(R.id.btnLogin);
         btnAdmin.setOnClickListener(this);
         btnCaterer.setOnClickListener(this);
         btnStaff.setOnClickListener(this);

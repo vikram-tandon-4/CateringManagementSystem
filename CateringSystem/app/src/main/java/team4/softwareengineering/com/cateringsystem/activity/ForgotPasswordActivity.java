@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import team4.softwareengineering.com.cateringsystem.R;
@@ -18,7 +19,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
     private Context mContext;
     private Toolbar toolbar;
-    private TextView tvTbTitle;
+    private TextView tvTbTitle,btnResetPassword;
+    private EditText txtUserName,txtNewPassword;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,7 +35,9 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tvTbTitle = (TextView) findViewById(R.id.tvTbTitle);
-
+        btnResetPassword = (TextView) findViewById(R.id.btnResetPassword);
+        txtUserName = (EditText) findViewById(R.id.txtUserName);
+        txtNewPassword = (EditText) findViewById(R.id.txtNewPassword);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,8 +45,6 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
         tvTbTitle.setText(R.string.forgot_password);
-
     }
 }
