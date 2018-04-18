@@ -25,7 +25,8 @@ public class EventDetailsActivity extends AppCompatActivity implements View.OnCl
     private TextView tvTbTitle;
 
     private Button btnAvailableHalls, btnAvailableStaff;
-    private TextView tvEventName, tvEventId, tvPlace, tvPartySize, tvDate, tvTime, tvDuration, tvOcassionType, tvMealType, tvDrinks, tvEntertainment;
+    private TextView tvEventName, tvEventId, tvPlace, tvPartySize, tvDate, tvTime,
+            tvDuration, tvOcassionType, tvMealType, tvDrinks, tvEntertainment;
 
 
     @Override

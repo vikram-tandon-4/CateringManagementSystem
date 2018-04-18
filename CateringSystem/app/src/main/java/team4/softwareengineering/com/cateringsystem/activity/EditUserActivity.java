@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,7 +29,9 @@ public class EditUserActivity extends AppCompatActivity {
     private Spinner spinnerCategory;
     private ArrayAdapter<String> simpleSpinnerAdaptor ;
     private Toolbar toolbar;
-    private TextView tvTbTitle;
+    private TextView tvTbTitle,tvRegister;
+    private EditText etUtaId, etFirstName, etLastName, etEmail, etPhoneNumber, etPassword;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,13 +39,26 @@ public class EditUserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_user);
 
         mContext= this;
-
         init();
-
-
     }
 
     private void init() {
+
+        etUtaId = (EditText)findViewById(R.id.etUtaId);
+        etFirstName = (EditText)findViewById(R.id.etFirstName);
+        etLastName = (EditText)findViewById(R.id.etLastName);
+        etEmail = (EditText)findViewById(R.id.etEmail);
+        etPhoneNumber = (EditText)findViewById(R.id.etPhoneNumber);
+        etPassword = (EditText)findViewById(R.id.etPassword);
+
+        tvRegister = (TextView) findViewById(R.id.tvRegister);
+
+        tvRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tvTbTitle = (TextView) findViewById(R.id.tvTbTitle);
@@ -63,7 +79,6 @@ public class EditUserActivity extends AppCompatActivity {
                     case R.id.logout:
                         Toast.makeText(mContext, "Logout",Toast.LENGTH_LONG).show();
                         return true;
-
                 }
                 return false;
             }
