@@ -18,30 +18,31 @@
 
     <string-array name="meal_type_array">
         <item>Meal Type</item>
-        <item>Breakfast</item>
-        <item>Lunch</item>
-        <item>Supper</item>
+        <item>Breakfast($8/person)</item>
+        <item>Lunch($12/person)</item>
+        <item>Supper($18/person)</item>
     </string-array>
 
     <string-array name="meal_formality_array">
         <item>Meal Formality</item>
-        <item>Breakfast</item>
-        <item>Lunch</item>
-        <item>Supper</item>
+        <item>Informal</item>
+        <item>Formal(1.5 * Meal Type)</item>
     </string-array>
 
     <string-array name="drink_type_array">
         <item>Drink</item>
-        <item>Breakfast</item>
-        <item>Lunch</item>
-        <item>Supper</item>
+        <item>Standard</item>
+        <item>Alcohol($15/person)</item>
     </string-array>
 
     <string-array name="ocassion_type_array">
         <item>Occasion</item>
-        <item>Breakfast</item>
-        <item>Lunch</item>
-        <item>Supper</item>
+        <item>Birthday</item>
+        <item>Farewell</item>
+        <item>orientation</item>
+        <item>Wedding</item>
+        <item>Charity</item>
+        <item>Corporate event</item>
     </string-array>
 
 </resources>
