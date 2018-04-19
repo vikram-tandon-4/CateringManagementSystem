@@ -8,6 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +31,11 @@ public class RequestActivity extends AppCompatActivity {
     private ArrayAdapter<String> simpleSpinnerAdaptor;
     private Toolbar toolbar;
     private TextView tvTbTitle;
+    private EditText etPartySize;
+    private EditText etDurationInMinutes;
+    private EditText etDate;
+    private EditText etTime;
+    private TextView btnSubmit;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,7 +53,11 @@ public class RequestActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tvTbTitle = (TextView) findViewById(R.id.tvTbTitle);
-
+        etPartySize= (EditText) findViewById(R.id.etPartySize);
+        etDurationInMinutes= (EditText) findViewById(R.id.etDurationInMinutes);
+        etDate= (EditText) findViewById(R.id.etDate);
+        etTime= (EditText) findViewById(R.id.etTime);
+        btnSubmit= (TextView) findViewById(R.id.btnSubmit);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

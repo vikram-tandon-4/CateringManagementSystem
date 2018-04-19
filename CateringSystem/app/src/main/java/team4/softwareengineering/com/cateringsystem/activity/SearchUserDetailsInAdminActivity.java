@@ -23,7 +23,7 @@ public class SearchUserDetailsInAdminActivity extends AppCompatActivity {
 
     private Context mContext;
     private Toolbar toolbar;
-    private TextView tvTbTitle;
+    private TextView tvTbTitle,tvUserName,tvFirstName,tvEmailId,tvPassword,tvAddress,tvCategory;
     private Dialog confirmDialog;
 
     @Override
@@ -39,6 +39,12 @@ public class SearchUserDetailsInAdminActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tvTbTitle = (TextView) findViewById(R.id.tvTbTitle);
+        tvUserName= (TextView) findViewById(R.id.tvUserName);
+        tvFirstName= (TextView) findViewById(R.id.tvFirstName);
+        tvEmailId= (TextView) findViewById(R.id.tvEmailId);
+        tvPassword= (TextView) findViewById(R.id.tvPassword);
+        tvAddress= (TextView) findViewById(R.id.tvAddress);
+        tvCategory= (TextView) findViewById(R.id.tvCategory);
 
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {

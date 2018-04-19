@@ -22,7 +22,7 @@ public class SelectedEventDetailsActivity extends AppCompatActivity implements V
 
     private Context mContext;
     private Toolbar toolbar;
-    private TextView tvTbTitle;
+    private TextView tvTbTitle,textView,textView1,textView2,textView3,textView4,textView5,textView6,textView7,textView9,textView10,textView11,textView12,textView13,textView14,textView15,textView16,textView17,textView18,textView19,textView20,textView21,textView22;
     private Button btnReviewResources,btnCreateEvent;
 
     @Override
@@ -44,6 +44,28 @@ public class SelectedEventDetailsActivity extends AppCompatActivity implements V
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tvTbTitle = (TextView) findViewById(R.id.tvTbTitle);
+        textView = (TextView) findViewById(R.id.textView);
+        textView1 = (TextView) findViewById(R.id.textView1);
+        textView2 = (TextView) findViewById(R.id.textView2);
+        textView3 = (TextView) findViewById(R.id.textView3);
+        textView4 = (TextView) findViewById(R.id.textView4);
+        textView5 = (TextView) findViewById(R.id.textView5);
+        textView6 = (TextView) findViewById(R.id.textView6);
+        textView7 = (TextView) findViewById(R.id.textView7);
+        textView9 = (TextView) findViewById(R.id.textView9);
+        textView10 = (TextView) findViewById(R.id.textView10);
+        textView11 = (TextView) findViewById(R.id.textView11);
+        textView12 = (TextView) findViewById(R.id.textView12);
+        textView13 = (TextView) findViewById(R.id.textView13);
+        textView14 = (TextView) findViewById(R.id.textView14);
+        textView15 = (TextView) findViewById(R.id.textView15);
+        textView16 = (TextView) findViewById(R.id.textView16);
+        textView17 = (TextView) findViewById(R.id.textView17);
+        textView18 = (TextView) findViewById(R.id.textView18);
+        textView19 = (TextView) findViewById(R.id.textView19);
+        textView20 = (TextView) findViewById(R.id.textView20);
+        textView21 = (TextView) findViewById(R.id.textView21);
+        textView22 = (TextView) findViewById(R.id.textView22);
 
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
