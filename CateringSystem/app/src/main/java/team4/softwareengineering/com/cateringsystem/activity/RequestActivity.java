@@ -49,10 +49,7 @@ public class RequestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_request_event);
 
         mContext= this;
-
         init();
-
-
     }
 
     private void init() {
@@ -117,8 +114,13 @@ public class RequestActivity extends AppCompatActivity {
                 databaseEventsModel.setEventColumnUserFirstName("Roopam");
 
                 databaseEventsModel.setEventColumnUtaId("UTA1234");
-                if(databaseAdapter.insertEvents(databaseEventsModel))
-                databaseAdapter.getEvents();
+                if(databaseAdapter.insertEvents(databaseEventsModel)){
+                    databaseAdapter.getEvents();
+                    // Uncomment below to delete the top most event
+//                    if(databaseAdapter.deleteEvent(databaseAdapter.getEvents().get(0).getEventColumnId()))
+//                    databaseAdapter.getEvents();
+                }
+
 
             }
         });

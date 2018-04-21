@@ -10,7 +10,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import team4.softwareengineering.com.cateringsystem.R;
+import team4.softwareengineering.com.cateringsystem.model.HallModel;
+import team4.softwareengineering.com.cateringsystem.utils.AppPreferences;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -58,6 +62,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         tvTbTitle.setText(R.string.login);
 
+
+        if(AppPreferences.isFirstTime(mContext)){
+            AppPreferences.setHalls(mContext,getHallData());
+            ArrayList<HallModel> hallModels = AppPreferences.getHalls(mContext);
+//            AppPreferences.setFirstTime(mContext,false);
+        }
+
+
     }
 
     @Override
@@ -92,5 +104,47 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             default:
                 break;
         }
+    }
+
+    private ArrayList<HallModel> getHallData(){
+
+        ArrayList<HallModel> halls = new ArrayList<>();
+
+        HallModel hallModel = new HallModel();
+        hallModel.setCapacity("Capacity: 200");
+        hallModel.setHallName("Liberty");
+        hallModel.setLocation("UTA");
+        hallModel.setPrice("Price: $150/hr");
+        halls.add(hallModel);
+
+        hallModel = new HallModel();
+        hallModel.setCapacity("Capacity: 300");
+        hallModel.setHallName("KC");
+        hallModel.setLocation("UTA");
+        hallModel.setPrice("Price: $250/hr");
+        halls.add(hallModel);
+
+        hallModel = new HallModel();
+        hallModel.setCapacity("Capacity: 800");
+        hallModel.setHallName("Shard");
+        hallModel.setLocation("UTA");
+        hallModel.setPrice("Price: $350/hr");
+        halls.add(hallModel);
+
+        hallModel = new HallModel();
+        hallModel.setCapacity("Capacity: 500");
+        hallModel.setHallName("Arlington");
+        hallModel.setLocation("UTA");
+        hallModel.setPrice("Price: $100/hr");
+        halls.add(hallModel);
+
+        hallModel = new HallModel();
+        hallModel.setCapacity("Capacity: 300");
+        hallModel.setHallName("Maverick");
+        hallModel.setLocation("UTA");
+        hallModel.setPrice("Price: $170/hr");
+        halls.add(hallModel);
+
+        return halls;
     }
 }

@@ -14,6 +14,8 @@ import android.widget.Toast;
 import org.w3c.dom.Text;
 
 import team4.softwareengineering.com.cateringsystem.R;
+import team4.softwareengineering.com.cateringsystem.database.DatabaseAdapter;
+import team4.softwareengineering.com.cateringsystem.model.DatabaseUsersModel;
 
 /**
  * Created by vikra on 3/24/2018.
@@ -28,6 +30,8 @@ public class UpdateProfileActivity extends AppCompatActivity {
     private EditText etFirstName,etLastName, etEmail,etPhoneNumber,etAddress,etPassword;
     private TextView btnUpdateProfile;
 
+    private DatabaseAdapter databaseAdapter;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +43,8 @@ public class UpdateProfileActivity extends AppCompatActivity {
     }
 
     private void init() {
+
+        databaseAdapter = DatabaseAdapter.getDBAdapterInstance(mContext);
 
         etFirstName = (EditText) findViewById(R.id.etFirstName);
         etLastName = (EditText) findViewById(R.id.etLastName);
@@ -72,6 +78,26 @@ public class UpdateProfileActivity extends AppCompatActivity {
                         return true;
                 }
                 return false;
+            }
+        });
+
+        btnUpdateProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                DatabaseUsersModel databaseUsersModel = databaseAdapter.getUsers().get(0);
+
+                databaseUsersModel.setUserColumnFirstName("New First Name");
+                databaseUsersModel.setUserColumnLastName("New Last Name");
+                databaseUsersModel.setUserColumnAddress("New 404 Border");
+                databaseUsersModel.setUserColumnEmailId("New@gmail.com");
+                databaseUsersModel.setUserColumnPhoneNumber("987654567876567");
+                databaseUsersModel.setUserColumnPassword("passssssword");
+
+                if(databaseAdapter.updateUserProfile(databaseAdapter.getUsers().get(0).getUserColumnUserId(),databaseUsersModel)){
+                    databaseAdapter.getUsers();
+                }
             }
         });
     }
