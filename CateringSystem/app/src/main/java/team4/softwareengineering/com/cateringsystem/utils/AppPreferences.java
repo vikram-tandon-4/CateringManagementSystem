@@ -10,7 +10,6 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 
 import team4.softwareengineering.com.cateringsystem.model.HallModel;
 
@@ -18,7 +17,25 @@ public class AppPreferences {
 
     private static String HALLS = "halls";
     private static String FIRST_TIME = "firstTime";
+    private static String UTAID = "utaId";
     // Add uta id to globally access it
+
+
+    //get name
+    public static String getUtaId(Context context)
+    {
+        return PreferenceManager.getDefaultSharedPreferences(context).getString(UTAID, "1001557656");
+    }
+
+    //set name
+    public static void setUtaId(Context context, String utaID)
+    {
+        SharedPreferences _sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = _sharedPreferences.edit();
+        editor.putString(UTAID, utaID);
+        editor.commit();
+    }
+
 
     public static void setHalls(Context context, ArrayList<HallModel> list) {
         Gson gson = new Gson();

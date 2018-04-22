@@ -56,6 +56,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btnUser.setOnClickListener(this);
         tvRegister.setOnClickListener(this);
         tvForgotPassword.setOnClickListener(this);
+        btnLogin.setOnClickListener(this);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tvTbTitle = (TextView) findViewById(R.id.tvTbTitle);
@@ -99,6 +100,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             case R.id.tvForgotPassword:
                 startActivity(new Intent(LoginActivity.this,ForgotPasswordActivity.class));
+                break;
+
+            case R.id.btnLogin:
+               AppPreferences.setUtaId(mContext,"100155534376");
+                // check thi UTA id in database
+                // according to the category logging
+                AppPreferences.getUtaId(mContext);
                 break;
 
             default:

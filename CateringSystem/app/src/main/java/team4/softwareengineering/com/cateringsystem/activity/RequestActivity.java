@@ -72,6 +72,12 @@ public class RequestActivity extends AppCompatActivity {
         cbMexican =(CheckBox)findViewById(R.id.cbMexican);
         cbPizza =(CheckBox)findViewById(R.id.cbPizza);
 
+        String foodVenue="";
+//
+//        if(cbAmerican.isChecked()){
+//            foodVenue += "American";
+//        }
+
         etDate= (EditText) findViewById(R.id.etDate);
         etTime= (EditText) findViewById(R.id.etTime);
         btnSubmit= (TextView) findViewById(R.id.btnSubmit);
@@ -117,8 +123,8 @@ public class RequestActivity extends AppCompatActivity {
                 if(databaseAdapter.insertEvents(databaseEventsModel)){
                     databaseAdapter.getEvents();
                     // Uncomment below to delete the top most event
-//                    if(databaseAdapter.deleteEvent(databaseAdapter.getEvents().get(0).getEventColumnId()))
-//                    databaseAdapter.getEvents();
+                    if(databaseAdapter.deleteEvent(databaseAdapter.getEvents().get(0).getEventColumnId()))
+                    databaseAdapter.getEvents();
                 }
 
 

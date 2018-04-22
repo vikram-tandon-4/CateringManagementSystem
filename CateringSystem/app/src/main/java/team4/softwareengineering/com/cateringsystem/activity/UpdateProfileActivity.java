@@ -94,7 +94,10 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 databaseUsersModel.setUserColumnEmailId("New@gmail.com");
                 databaseUsersModel.setUserColumnPhoneNumber("987654567876567");
                 databaseUsersModel.setUserColumnPassword("passssssword");
+                databaseAdapter.getUsers();
 
+                // databaseAdapter.updateUserProfile() will return true if the updation is successful
+                // put debug points at this databaseAdapter.getUsers() to see updates
                 if(databaseAdapter.updateUserProfile(databaseAdapter.getUsers().get(0).getUserColumnUserId(),databaseUsersModel)){
                     databaseAdapter.getUsers();
                 }

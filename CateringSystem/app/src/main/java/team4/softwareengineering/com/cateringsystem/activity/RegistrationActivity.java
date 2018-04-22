@@ -75,8 +75,8 @@ public class RegistrationActivity extends AppCompatActivity {
                 DatabaseUsersModel databaseUsersModel = new DatabaseUsersModel();
 
                 databaseUsersModel.setUserColumnUtaId("1001554543");
-                databaseUsersModel.setUserColumnFirstName("Roopam");
-                databaseUsersModel.setUserColumnLastName("Sharma");
+                databaseUsersModel.setUserColumnFirstName("pradeep");
+                databaseUsersModel.setUserColumnLastName("ashwin");
                 databaseUsersModel.setUserColumnEmailId("roopam@gmail.com");
                 databaseUsersModel.setUserColumnPhoneNumber("987654321");
                 databaseUsersModel.setUserColumnCategory("Staff");
@@ -86,11 +86,21 @@ public class RegistrationActivity extends AppCompatActivity {
                 databaseUsersModel.setUserColumnTimestamp(""+System.currentTimeMillis());
                 databaseUsersModel.setUserColumnStatus("Pending");
 
+                /*
+                databaseAdapter.addUser() is for inserting a new user to the database
+                returns true if the insertion is done successfully
+
+                databaseAdapter.getUsers() is for fetching the users from the database
+
+                databaseAdapter.deleteUser() is for deletting a  user from the database
+                 returns true if the deletion is done successfully
+                 */
+
                 if(databaseAdapter.addUser(databaseUsersModel)){
                     databaseAdapter.getUsers();
-                    if(databaseAdapter.deleteUser(databaseAdapter.getUsers().get(0).getUserColumnUserId())){
-                        databaseAdapter.getUsers();
-                    }
+//                    if(databaseAdapter.deleteUser(databaseAdapter.getUsers().get(0).getUserColumnUserId())){
+//                        databaseAdapter.getUsers();
+ //                   }
                 }
             }
         });
