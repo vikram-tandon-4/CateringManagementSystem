@@ -1,6 +1,7 @@
 package team4.softwareengineering.com.cateringsystem.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -14,12 +15,16 @@ import android.widget.Toast;
 import org.w3c.dom.Text;
 
 import team4.softwareengineering.com.cateringsystem.R;
+import team4.softwareengineering.com.cateringsystem.database.DatabaseAdapter;
+import team4.softwareengineering.com.cateringsystem.model.DatabaseUsersModel;
+import team4.softwareengineering.com.cateringsystem.utils.AppConstants;
+import team4.softwareengineering.com.cateringsystem.utils.AppPreferences;
 
 /**
  * Created by vikra on 3/24/2018.
  */
 
-public class UserDetailsAdminActivity extends AppCompatActivity {
+public class UserDetailsAdminActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Context mContext;
     private Toolbar toolbar;
@@ -27,6 +32,9 @@ public class UserDetailsAdminActivity extends AppCompatActivity {
 
     private Button btnApprove, btnReject;
     private TextView tvUserName, tvFirstName, tvLastName, tvEmailId,tvPassword, tvAddress,tvCategory;
+    private DatabaseUsersModel databaseUsersModel;
+
+    private DatabaseAdapter databaseAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,8 +47,12 @@ public class UserDetailsAdminActivity extends AppCompatActivity {
 
     private void init() {
 
+        databaseAdapter = DatabaseAdapter.getDBAdapterInstance(mContext);
+
         btnApprove = (Button) findViewById(R.id.btnApprove);
         btnReject = (Button) findViewById(R.id.btnReject);
+        btnApprove.setOnClickListener(this);
+        btnReject.setOnClickListener(this);
         tvUserName = (TextView) findViewById(R.id.tvUserName);
         tvFirstName = (TextView) findViewById(R.id.tvFirstName);
         tvLastName = (TextView) findViewById(R.id.tvLastName);
@@ -84,5 +96,32 @@ public class UserDetailsAdminActivity extends AppCompatActivity {
             }
         });
 
+        databaseUsersModel = (DatabaseUsersModel) getIntent().getSerializableExtra(AppConstants.REGISTRATION_REQUEST);
+        tvUserName.setText(databaseUsersModel.getUserColumnUtaId());
+        tvFirstName.setText(databaseUsersModel.getUserColumnFirstName());
+        tvLastName.setText(databaseUsersModel.getUserColumnLastName());
+        tvEmailId.setText(databaseUsersModel.getUserColumnEmailId());
+        tvPassword.setText(databaseUsersModel.getUserColumnPassword());
+        tvCategory.setText(databaseUsersModel.getUserColumnCategory());
+        tvAddress.setText(databaseUsersModel.getUserColumnAddress());
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId() /*to get clicked view id**/) {
+            case R.id.btnApprove:
+                databaseUsersModel.setUserColumnStatus(AppConstants.APPROVED);
+                if(databaseAdapter.updateUserProfile(databaseUsersModel.getUserColumnUserId(),databaseUsersModel))
+                databaseAdapter.getUsers();
+                break;
+
+            case R.id.btnReject:
+                databaseAdapter.deleteUser(databaseUsersModel.getUserColumnUserId());
+                databaseAdapter.getUsers();
+                break;
+
+            default:
+                break;
+        }
     }
 }

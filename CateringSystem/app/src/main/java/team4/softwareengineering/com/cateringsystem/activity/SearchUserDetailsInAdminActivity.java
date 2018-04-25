@@ -13,6 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import team4.softwareengineering.com.cateringsystem.R;
+import team4.softwareengineering.com.cateringsystem.database.DatabaseAdapter;
+import team4.softwareengineering.com.cateringsystem.model.DatabaseUsersModel;
+import team4.softwareengineering.com.cateringsystem.utils.AppConstants;
 import team4.softwareengineering.com.cateringsystem.utils.Utils;
 
 /**
@@ -23,8 +26,10 @@ public class SearchUserDetailsInAdminActivity extends AppCompatActivity {
 
     private Context mContext;
     private Toolbar toolbar;
-    private TextView tvTbTitle,tvUserName,tvFirstName,tvEmailId,tvPassword,tvAddress,tvCategory;
+    private TextView tvTbTitle,tvUserName,tvFirstName,tvLastName,tvEmailId,tvPassword,tvAddress,tvCategory;
     private Dialog confirmDialog;
+    private DatabaseAdapter databaseAdapter;
+    private DatabaseUsersModel databaseUsersModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,10 +42,13 @@ public class SearchUserDetailsInAdminActivity extends AppCompatActivity {
 
     private void init() {
 
+        databaseAdapter = DatabaseAdapter.getDBAdapterInstance(mContext);
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tvTbTitle = (TextView) findViewById(R.id.tvTbTitle);
         tvUserName= (TextView) findViewById(R.id.tvUserName);
         tvFirstName= (TextView) findViewById(R.id.tvFirstName);
+        tvLastName = (TextView) findViewById(R.id.tvLastName);
         tvEmailId= (TextView) findViewById(R.id.tvEmailId);
         tvPassword= (TextView) findViewById(R.id.tvPassword);
         tvAddress= (TextView) findViewById(R.id.tvAddress);
@@ -54,7 +62,7 @@ public class SearchUserDetailsInAdminActivity extends AppCompatActivity {
             }
         });
 
-        tvTbTitle.setText(R.string.user_event_details);
+        tvTbTitle.setText("User Details");
 
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -74,11 +82,12 @@ public class SearchUserDetailsInAdminActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.edit:
-                        startActivity(new Intent(SearchUserDetailsInAdminActivity.this,EditUserActivity.class));
+                        Intent intent = new Intent(SearchUserDetailsInAdminActivity.this,EditUserActivity.class);
+                        intent.putExtra(AppConstants.EDIT_USER_ACTIVITY,databaseUsersModel);
+                        startActivity(intent);
                         return true;
 
                     case R.id.delete:
-                        Toast.makeText(mContext, "Delete",Toast.LENGTH_LONG).show();
                         confirmationDialog();
                         return true;
 
@@ -87,6 +96,15 @@ public class SearchUserDetailsInAdminActivity extends AppCompatActivity {
             }
         });
 
+         databaseUsersModel= (DatabaseUsersModel) getIntent().getSerializableExtra(AppConstants.SEARCH_USER_DETAILS);
+
+        tvUserName.setText(databaseUsersModel.getUserColumnUtaId());
+        tvFirstName.setText(databaseUsersModel.getUserColumnFirstName());
+        tvLastName.setText(databaseUsersModel.getUserColumnLastName());
+        tvEmailId.setText(databaseUsersModel.getUserColumnEmailId());
+        tvPassword.setText(databaseUsersModel.getUserColumnPassword());
+        tvAddress.setText(databaseUsersModel.getUserColumnAddress());
+        tvCategory.setText(databaseUsersModel.getUserColumnCategory());
     }
 
     private void confirmationDialog() {
@@ -102,6 +120,7 @@ public class SearchUserDetailsInAdminActivity extends AppCompatActivity {
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                databaseAdapter.deleteUser(databaseUsersModel.getUserColumnUserId());
                 confirmDialog.dismiss();
             }
         });

@@ -18,6 +18,9 @@ import java.util.Arrays;
 
 import team4.softwareengineering.com.cateringsystem.R;
 import team4.softwareengineering.com.cateringsystem.adapter.SimpleSpinnerAdaptor;
+import team4.softwareengineering.com.cateringsystem.database.DatabaseAdapter;
+import team4.softwareengineering.com.cateringsystem.model.DatabaseUsersModel;
+import team4.softwareengineering.com.cateringsystem.utils.AppConstants;
 
 /**
  * Created by vikra on 3/24/2018.
@@ -29,8 +32,9 @@ public class EditUserActivity extends AppCompatActivity {
     private Spinner spinnerCategory;
     private ArrayAdapter<String> simpleSpinnerAdaptor ;
     private Toolbar toolbar;
-    private TextView tvTbTitle,tvRegister;
+    private TextView tvTbTitle,tvSave;
     private EditText etUtaId, etFirstName, etLastName, etEmail, etPhoneNumber, etPassword;
+    private DatabaseAdapter databaseAdapter;
 
 
     @Override
@@ -44,6 +48,10 @@ public class EditUserActivity extends AppCompatActivity {
 
     private void init() {
 
+        final DatabaseUsersModel databaseUsersModel = (DatabaseUsersModel) getIntent().getSerializableExtra(AppConstants.EDIT_USER_ACTIVITY);
+
+        databaseAdapter = DatabaseAdapter.getDBAdapterInstance(mContext);
+
         etUtaId = (EditText)findViewById(R.id.etUtaId);
         etFirstName = (EditText)findViewById(R.id.etFirstName);
         etLastName = (EditText)findViewById(R.id.etLastName);
@@ -51,12 +59,21 @@ public class EditUserActivity extends AppCompatActivity {
         etPhoneNumber = (EditText)findViewById(R.id.etPhoneNumber);
         etPassword = (EditText)findViewById(R.id.etPassword);
 
-        tvRegister = (TextView) findViewById(R.id.tvRegister);
+        tvSave = (TextView) findViewById(R.id.tvSave);
 
-        tvRegister.setOnClickListener(new View.OnClickListener() {
+        tvSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                databaseUsersModel.setUserColumnUtaId(etUtaId.getText().toString());
+                databaseUsersModel.setUserColumnFirstName(etFirstName.getText().toString());
+                databaseUsersModel.setUserColumnLastName(etLastName.getText().toString());
+                databaseUsersModel.setUserColumnEmailId(etEmail.getText().toString());
+                databaseUsersModel.setUserColumnPhoneNumber(etPhoneNumber.getText().toString());
+                databaseUsersModel.setUserColumnPassword(etPassword.getText().toString());
+                databaseUsersModel.setUserColumnCategory(spinnerCategory.getSelectedItem().toString());
+
+                databaseAdapter.updateUserProfile(databaseUsersModel.getUserColumnUserId(),databaseUsersModel);
             }
         });
 
@@ -90,6 +107,23 @@ public class EditUserActivity extends AppCompatActivity {
         setSystemUserCategory();
 
         Toast.makeText(mContext,"This screen will have prefilled data",Toast.LENGTH_LONG);
+
+        // Prefill data from databsse
+
+        etUtaId.setText(databaseUsersModel.getUserColumnUtaId());
+        etFirstName.setText(databaseUsersModel.getUserColumnFirstName());
+        etLastName.setText(databaseUsersModel.getUserColumnLastName());
+        etEmail.setText(databaseUsersModel.getUserColumnEmailId());
+        etPhoneNumber.setText(databaseUsersModel.getUserColumnPhoneNumber());
+        etPassword.setText(databaseUsersModel.getUserColumnPassword());
+
+        if(databaseUsersModel.getUserColumnCategory().equals("Caterer")){
+            spinnerCategory.setSelection(0);
+        }else if(databaseUsersModel.getUserColumnCategory().equals("Caterer Staff")){
+            spinnerCategory.setSelection(1);
+        }else{
+            spinnerCategory.setSelection(2);
+        }
     }
 
     /*

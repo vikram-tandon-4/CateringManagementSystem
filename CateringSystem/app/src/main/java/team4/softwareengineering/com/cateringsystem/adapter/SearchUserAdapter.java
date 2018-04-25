@@ -14,16 +14,19 @@ import android.widget.Filter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import team4.softwareengineering.com.cateringsystem.R;
 import team4.softwareengineering.com.cateringsystem.activity.SearchUserDetailsInAdminActivity;
+import team4.softwareengineering.com.cateringsystem.model.DatabaseUsersModel;
 import team4.softwareengineering.com.cateringsystem.model.SearchUserModel;
+import team4.softwareengineering.com.cateringsystem.utils.AppConstants;
 
 
 public class SearchUserAdapter extends RecyclerView.Adapter<SearchUserAdapter.MyViewHolder> {
 
-    private ArrayList<SearchUserModel> searchUserModels;
-    private ArrayList<SearchUserModel> mFilteredList;
+    private List<DatabaseUsersModel> searchUserModels;
+    private List<DatabaseUsersModel> mFilteredList;
 
     private Context mContext;
 
@@ -44,7 +47,7 @@ public class SearchUserAdapter extends RecyclerView.Adapter<SearchUserAdapter.My
     }
 
 
-    public SearchUserAdapter(ArrayList<SearchUserModel> searchUserModels, Context mContext) {
+    public SearchUserAdapter(List<DatabaseUsersModel> searchUserModels, Context mContext) {
         this.searchUserModels = searchUserModels;
         mFilteredList = searchUserModels;
         this.mContext = mContext;
@@ -62,11 +65,14 @@ public class SearchUserAdapter extends RecyclerView.Adapter<SearchUserAdapter.My
 
 
 
-        holder.tvUserName.setText(mFilteredList.get(position).getName());
+        holder.tvUserName.setText(mFilteredList.get(position).getUserColumnFirstName());
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mContext.startActivity(new Intent(mContext,SearchUserDetailsInAdminActivity.class));
+
+                Intent intent = new Intent(mContext,SearchUserDetailsInAdminActivity.class);
+                intent.putExtra(AppConstants.SEARCH_USER_DETAILS,mFilteredList.get(position));
+                mContext.startActivity(intent);
             }
         });
         setAnimation(holder.container, position);
@@ -85,12 +91,11 @@ public class SearchUserAdapter extends RecyclerView.Adapter<SearchUserAdapter.My
                     mFilteredList = searchUserModels;
                 } else {
 
-                    ArrayList<SearchUserModel> filteredList = new ArrayList<>();
+                    ArrayList<DatabaseUsersModel> filteredList = new ArrayList<>();
 
-                    for (SearchUserModel searchUser : searchUserModels) {
-
+                    for (DatabaseUsersModel searchUser : searchUserModels) {
 //                        if (searchUser.getName().toLowerCase().contains(charString) || searchUser.getName().toLowerCase().contains(charString) || searchUser.getVer().toLowerCase().contains(charString)) {
-                        if (searchUser.getName().toLowerCase().contains(charString)) {
+                        if (searchUser.getUserColumnFirstName().toLowerCase().contains(charString)) {
 
                             filteredList.add(searchUser);
                         }
@@ -106,7 +111,7 @@ public class SearchUserAdapter extends RecyclerView.Adapter<SearchUserAdapter.My
 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                mFilteredList = (ArrayList<SearchUserModel>) filterResults.values;
+                mFilteredList = (ArrayList<DatabaseUsersModel>) filterResults.values;
                 notifyDataSetChanged();
             }
         };

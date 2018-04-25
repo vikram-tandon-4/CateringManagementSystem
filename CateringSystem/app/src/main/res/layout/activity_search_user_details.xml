@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
-        android:text="User Name"
+        android:text="UTA Id"
         android:textStyle="bold"
         android:textSize="15dp"
         tools:layout_editor_absoluteX="16dp"

@@ -1,10 +1,12 @@
 package team4.softwareengineering.com.cateringsystem.model;
 
+import java.io.Serializable;
+
 /**
  * Created by vikra on 4/19/2018.
  */
 
-public class DatabaseUsersModel {
+public class DatabaseUsersModel implements Serializable {
 
     private int userColumnUserId;
     private String userColumnUtaId;

@@ -12,19 +12,23 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import team4.softwareengineering.com.cateringsystem.R;
 import team4.softwareengineering.com.cateringsystem.activity.AdminHomeActivity;
 import team4.softwareengineering.com.cateringsystem.activity.RegistrationRequestActivity;
 import team4.softwareengineering.com.cateringsystem.activity.UserDetailsAdminActivity;
 import team4.softwareengineering.com.cateringsystem.model.AdminRegistrationRequestModel;
+import team4.softwareengineering.com.cateringsystem.model.DatabaseUsersModel;
 import team4.softwareengineering.com.cateringsystem.model.HallModel;
+import team4.softwareengineering.com.cateringsystem.utils.AppConstants;
 
 
 public class RegistrationRequestAdapter extends RecyclerView.Adapter<RegistrationRequestAdapter.MyViewHolder> {
 
-    private ArrayList<AdminRegistrationRequestModel> adminRegistrationRequestModels;
+    private ArrayList<DatabaseUsersModel> adminRegistrationRequestModels;
 
     private Context mContext;
 
@@ -47,7 +51,7 @@ public class RegistrationRequestAdapter extends RecyclerView.Adapter<Registratio
     }
 
 
-    public RegistrationRequestAdapter(ArrayList<AdminRegistrationRequestModel> adminRegistrationRequestModels, Context mContext) {
+    public RegistrationRequestAdapter(ArrayList<DatabaseUsersModel> adminRegistrationRequestModels, Context mContext) {
         this.adminRegistrationRequestModels = adminRegistrationRequestModels;
         this.mContext = mContext;
     }
@@ -62,15 +66,20 @@ public class RegistrationRequestAdapter extends RecyclerView.Adapter<Registratio
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
 
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(Long.parseLong(adminRegistrationRequestModels.get(position).getUserColumnTimestamp()));  //here your time in miliseconds
+        String date = "" + calendar.get(Calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.MONTH) + "/" + calendar.get(Calendar.YEAR);
+        String time = "" + calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE) + ":" + calendar.get(Calendar.SECOND);
 
-
-        holder.tvUserName.setText(adminRegistrationRequestModels.get(position).getName());
-        holder.tvDate.setText(adminRegistrationRequestModels.get(position).getDate());
-        holder.tvTime.setText(adminRegistrationRequestModels.get(position).getTime());
+        holder.tvUserName.setText(adminRegistrationRequestModels.get(position).getUserColumnFirstName());
+        holder.tvDate.setText(date);
+        holder.tvTime.setText(time);
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mContext.startActivity(new Intent(mContext,UserDetailsAdminActivity.class));
+                Intent intent = new Intent(mContext,UserDetailsAdminActivity.class);
+                intent.putExtra(AppConstants.REGISTRATION_REQUEST,(Serializable) adminRegistrationRequestModels.get(position));
+                mContext.startActivity(intent);
             }
         });
         setAnimation(holder.container, position);

@@ -3,6 +3,7 @@ package team4.softwareengineering.com.cateringsystem.activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -19,6 +20,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -127,7 +129,8 @@ public class RequestActivity extends AppCompatActivity {
                 databaseEventsModel.setEventColumnCatererId("To be assigned");
                 databaseEventsModel.setEventColumnMealFormality(spinnerMealFormality.getSelectedItem().toString());
                 databaseEventsModel.setEventColumnFoodVenue(getFoodVenues());
-                databaseEventsModel.setEventColumnStaffId("To be assigned");
+//                databaseEventsModel.setEventColumnStaffId("To be assigned");
+                databaseEventsModel.setEventColumnStaffId("1001551001,1001551002,1001551003,1001551004");
                 databaseEventsModel.setEventColumnUtaId(AppPreferences.getUtaId(mContext));
                 databaseEventsModel.setEventColumnUserId(AppPreferences.getUtaId(mContext));
                 databaseEventsModel.setEventColumnEventCost(calculateCost());
@@ -139,8 +142,8 @@ public class RequestActivity extends AppCompatActivity {
                 if(databaseAdapter.insertEvents(databaseEventsModel)){
                     databaseAdapter.getEvents();
                     // Uncomment below to delete the top most event
-                    if(databaseAdapter.deleteEvent(databaseAdapter.getEvents().get(0).getEventColumnId()))
-                    databaseAdapter.getEvents();
+//                    if(databaseAdapter.deleteEvent(databaseAdapter.getEvents().get(0).getEventColumnId()))
+//                    databaseAdapter.getEvents();
 
                     for(int i=0;i<databaseAdapter.getEvents().size();i++){
                         if(AppPreferences.getUtaId(mContext).equals(databaseAdapter.getEvents().get(i).getEventColumnUtaId())){

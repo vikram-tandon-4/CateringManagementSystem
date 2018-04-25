@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import team4.softwareengineering.com.cateringsystem.R;
 import team4.softwareengineering.com.cateringsystem.adapter.RegistrationRequestAdapter;
 import team4.softwareengineering.com.cateringsystem.adapter.SearchUserAdapter;
+import team4.softwareengineering.com.cateringsystem.database.DatabaseAdapter;
 import team4.softwareengineering.com.cateringsystem.model.AdminRegistrationRequestModel;
 import team4.softwareengineering.com.cateringsystem.model.SearchUserModel;
 
@@ -37,6 +38,8 @@ public class SearchUserActivity extends AppCompatActivity {
     private RecyclerView rvSearch;
     private EditText etSearch;
 
+    private DatabaseAdapter databaseAdapter;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,6 +52,8 @@ public class SearchUserActivity extends AppCompatActivity {
     }
 
     private void init() {
+
+        databaseAdapter = DatabaseAdapter.getDBAdapterInstance(mContext);
 
         etSearch =(EditText) findViewById(R.id.etSearch);
 
@@ -70,7 +75,7 @@ public class SearchUserActivity extends AppCompatActivity {
         rvSearch.setLayoutManager(mLayoutManager);
         rvSearch.setItemAnimator(new DefaultItemAnimator());
 
-        mAdapter = new SearchUserAdapter(getUsers(), mContext);
+        mAdapter = new SearchUserAdapter(databaseAdapter.getUsers(), mContext);
         rvSearch.setAdapter(mAdapter);
 
         toolbar.inflateMenu(R.menu.home);
@@ -103,36 +108,5 @@ public class SearchUserActivity extends AppCompatActivity {
 
             }
         });
-    }
-
-    private ArrayList<SearchUserModel>  getUsers(){
-
-        ArrayList<SearchUserModel> searchUserModels = new ArrayList<>();
-
-        SearchUserModel searchUserModel = new SearchUserModel();
-        searchUserModel.setName("Pradeep");
-        searchUserModels.add(searchUserModel);
-
-        searchUserModel = new SearchUserModel();
-        searchUserModel.setName("Ankur");
-        searchUserModels.add(searchUserModel);
-
-        searchUserModel = new SearchUserModel();
-        searchUserModel.setName("Roopam");
-        searchUserModels.add(searchUserModel);
-
-        searchUserModel = new SearchUserModel();
-        searchUserModel.setName("Vikram");
-        searchUserModels.add(searchUserModel);
-
-        searchUserModel = new SearchUserModel();
-        searchUserModel.setName("Gangsd");
-        searchUserModels.add(searchUserModel);
-
-        searchUserModel = new SearchUserModel();
-        searchUserModel.setName("Victoria");
-        searchUserModels.add(searchUserModel);
-
-        return searchUserModels;
     }
 }

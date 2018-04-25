@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -101,10 +102,12 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 if(databaseAdapter.addUser(databaseUsersModel)){
                     databaseAdapter.getUsers();
+                    Toast.makeText(mContext,"Insertion successful",Toast.LENGTH_LONG).show();
                     // Uncomment below to see how deletion works
-//                    if(databaseAdapter.deleteUser(databaseAdapter.getUsers().get(0).getUserColumnUserId())){
-//                            databaseAdapter.getUsers();
-//                    }
+                    if(databaseAdapter.deleteUser(databaseAdapter.getUsers().get(0).getUserColumnUserId())){
+                            databaseAdapter.getUsers();
+                        Toast.makeText(mContext,"Deletion successful",Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });

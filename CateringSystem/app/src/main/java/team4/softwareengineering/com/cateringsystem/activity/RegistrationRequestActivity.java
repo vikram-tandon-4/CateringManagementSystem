@@ -18,7 +18,9 @@ import java.util.ArrayList;
 import team4.softwareengineering.com.cateringsystem.R;
 import team4.softwareengineering.com.cateringsystem.adapter.HallsAdapter;
 import team4.softwareengineering.com.cateringsystem.adapter.RegistrationRequestAdapter;
+import team4.softwareengineering.com.cateringsystem.database.DatabaseAdapter;
 import team4.softwareengineering.com.cateringsystem.model.AdminRegistrationRequestModel;
+import team4.softwareengineering.com.cateringsystem.model.DatabaseUsersModel;
 import team4.softwareengineering.com.cateringsystem.model.HallModel;
 
 /**
@@ -33,6 +35,8 @@ public class RegistrationRequestActivity extends AppCompatActivity {
     private RegistrationRequestAdapter mAdapter;
     private RecyclerView rvRegistrationRequest;
 
+    private DatabaseAdapter databaseAdapter;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +48,8 @@ public class RegistrationRequestActivity extends AppCompatActivity {
     }
 
     private void init() {
+
+        databaseAdapter = DatabaseAdapter.getDBAdapterInstance(mContext);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tvTbTitle = (TextView) findViewById(R.id.tvTbTitle);
@@ -81,40 +87,53 @@ public class RegistrationRequestActivity extends AppCompatActivity {
         });
     }
 
-    private ArrayList<AdminRegistrationRequestModel>  getRegistrationRequestData(){
+    private ArrayList<DatabaseUsersModel>  getRegistrationRequestData(){
 
-        ArrayList<AdminRegistrationRequestModel> adminRegistrationRequestModels = new ArrayList<>();
 
-        AdminRegistrationRequestModel registrationRequestModel = new AdminRegistrationRequestModel();
-        registrationRequestModel.setName("Pradeep");
-        registrationRequestModel.setTime("12:00 PM");
-        registrationRequestModel.setDate("12/12/2018");
-        adminRegistrationRequestModels.add(registrationRequestModel);
+        ArrayList<DatabaseUsersModel> adminRegistrationRequestModels = new ArrayList<>();
 
-        registrationRequestModel = new AdminRegistrationRequestModel();
-        registrationRequestModel.setName("Ankur");
-        registrationRequestModel.setTime("12:00 PM");
-        registrationRequestModel.setDate("12/12/2018");
-        adminRegistrationRequestModels.add(registrationRequestModel);
 
-        registrationRequestModel = new AdminRegistrationRequestModel();
-        registrationRequestModel.setName("Roopam");
-        registrationRequestModel.setTime("12:00 PM");
-        registrationRequestModel.setDate("12/12/2018");
-        adminRegistrationRequestModels.add(registrationRequestModel);
-
-        registrationRequestModel = new AdminRegistrationRequestModel();
-        registrationRequestModel.setName("Gangsd");
-        registrationRequestModel.setTime("12:00 PM");
-        registrationRequestModel.setDate("12/12/2018");
-        adminRegistrationRequestModels.add(registrationRequestModel);
-
-        registrationRequestModel = new AdminRegistrationRequestModel();
-        registrationRequestModel.setName("Victoria");
-        registrationRequestModel.setTime("12:00 PM");
-        registrationRequestModel.setDate("12/12/2018");
-        adminRegistrationRequestModels.add(registrationRequestModel);
+        for(DatabaseUsersModel databaseUser: databaseAdapter.getUsers()){
+            if(databaseUser.getUserColumnStatus().equalsIgnoreCase("PENDING")){
+                adminRegistrationRequestModels.add(databaseUser);
+            }
+        }
 
         return adminRegistrationRequestModels;
+
+
+//        ArrayList<AdminRegistrationRequestModel> adminRegistrationRequestModels = new ArrayList<>();
+//
+//        AdminRegistrationRequestModel registrationRequestModel = new AdminRegistrationRequestModel();
+//        registrationRequestModel.setName("Pradeep");
+//        registrationRequestModel.setTime("12:00 PM");
+//        registrationRequestModel.setDate("12/12/2018");
+//        adminRegistrationRequestModels.add(registrationRequestModel);
+//
+//        registrationRequestModel = new AdminRegistrationRequestModel();
+//        registrationRequestModel.setName("Ankur");
+//        registrationRequestModel.setTime("12:00 PM");
+//        registrationRequestModel.setDate("12/12/2018");
+//        adminRegistrationRequestModels.add(registrationRequestModel);
+//
+//        registrationRequestModel = new AdminRegistrationRequestModel();
+//        registrationRequestModel.setName("Roopam");
+//        registrationRequestModel.setTime("12:00 PM");
+//        registrationRequestModel.setDate("12/12/2018");
+//        adminRegistrationRequestModels.add(registrationRequestModel);
+//
+//        registrationRequestModel = new AdminRegistrationRequestModel();
+//        registrationRequestModel.setName("Gangsd");
+//        registrationRequestModel.setTime("12:00 PM");
+//        registrationRequestModel.setDate("12/12/2018");
+//        adminRegistrationRequestModels.add(registrationRequestModel);
+//
+//        registrationRequestModel = new AdminRegistrationRequestModel();
+//        registrationRequestModel.setName("Victoria");
+//        registrationRequestModel.setTime("12:00 PM");
+//        registrationRequestModel.setDate("12/12/2018");
+//        adminRegistrationRequestModels.add(registrationRequestModel);
+
+ //       return adminRegistrationRequestModels;
     }
 }
