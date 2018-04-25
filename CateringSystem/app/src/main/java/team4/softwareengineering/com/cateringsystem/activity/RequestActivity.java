@@ -120,7 +120,7 @@ public class RequestActivity extends AppCompatActivity {
                 databaseEventsModel.setEventColumnStatus("PENDING");
                 databaseEventsModel.setEventColumnTimestamp(""+System.currentTimeMillis());
                 databaseEventsModel.setEventColumnDuration(etDurationInMinutes.getText().toString());
-                databaseEventsModel.setEventColumnOccasionType(etDurationInMinutes.getText().toString());
+                databaseEventsModel.setEventColumnOccasionType(spinnerOccasionType.getSelectedItem().toString());
                 databaseEventsModel.setEventColumnEntertainment(cbEntertainment.isChecked()?"Yes":"No");
                 databaseEventsModel.setEventColumnMealType(spinnerMealType.getSelectedItem().toString());
                 databaseEventsModel.setEventColumnDrinks(spinnerDrink.getSelectedItem().toString());
