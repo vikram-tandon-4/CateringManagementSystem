@@ -74,14 +74,17 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 DatabaseUsersModel databaseUsersModel = new DatabaseUsersModel();
 
-                databaseUsersModel.setUserColumnUtaId("1001554543");
-                databaseUsersModel.setUserColumnFirstName("pradeep");
-                databaseUsersModel.setUserColumnLastName("ashwin");
-                databaseUsersModel.setUserColumnEmailId("roopam@gmail.com");
-                databaseUsersModel.setUserColumnPhoneNumber("987654321");
-                databaseUsersModel.setUserColumnCategory("Staff");
-                databaseUsersModel.setUserColumnPassword("password");
-                databaseUsersModel.setUserColumnAddress("404 Borders");
+                // Don't keep any field empty
+                // There are no validations
+
+                databaseUsersModel.setUserColumnUtaId(etUtaId.getText().toString());
+                databaseUsersModel.setUserColumnFirstName(etFirstName.getText().toString());
+                databaseUsersModel.setUserColumnLastName(etLastName.getText().toString());
+                databaseUsersModel.setUserColumnEmailId(etEmail.getText().toString());
+                databaseUsersModel.setUserColumnPhoneNumber(etPhoneNumber.getText().toString());
+                databaseUsersModel.setUserColumnCategory(spinnerCategory.getSelectedItem().toString());
+                databaseUsersModel.setUserColumnPassword(etPassword.getText().toString());
+                databaseUsersModel.setUserColumnAddress(etAddress.getText().toString());
                 // fixed fields
                 databaseUsersModel.setUserColumnTimestamp(""+System.currentTimeMillis());
                 databaseUsersModel.setUserColumnStatus("Pending");
@@ -98,9 +101,10 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 if(databaseAdapter.addUser(databaseUsersModel)){
                     databaseAdapter.getUsers();
+                    // Uncomment below to see how deletion works
 //                    if(databaseAdapter.deleteUser(databaseAdapter.getUsers().get(0).getUserColumnUserId())){
-//                        databaseAdapter.getUsers();
- //                   }
+//                            databaseAdapter.getUsers();
+//                    }
                 }
             }
         });

@@ -216,6 +216,20 @@ public class DatabaseAdapter {
         return sqLliteDatabase.update(USER_TABLE,contentValues, USER_COLUMN_USER_ID+" = "+userID,null)>0;
     }
 
+    public boolean updateEvent(int eventID, DatabaseEventsModel databaseEventsModel){
+        ContentValues contentValues=new ContentValues();
+
+        contentValues.put(EVENT_COLUMN_EVENT_STATUS, databaseEventsModel.getEventColumnStatus());
+        contentValues.put(EVENT_COLUMN_LOCATION, databaseEventsModel.getEventColumnLocation());
+        contentValues.put(EVENT_COLUMN_CATERER_ID, databaseEventsModel.getEventColumnCatererId());
+        contentValues.put(EVENT_COLUMN_STAFF_ID, databaseEventsModel.getEventColumnStaffId());
+        contentValues.put(EVENT_HALL_ID, databaseEventsModel.getEventColumnHallId());
+
+        return sqLliteDatabase.update(EVENT_TABLE,contentValues, EVENT_COLUMN_EVENT_ID+" = "+eventID,null)>0;
+    }
+
+
+
     public List<DatabaseEventsModel> getEvents() {
         List<DatabaseEventsModel> databaseEventsModels = new ArrayList<DatabaseEventsModel>();
 

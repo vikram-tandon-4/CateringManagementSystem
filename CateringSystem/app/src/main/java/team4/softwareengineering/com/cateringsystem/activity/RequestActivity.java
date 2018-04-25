@@ -1,8 +1,11 @@
 package team4.softwareengineering.com.cateringsystem.activity;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -10,6 +13,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -17,11 +21,15 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.List;
 
 import team4.softwareengineering.com.cateringsystem.R;
 import team4.softwareengineering.com.cateringsystem.adapter.SimpleSpinnerAdaptor;
 import team4.softwareengineering.com.cateringsystem.database.DatabaseAdapter;
 import team4.softwareengineering.com.cateringsystem.model.DatabaseEventsModel;
+import team4.softwareengineering.com.cateringsystem.model.DatabaseUsersModel;
+import team4.softwareengineering.com.cateringsystem.utils.AppPreferences;
 
 /**
  * Created by vikra on 3/24/2018.
@@ -36,7 +44,7 @@ public class RequestActivity extends AppCompatActivity {
     private TextView tvTbTitle;
     private EditText etPartySize;
     private EditText etDurationInMinutes;
-    private EditText etDate;
+    private static EditText etDate;
     private EditText etTime;
     private CheckBox cbEntertainment,cbAmerican,cbChinese,cbFrench,cbGreek,cbIndian,cbItalian,
             cbJapanese,cbMexican,cbPizza;
@@ -72,11 +80,6 @@ public class RequestActivity extends AppCompatActivity {
         cbMexican =(CheckBox)findViewById(R.id.cbMexican);
         cbPizza =(CheckBox)findViewById(R.id.cbPizza);
 
-        String foodVenue="";
-//
-//        if(cbAmerican.isChecked()){
-//            foodVenue += "American";
-//        }
 
         etDate= (EditText) findViewById(R.id.etDate);
         etTime= (EditText) findViewById(R.id.etTime);
@@ -91,40 +94,65 @@ public class RequestActivity extends AppCompatActivity {
 
         tvTbTitle.setText(R.string.request_event);
 
+        etDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment newFragment = new RequestActivity.DatePickerFragment();
+                newFragment.show(getSupportFragmentManager(), "datePicker");
+            }
+        });
+
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 DatabaseEventsModel databaseEventsModel = new DatabaseEventsModel();
 
+                long time= System.currentTimeMillis();
+
+                // 5 values are to assigned later
+                // Event update method will be used to change values
+
 //                contentValues.put(EVENT_COLUMN_EVENT_ID,databaseEventsModel.getEventColumnId());
-                databaseEventsModel.setEventAssignedColumnId("UTA+TIMESTAMP");
+                databaseEventsModel.setEventAssignedColumnId("E"+time);
                 databaseEventsModel.setEventColumnStatus("PENDING");
                 databaseEventsModel.setEventColumnTimestamp(""+System.currentTimeMillis());
-                databaseEventsModel.setEventColumnDuration("120");
-                databaseEventsModel.setEventColumnOccasionType("Birthday");
-                databaseEventsModel.setEventColumnEntertainment("Yes");
-                databaseEventsModel.setEventColumnMealType("American");
-                databaseEventsModel.setEventColumnDrinks("Alcoholic");
-                databaseEventsModel.setEventColumnLocation("UC");
-                databaseEventsModel.setEventColumnSizeOfParty(123);
-                databaseEventsModel.setEventColumnCatererId("catererid");
-                databaseEventsModel.setEventColumnMealFormality("formal");
-                databaseEventsModel.setEventColumnFoodVenue("foodvenue");
-                databaseEventsModel.setEventColumnStaffId("Ankur,pradeep");
-                databaseEventsModel.setEventColumnUtaId("UTA1234");
-                databaseEventsModel.setEventColumnUserId("userid");
-                databaseEventsModel.setEventColumnEventCost(500);
-                databaseEventsModel.setEventColumnDate("12/12/2018");
-                databaseEventsModel.setEventColumnTime("2:00PM");
-                databaseEventsModel.setEventColumnHallId("hall11");
-                databaseEventsModel.setEventColumnUserFirstName("Roopam");
+                databaseEventsModel.setEventColumnDuration(etDurationInMinutes.getText().toString());
+                databaseEventsModel.setEventColumnOccasionType(etDurationInMinutes.getText().toString());
+                databaseEventsModel.setEventColumnEntertainment(cbEntertainment.isChecked()?"Yes":"No");
+                databaseEventsModel.setEventColumnMealType(spinnerMealType.getSelectedItem().toString());
+                databaseEventsModel.setEventColumnDrinks(spinnerDrink.getSelectedItem().toString());
+                databaseEventsModel.setEventColumnLocation("To be assigned");
+                databaseEventsModel.setEventColumnSizeOfParty(Integer.parseInt(etPartySize.getText().toString()));
+                databaseEventsModel.setEventColumnCatererId("To be assigned");
+                databaseEventsModel.setEventColumnMealFormality(spinnerMealFormality.getSelectedItem().toString());
+                databaseEventsModel.setEventColumnFoodVenue(getFoodVenues());
+                databaseEventsModel.setEventColumnStaffId("To be assigned");
+                databaseEventsModel.setEventColumnUtaId(AppPreferences.getUtaId(mContext));
+                databaseEventsModel.setEventColumnUserId(AppPreferences.getUtaId(mContext));
+                databaseEventsModel.setEventColumnEventCost(calculateCost());
+                databaseEventsModel.setEventColumnDate(etDate.getText().toString());
+                databaseEventsModel.setEventColumnTime(etTime.getText().toString());
+                databaseEventsModel.setEventColumnHallId("To be assigned");
+                databaseEventsModel.setEventColumnUserFirstName(getName());
 
-                databaseEventsModel.setEventColumnUtaId("UTA1234");
                 if(databaseAdapter.insertEvents(databaseEventsModel)){
                     databaseAdapter.getEvents();
                     // Uncomment below to delete the top most event
                     if(databaseAdapter.deleteEvent(databaseAdapter.getEvents().get(0).getEventColumnId()))
                     databaseAdapter.getEvents();
+
+                    for(int i=0;i<databaseAdapter.getEvents().size();i++){
+                        if(AppPreferences.getUtaId(mContext).equals(databaseAdapter.getEvents().get(i).getEventColumnUtaId())){
+                            databaseAdapter.getEvents().get(i);
+                        }
+                    }
+                    // Updating event
+                    databaseEventsModel.setEventColumnHallId("Red River");
+                    databaseEventsModel.setEventColumnLocation("University Center");
+                    if(databaseAdapter.updateEvent( databaseAdapter.getEvents().get(0).getEventColumnId(),databaseEventsModel)){
+                        databaseAdapter.getEvents();
+                    }
                 }
 
 
@@ -175,5 +203,81 @@ Adding data to dropdowns
         simpleSpinnerAdaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCategory.setAdapter(simpleSpinnerAdaptor);
 
+    }
+
+    private String getFoodVenues(){
+
+        String foodVenue="";
+        if(cbAmerican.isChecked()){
+            foodVenue =foodVenue+ " American";
+        }
+        if(cbChinese.isChecked()){
+            foodVenue =foodVenue+ " Chinese";
+        }
+        if(cbFrench.isChecked()){
+            foodVenue =foodVenue+ " French";
+        }
+        if(cbGreek.isChecked()){
+            foodVenue =foodVenue+ " Greek";
+        }
+        if(cbIndian.isChecked()){
+            foodVenue =foodVenue+ " Indian";
+        }
+        if(cbItalian.isChecked()){
+            foodVenue =foodVenue+ " Italian";
+        }
+        if(cbJapanese.isChecked()){
+            foodVenue =foodVenue+ " Japanese";
+        }
+        if(cbMexican.isChecked()){
+            foodVenue =foodVenue+ " Mexican";
+        }
+        if(cbPizza.isChecked()){
+            foodVenue =foodVenue+ " Pizza";
+        }
+
+        return foodVenue;
+    }
+
+
+    private String getName(){
+
+        String name="";
+
+        List<DatabaseUsersModel> databaseUsersModels = databaseAdapter.getUsers();
+
+        for(DatabaseUsersModel databaseUsersModel:databaseUsersModels){
+            if(AppPreferences.getUtaId(mContext).equals(databaseUsersModel.getUserColumnUtaId())){
+                name= databaseUsersModel.getUserColumnFirstName();
+            }
+        }
+        if(name.equals("")){
+            name="Gangadhar";
+        }
+
+        return name;
+    }
+    public static class DatePickerFragment extends DialogFragment
+            implements DatePickerDialog.OnDateSetListener {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+            DatePickerDialog dialog = new DatePickerDialog(getActivity(), this, year, month, day);
+            dialog.getDatePicker().setMaxDate(c.getTimeInMillis());
+            return  dialog;
+        }
+
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+            etDate.setText(month+"/"+day+"/"+year);
+        }
+    }
+
+    // implementation pending
+    private int calculateCost(){
+        return 500;
     }
 }

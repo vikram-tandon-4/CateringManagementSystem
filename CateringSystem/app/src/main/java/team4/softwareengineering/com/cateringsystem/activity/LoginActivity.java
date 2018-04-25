@@ -66,6 +66,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         if(AppPreferences.isFirstTime(mContext)){
             AppPreferences.setHalls(mContext,getHallData());
+            // ftech halls
             ArrayList<HallModel> hallModels = AppPreferences.getHalls(mContext);
 //            AppPreferences.setFirstTime(mContext,false);
         }
@@ -99,6 +100,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.tvForgotPassword:
+          //      AppPreferences.getHalls(mContext);
                 startActivity(new Intent(LoginActivity.this,ForgotPasswordActivity.class));
                 break;
 
