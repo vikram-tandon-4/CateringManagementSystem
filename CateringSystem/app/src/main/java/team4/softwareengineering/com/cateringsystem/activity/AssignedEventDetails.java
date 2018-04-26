@@ -17,7 +17,9 @@ import java.util.ArrayList;
 
 import team4.softwareengineering.com.cateringsystem.R;
 import team4.softwareengineering.com.cateringsystem.adapter.ReservedEventsAdapter;
+import team4.softwareengineering.com.cateringsystem.model.DatabaseEventsModel;
 import team4.softwareengineering.com.cateringsystem.model.ReservedEventsModel;
+import team4.softwareengineering.com.cateringsystem.utils.AppConstants;
 
 /**
  * Created by vikra on 3/24/2018.
@@ -77,6 +79,19 @@ public class AssignedEventDetails extends AppCompatActivity {
                 return false;
             }
         });
+
+        DatabaseEventsModel databaseEventsModel = (DatabaseEventsModel)getIntent().getSerializableExtra(AppConstants.ASSIGNED_EVENTS_ACTIVITY);
+
+
+        tvEventName.setText(databaseEventsModel.getEventColumnOccasionType());
+        tvEventId.setText(databaseEventsModel.getEventAssignedColumnId());
+        tvPlace.setText(databaseEventsModel.getEventColumnLocation());
+        tvCapacity.setText(""+databaseEventsModel.getEventColumnSizeOfParty());
+        tvDate.setText(databaseEventsModel.getEventColumnDate());
+        tvDuration.setText(databaseEventsModel.getEventColumnDuration());
+        tvTime.setText(databaseEventsModel.getEventColumnTime());
+        tvOcassionType.setText(databaseEventsModel.getEventColumnOccasionType());
+
     }
 
 }

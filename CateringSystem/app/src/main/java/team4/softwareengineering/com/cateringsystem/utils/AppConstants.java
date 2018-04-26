@@ -9,6 +9,7 @@ public interface AppConstants {
     String APPROVED ="approved";
     String PENDING ="pending";
     String REGISTRATION_REQUEST = "registrationRequest";
-    String SEARCH_USER_DETAILS ="SearchUserDetailsInAdminActivity";
-    String EDIT_USER_ACTIVITY="EditUserActivity";
+    String SEARCH_USER_DETAILS ="searchUserDetailsInAdminActivity";
+    String EDIT_USER_ACTIVITY="editUserActivity";
+    String ASSIGNED_EVENTS_ACTIVITY="assignedEventsActivity";
 }

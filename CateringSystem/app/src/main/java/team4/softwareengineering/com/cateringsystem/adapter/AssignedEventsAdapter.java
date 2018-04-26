@@ -13,16 +13,19 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import team4.softwareengineering.com.cateringsystem.R;
 import team4.softwareengineering.com.cateringsystem.activity.AssignedEventDetails;
 import team4.softwareengineering.com.cateringsystem.activity.EventDetailsActivity;
+import team4.softwareengineering.com.cateringsystem.model.DatabaseEventsModel;
 import team4.softwareengineering.com.cateringsystem.model.ReservedEventsModel;
+import team4.softwareengineering.com.cateringsystem.utils.AppConstants;
 
 
 public class AssignedEventsAdapter extends RecyclerView.Adapter<AssignedEventsAdapter.MyViewHolder> {
 
-    private ArrayList<ReservedEventsModel> reservedEventsModels;
+    private ArrayList<DatabaseEventsModel> reservedEventsModels;
 
     private Context mContext;
 
@@ -47,7 +50,7 @@ public class AssignedEventsAdapter extends RecyclerView.Adapter<AssignedEventsAd
     }
 
 
-    public AssignedEventsAdapter(ArrayList<ReservedEventsModel> reservedEventsModels, Context mContext) {
+    public AssignedEventsAdapter(ArrayList<DatabaseEventsModel> reservedEventsModels, Context mContext) {
         this.reservedEventsModels = reservedEventsModels;
         this.mContext = mContext;
     }
@@ -62,18 +65,18 @@ public class AssignedEventsAdapter extends RecyclerView.Adapter<AssignedEventsAd
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
 
-
-
-        holder.tvEventName.setText(reservedEventsModels.get(position).getEventName());
-        holder.tvEventId.setText(reservedEventsModels.get(position).getEventId());
-        holder.tvStatus.setText(reservedEventsModels.get(position).getStatus());
-        holder.tvDate.setText(reservedEventsModels.get(position).getDate());
-        holder.tvTime.setText(reservedEventsModels.get(position).getTime());
+        holder.tvEventName.setText(reservedEventsModels.get(position).getEventColumnOccasionType());
+        holder.tvEventId.setText(reservedEventsModels.get(position).getEventAssignedColumnId());
+        holder.tvStatus.setText("Status: "+reservedEventsModels.get(position).getEventColumnStatus());
+        holder.tvDate.setText(reservedEventsModels.get(position).getEventColumnDate());
+        holder.tvTime.setText(reservedEventsModels.get(position).getEventColumnTime());
 
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mContext.startActivity(new Intent(mContext,AssignedEventDetails.class));
+                Intent intent= new Intent(mContext,AssignedEventDetails.class);
+                intent.putExtra(AppConstants.ASSIGNED_EVENTS_ACTIVITY,reservedEventsModels.get(position));
+                mContext.startActivity(intent);
             }
         });
 

@@ -100,40 +100,5 @@ public class RegistrationRequestActivity extends AppCompatActivity {
         }
 
         return adminRegistrationRequestModels;
-
-
-//        ArrayList<AdminRegistrationRequestModel> adminRegistrationRequestModels = new ArrayList<>();
-//
-//        AdminRegistrationRequestModel registrationRequestModel = new AdminRegistrationRequestModel();
-//        registrationRequestModel.setName("Pradeep");
-//        registrationRequestModel.setTime("12:00 PM");
-//        registrationRequestModel.setDate("12/12/2018");
-//        adminRegistrationRequestModels.add(registrationRequestModel);
-//
-//        registrationRequestModel = new AdminRegistrationRequestModel();
-//        registrationRequestModel.setName("Ankur");
-//        registrationRequestModel.setTime("12:00 PM");
-//        registrationRequestModel.setDate("12/12/2018");
-//        adminRegistrationRequestModels.add(registrationRequestModel);
-//
-//        registrationRequestModel = new AdminRegistrationRequestModel();
-//        registrationRequestModel.setName("Roopam");
-//        registrationRequestModel.setTime("12:00 PM");
-//        registrationRequestModel.setDate("12/12/2018");
-//        adminRegistrationRequestModels.add(registrationRequestModel);
-//
-//        registrationRequestModel = new AdminRegistrationRequestModel();
-//        registrationRequestModel.setName("Gangsd");
-//        registrationRequestModel.setTime("12:00 PM");
-//        registrationRequestModel.setDate("12/12/2018");
-//        adminRegistrationRequestModels.add(registrationRequestModel);
-//
-//        registrationRequestModel = new AdminRegistrationRequestModel();
-//        registrationRequestModel.setName("Victoria");
-//        registrationRequestModel.setTime("12:00 PM");
-//        registrationRequestModel.setDate("12/12/2018");
-//        adminRegistrationRequestModels.add(registrationRequestModel);
-
- //       return adminRegistrationRequestModels;
     }
 }
