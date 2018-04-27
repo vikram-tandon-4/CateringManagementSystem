@@ -1,7 +1,9 @@
 package team4.softwareengineering.com.cateringsystem.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -11,7 +13,14 @@ import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
+import java.awt.font.TextAttribute;
+import java.util.List;
+
 import team4.softwareengineering.com.cateringsystem.R;
+import team4.softwareengineering.com.cateringsystem.database.DatabaseAdapter;
+import team4.softwareengineering.com.cateringsystem.model.DatabaseEventsModel;
 
 /**
  * Created by vikra on 3/24/2018.
@@ -23,41 +32,52 @@ public class UserEventDetailsActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TextView tvTbTitle;
 
-    private TextView textView, textView1,textView2,textView3,textView4,textView5,textView6;
-    private TextView textView7, textView8, textView9, textView10, textView11,textView12,textView13;
-    private TextView textView14, textView15,textView16;
+    private TextView tvOccasionType,tvEventName,tvDuration,tvTime,tvPlace,tvCapacity,tvEventId,tvDate,tvCost;
+    private DatabaseAdapter databaseAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_event_details);
-
         mContext= this;
         init();
     }
 
     private void init() {
-
-    textView =  (TextView) findViewById(R.id.textView);
-    textView1 = (TextView) findViewById(R.id.textView1);
-    textView2 = (TextView) findViewById(R.id.textView2);
-    textView3 = (TextView) findViewById(R.id.textView3);
-    textView4 = (TextView) findViewById(R.id.textView4);
-    textView5 = (TextView) findViewById(R.id.textView5);
-    textView6 = (TextView) findViewById(R.id.textView6);
-    textView7 = (TextView) findViewById(R.id.textView7);
-    textView9 = (TextView) findViewById(R.id.textView9);
-    textView10 = (TextView) findViewById(R.id.textView10);
-    textView11 = (TextView) findViewById(R.id.textView11);
-    textView12 = (TextView) findViewById(R.id.textView12);
-    textView13 = (TextView) findViewById(R.id.textView13);
-    textView14 = (TextView) findViewById(R.id.textView14);
-    textView15 = (TextView) findViewById(R.id.textView15);
-    textView16 = (TextView) findViewById(R.id.textView16);
+        databaseAdapter = DatabaseAdapter.getDBAdapterInstance(mContext);
+        tvOccasionType = (TextView) findViewById(R.id.tvOccasionType);
+        tvDuration = (TextView) findViewById(R.id.tvDuration);
+        tvEventName = (TextView) findViewById(R.id.tvEventName);
+        tvEventId = (TextView) findViewById(R.id.tvEventId);
+        tvTime = (TextView) findViewById(R.id.tvTime);
+        tvPlace = (TextView) findViewById(R.id.tvPlace);
+        tvCapacity = (TextView) findViewById(R.id.tvCapacity);
+        tvDate = (TextView) findViewById(R.id.tvDate);
+        tvCost = (TextView) findViewById(R.id.tvCost);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tvTbTitle = (TextView) findViewById(R.id.tvTbTitle);
-
+        final String eventId = getIntent().getStringExtra("EventId");
+        final List<DatabaseEventsModel> dbEvents = databaseAdapter.getEvents();
+        int i = 0;
+        DatabaseEventsModel databaseEventsModel = new DatabaseEventsModel();
+        for(i=0;i<dbEvents.size();i++){
+            if((dbEvents.get(i).getEventColumnId()+"").equals(eventId)){
+                 databaseEventsModel = dbEvents.get(i);
+                tvOccasionType.setText(dbEvents.get(i).getEventColumnOccasionType());
+                tvDuration.setText(dbEvents.get(i).getEventColumnDuration());
+                tvEventName.setText(dbEvents.get(i).getEventColumnOccasionType());
+                tvDate.setText(dbEvents.get(i).getEventColumnDate());
+                tvEventId.setText(eventId);
+                tvTime.setText(dbEvents.get(i).getEventColumnTime());
+                tvPlace.setText(dbEvents.get(i).getEventColumnLocation());
+                tvCapacity.setText(dbEvents.get(i).getEventColumnSizeOfParty()+"");
+                tvCost.setText(tvCost.getText().toString()+dbEvents.get(i).getEventColumnEventCost()+"");
+                break;
+            }
+        }
+        final DatabaseEventsModel dm = databaseEventsModel;
+        //Toast.makeText(mContext,eventId,Toast.LENGTH_SHORT).show();
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,9 +106,12 @@ public class UserEventDetailsActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.cancelEvent:
-                        Toast.makeText(mContext, "Cancel",Toast.LENGTH_LONG).show();
+                        dm.setEventColumnStatus("Cancelled");
+                        if(databaseAdapter.updateEvent( Integer.parseInt(eventId),dm)){
+                            Toast.makeText(mContext, "Event Cancelled Successfully",Toast.LENGTH_LONG).show();
+                            finish();
+                        }
                         return true;
-
                 }
                 return false;
             }

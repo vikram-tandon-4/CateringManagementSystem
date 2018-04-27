@@ -124,41 +124,35 @@ public class RequestActivity extends AppCompatActivity {
                 databaseEventsModel.setEventColumnEntertainment(cbEntertainment.isChecked()?"Yes":"No");
                 databaseEventsModel.setEventColumnMealType(spinnerMealType.getSelectedItem().toString());
                 databaseEventsModel.setEventColumnDrinks(spinnerDrink.getSelectedItem().toString());
-                databaseEventsModel.setEventColumnLocation("To be assigned");
+                databaseEventsModel.setEventColumnLocation("");
                 databaseEventsModel.setEventColumnSizeOfParty(Integer.parseInt(etPartySize.getText().toString()));
-                databaseEventsModel.setEventColumnCatererId("To be assigned");
+                databaseEventsModel.setEventColumnCatererId("");
                 databaseEventsModel.setEventColumnMealFormality(spinnerMealFormality.getSelectedItem().toString());
                 databaseEventsModel.setEventColumnFoodVenue(getFoodVenues());
 //                databaseEventsModel.setEventColumnStaffId("To be assigned");
-                databaseEventsModel.setEventColumnStaffId("1001551001,1001551002,1001551003,1001551004");
+                databaseEventsModel.setEventColumnStaffId("");
                 databaseEventsModel.setEventColumnUtaId(AppPreferences.getUtaId(mContext));
                 databaseEventsModel.setEventColumnUserId(AppPreferences.getUtaId(mContext));
                 databaseEventsModel.setEventColumnEventCost(calculateCost());
                 databaseEventsModel.setEventColumnDate(etDate.getText().toString());
                 databaseEventsModel.setEventColumnTime(etTime.getText().toString());
-                databaseEventsModel.setEventColumnHallId("To be assigned");
-                databaseEventsModel.setEventColumnUserFirstName(getName());
+                databaseEventsModel.setEventColumnHallId("");
+                databaseEventsModel.setEventColumnUserFirstName("Roopam");
 
                 if(databaseAdapter.insertEvents(databaseEventsModel)){
-                    databaseAdapter.getEvents();
+                 //   databaseAdapter.getEvents();
                     // Uncomment below to delete the top most event
 //                    if(databaseAdapter.deleteEvent(databaseAdapter.getEvents().get(0).getEventColumnId()))
 //                    databaseAdapter.getEvents();
-
-                    for(int i=0;i<databaseAdapter.getEvents().size();i++){
-                        if(AppPreferences.getUtaId(mContext).equals(databaseAdapter.getEvents().get(i).getEventColumnUtaId())){
-                            databaseAdapter.getEvents().get(i);
-                        }
-                    }
                     // Updating event
-                    databaseEventsModel.setEventColumnHallId("Red River");
-                    databaseEventsModel.setEventColumnLocation("University Center");
-                    if(databaseAdapter.updateEvent( databaseAdapter.getEvents().get(0).getEventColumnId(),databaseEventsModel)){
-                        databaseAdapter.getEvents();
-                    }
+                  //  databaseEventsModel.setEventColumnHallId("Red River");
+                  //  databaseEventsModel.setEventColumnLocation("University Center");
+                  //  if(databaseAdapter.updateEvent( databaseAdapter.getEvents().get(0).getEventColumnId(),databaseEventsModel)){
+                  //      databaseAdapter.getEvents();
+                   // }
+                    Toast.makeText(mContext,"Request placed successfully",Toast.LENGTH_SHORT).show();
+                    finish();
                 }
-
-
             }
         });
 
@@ -254,10 +248,6 @@ Adding data to dropdowns
                 name= databaseUsersModel.getUserColumnFirstName();
             }
         }
-        if(name.equals("")){
-            name="Gangadhar";
-        }
-
         return name;
     }
     public static class DatePickerFragment extends DialogFragment
@@ -279,8 +269,28 @@ Adding data to dropdowns
         }
     }
 
-    // implementation pending
+    // implementation
     private int calculateCost(){
-        return 500;
+        int cost = 0;
+        if (spinnerMealType.getSelectedItem().toString().contains("Breakfast")){
+            cost = 8;
+        }
+        else if(spinnerMealType.getSelectedItem().toString().contains("Lunch")){
+            cost = 12;
+        }
+        else{
+            cost = 18;
+        }
+        if (spinnerMealFormality.getSelectedItem().toString().contains("Formal")){
+            cost*=1.5;
+        }
+        if (spinnerDrink.getSelectedItem().toString().contains("Standard")){
+            cost+=10;
+        }
+        else{
+            cost+=15;
+        }
+        System.out.println(Integer.parseInt(etPartySize.getText().toString()));
+        return cost*Integer.parseInt(etPartySize.getText().toString());
     }
 }

@@ -60,20 +60,16 @@ public class ReservedEventsAdapter extends RecyclerView.Adapter<ReservedEventsAd
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, final int position) {
-
-
-
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
         holder.tvEventName.setText(reservedEventsModels.get(position).getEventName());
         holder.tvEventId.setText(reservedEventsModels.get(position).getEventId());
         holder.tvStatus.setText(reservedEventsModels.get(position).getStatus());
         holder.tvDate.setText(reservedEventsModels.get(position).getDate());
         holder.tvTime.setText(reservedEventsModels.get(position).getTime());
-
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mContext.startActivity(new Intent(mContext,UserEventDetailsActivity.class));
+                mContext.startActivity(new Intent(mContext,UserEventDetailsActivity.class).putExtra("EventId",holder.tvEventId.getText().toString()));
             }
         });
 

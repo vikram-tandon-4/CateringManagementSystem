@@ -2,6 +2,7 @@ package team4.softwareengineering.com.cateringsystem.activity;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,18 +12,24 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import team4.softwareengineering.com.cateringsystem.R;
 import team4.softwareengineering.com.cateringsystem.adapter.HallsAdapter;
+import team4.softwareengineering.com.cateringsystem.database.DatabaseAdapter;
+import team4.softwareengineering.com.cateringsystem.model.DatabaseEventsModel;
 import team4.softwareengineering.com.cateringsystem.model.HallModel;
 
 /**
@@ -36,13 +43,14 @@ public class HallsActivity extends AppCompatActivity {
     private TextView tvTbTitle;
     private HallsAdapter mAdapter;
     private RecyclerView rvAvailableHall;
-    private static EditText etDate;
+    private static EditText etDate,etTime;
+    private Button btnSearch;
+    private DatabaseAdapter databaseAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_available_hall);
-
         mContext= this;
         init();
 
@@ -53,6 +61,9 @@ public class HallsActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tvTbTitle = (TextView) findViewById(R.id.tvTbTitle);
         etDate = (EditText) findViewById(R.id.etDate);
+        etTime = (EditText) findViewById(R.id.etTime);
+        btnSearch = (Button) findViewById(R.id.btnSearch);
+        databaseAdapter = DatabaseAdapter.getDBAdapterInstance(mContext);
 
         etDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +71,18 @@ public class HallsActivity extends AppCompatActivity {
                 DialogFragment newFragment = new DatePickerFragment();
                 newFragment.show(getSupportFragmentManager(), "datePicker");
             }
+        });
+
+        btnSearch.setOnClickListener(new View.OnClickListener(){
+           @Override
+            public void onClick(View v){
+               rvAvailableHall = (RecyclerView)findViewById(R.id.rvAvailableHall);
+               RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+               rvAvailableHall.setLayoutManager(mLayoutManager);
+               rvAvailableHall.setItemAnimator(new DefaultItemAnimator());
+               mAdapter = new HallsAdapter(getHallData(), mContext);
+               rvAvailableHall.setAdapter(mAdapter);
+           }
         });
 
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
@@ -71,14 +94,6 @@ public class HallsActivity extends AppCompatActivity {
         });
 
         tvTbTitle.setText("Halls");
-
-        rvAvailableHall = (RecyclerView)findViewById(R.id.rvAvailableHall);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        rvAvailableHall.setLayoutManager(mLayoutManager);
-        rvAvailableHall.setItemAnimator(new DefaultItemAnimator());
-
-        mAdapter = new HallsAdapter(getHallData(), mContext);
-        rvAvailableHall.setAdapter(mAdapter);
 
         toolbar.inflateMenu(R.menu.home);
         toolbar.setOnMenuItemClickListener(new android.support.v7.widget.Toolbar.OnMenuItemClickListener() {
@@ -95,45 +110,61 @@ public class HallsActivity extends AppCompatActivity {
         });
     }
 
+    public HallModel getHall(String s){
+        HallModel hallModel = new HallModel();
+
+        if (s.equals("Liberty")) {
+            hallModel.setCapacity("Capacity: 200");
+            hallModel.setHallName("Liberty");
+            hallModel.setLocation("UTA");
+            hallModel.setPrice("Price: $150/hr");
+        }
+        else if(s.equals("KC")) {
+            hallModel.setCapacity("Capacity: 300");
+            hallModel.setHallName("KC");
+            hallModel.setLocation("UTA");
+            hallModel.setPrice("Price: $250/hr");
+        }
+        else if(s.equals("Shard")) {
+            hallModel.setCapacity("Capacity: 800");
+            hallModel.setHallName("Shard");
+            hallModel.setLocation("UTA");
+            hallModel.setPrice("Price: $350/hr");
+        }
+        else if(s.equals("Arlington")) {
+            hallModel.setCapacity("Capacity: 500");
+            hallModel.setHallName("Arlington");
+            hallModel.setLocation("UTA");
+            hallModel.setPrice("Price: $100/hr");
+        }
+        else if(s.equals("Maverick")){
+            hallModel.setCapacity("Capacity: 300");
+            hallModel.setHallName("Maverick");
+            hallModel.setLocation("UTA");
+            hallModel.setPrice("Price: $170/hr");
+        }
+        return hallModel;
+    }
+
     private ArrayList<HallModel>  getHallData(){
 
         ArrayList<HallModel> halls = new ArrayList<>();
-
-        HallModel hallModel = new HallModel();
-        hallModel.setCapacity("Capacity: 200");
-        hallModel.setHallName("Liberty");
-        hallModel.setLocation("UTA");
-        hallModel.setPrice("Price: $150/hr");
-        halls.add(hallModel);
-
-        hallModel = new HallModel();
-        hallModel.setCapacity("Capacity: 300");
-        hallModel.setHallName("KC");
-        hallModel.setLocation("UTA");
-        hallModel.setPrice("Price: $250/hr");
-        halls.add(hallModel);
-
-        hallModel = new HallModel();
-        hallModel.setCapacity("Capacity: 800");
-        hallModel.setHallName("Shard");
-        hallModel.setLocation("UTA");
-        hallModel.setPrice("Price: $350/hr");
-        halls.add(hallModel);
-
-        hallModel = new HallModel();
-        hallModel.setCapacity("Capacity: 500");
-        hallModel.setHallName("Arlington");
-        hallModel.setLocation("UTA");
-        hallModel.setPrice("Price: $100/hr");
-        halls.add(hallModel);
-
-        hallModel = new HallModel();
-        hallModel.setCapacity("Capacity: 300");
-        hallModel.setHallName("Maverick");
-        hallModel.setLocation("UTA");
-        hallModel.setPrice("Price: $170/hr");
-        halls.add(hallModel);
-
+        List<String> availHall = new ArrayList<String>();
+        List<DatabaseEventsModel> events = databaseAdapter.getEvents();
+        availHall.add("Liberty");
+        availHall.add("Shard");
+        availHall.add("KC");
+        availHall.add("Maverick");
+        availHall.add("Arlington");
+        for(int i=0;i<events.size();i++){
+            if(events.get(i).getEventColumnDate().equals(etDate.getText().toString()) && events.get(i).getEventColumnTime().equals(etTime.getText().toString())){
+                availHall.remove(events.get(i).getEventColumnHallId());
+                //id to be changed to name
+            }
+        }
+        for(int i=0;i<availHall.size();i++) {
+            halls.add(getHall(availHall.get(i)));
+        }
         return halls;
     }
 

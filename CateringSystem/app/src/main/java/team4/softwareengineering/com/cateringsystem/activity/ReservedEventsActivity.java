@@ -14,10 +14,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import team4.softwareengineering.com.cateringsystem.R;
 import team4.softwareengineering.com.cateringsystem.adapter.ReservedEventsAdapter;
+import team4.softwareengineering.com.cateringsystem.database.DatabaseAdapter;
+import team4.softwareengineering.com.cateringsystem.model.DatabaseEventsModel;
+import team4.softwareengineering.com.cateringsystem.model.RequestedEventModel;
 import team4.softwareengineering.com.cateringsystem.model.ReservedEventsModel;
+import team4.softwareengineering.com.cateringsystem.utils.AppPreferences;
 
 /**
  * Created by vikra on 3/24/2018.
@@ -30,7 +35,7 @@ public class ReservedEventsActivity extends AppCompatActivity {
     private TextView tvTbTitle;
     private ReservedEventsAdapter mAdapter;
     private RecyclerView rvReservedEvents;
-
+    private DatabaseAdapter databaseAdapter;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +47,7 @@ public class ReservedEventsActivity extends AppCompatActivity {
     }
 
     private void init() {
-
+        databaseAdapter = DatabaseAdapter.getDBAdapterInstance(mContext);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tvTbTitle = (TextView) findViewById(R.id.tvTbTitle);
 
@@ -80,49 +85,20 @@ public class ReservedEventsActivity extends AppCompatActivity {
     }
 
     private ArrayList<ReservedEventsModel> getEventsData(){
+        ArrayList<ReservedEventsModel> events = new ArrayList<>();
 
-        ArrayList<ReservedEventsModel> reserved = new ArrayList<>();
-
-        ReservedEventsModel reservedEventsModel = new ReservedEventsModel();
-        reservedEventsModel.setDate("03/03/2018");
-        reservedEventsModel.setEventId("E0103452018");
-        reservedEventsModel.setEventName("Birthday");
-        reservedEventsModel.setStatus("Status: Booked");
-        reservedEventsModel.setTime("4:00 PM");
-        reserved.add(reservedEventsModel);
-
-        reservedEventsModel = new ReservedEventsModel();
-        reservedEventsModel.setDate("03/05/2018");
-        reservedEventsModel.setEventId("E01034532018");
-        reservedEventsModel.setEventName("Farewell");
-        reservedEventsModel.setStatus("Status: Cancelled");
-        reservedEventsModel.setTime("5:00 PM");
-        reserved.add(reservedEventsModel);
-
-        reservedEventsModel = new ReservedEventsModel();
-        reservedEventsModel.setDate("04/03/2018");
-        reservedEventsModel.setEventId("E0105632018");
-        reservedEventsModel.setEventName("Christmas");
-        reservedEventsModel.setStatus("Status: Booked");
-        reservedEventsModel.setTime("6:00 PM");
-        reserved.add(reservedEventsModel);
-
-        reservedEventsModel = new ReservedEventsModel();
-        reservedEventsModel.setDate("04/03/2018");
-        reservedEventsModel.setEventId("E0563032018");
-        reservedEventsModel.setEventName("Birthday");
-        reservedEventsModel.setStatus("Status: Cancelled");
-        reservedEventsModel.setTime("7:00 PM");
-        reserved.add(reservedEventsModel);
-
-        reservedEventsModel = new ReservedEventsModel();
-        reservedEventsModel.setDate("03/03/2018");
-        reservedEventsModel.setEventId("E0103056018");
-        reservedEventsModel.setEventName("Farewell");
-        reservedEventsModel.setStatus("Status: Pending");
-        reservedEventsModel.setTime("8:00 PM");
-        reserved.add(reservedEventsModel);
-
-        return reserved;
+        List<DatabaseEventsModel> dbEvents = databaseAdapter.getEvents();
+        for(int i =0;i<dbEvents.size();i++){
+            if(dbEvents.get(i).getEventColumnUserId().equals(AppPreferences.getUtaId(mContext))) {
+                ReservedEventsModel reservedEventModel = new ReservedEventsModel();
+                reservedEventModel.setEventId(dbEvents.get(i).getEventColumnId()+"");
+                reservedEventModel.setEventName(dbEvents.get(i).getEventColumnOccasionType());
+                reservedEventModel.setDate(dbEvents.get(i).getEventColumnDate());
+                reservedEventModel.setStatus(dbEvents.get(i).getEventColumnStatus());
+                reservedEventModel.setTime(dbEvents.get(i).getEventColumnTime());
+                events.add(reservedEventModel);
+            }
+        }
+        return events;
     }
 }
