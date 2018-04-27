@@ -131,6 +131,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 if(databaseAdapter.updateUserProfile(userId,databaseUsersModel)){
                     //databaseAdapter.getUsers();    i commented this cos i dont see why we need to get users again
                     Toast.makeText(mContext,"Update successful",Toast.LENGTH_LONG).show();
+                    finish();
             }
 
             }

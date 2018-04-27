@@ -102,7 +102,8 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 if(databaseAdapter.addUser(databaseUsersModel)){
                     databaseAdapter.getUsers();
-                    Toast.makeText(mContext,"Insertion successful",Toast.LENGTH_LONG).show();
+                    Toast.makeText(mContext,"Registration successful",Toast.LENGTH_LONG).show();
+                    finish();
                     // Uncomment below to see how deletion works
                     //if(databaseAdapter.deleteUser(databaseAdapter.getUsers().get(0).getUserColumnUserId())){
                     //        databaseAdapter.getUsers();
