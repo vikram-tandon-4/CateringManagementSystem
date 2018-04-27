@@ -12,6 +12,8 @@ import java.util.List;
 import team4.softwareengineering.com.cateringsystem.model.DatabaseEventsModel;
 import team4.softwareengineering.com.cateringsystem.model.DatabaseUsersModel;
 
+import static android.provider.Telephony.Carriers.PASSWORD;
+
 
 /**
  * Created by vikra on 3/11/2018.
@@ -205,13 +207,16 @@ public class DatabaseAdapter {
         contentValues.put(USER_COLUMN_LAST_NAME, databaseUsersModel.getUserColumnLastName());
         contentValues.put(USER_COLUMN_EMAIL_ID, databaseUsersModel.getUserColumnEmailId());
         contentValues.put(USER_COLUMN_PHONE_NUMBER, databaseUsersModel.getUserColumnPhoneNumber());
-        contentValues.put(USER_COLUMN_CATEGORY, databaseUsersModel.getUserColumnCategory());
+      // contentValues.put(USER_COLUMN_CATEGORY, databaseUsersModel.getUserColumnCategory());   //   I COMMENTED THIS BECAUSE WE DO NOT NEED TO UPDATE THIS.
+                                                                                                // AT THE TIME OF RUNNING THE GET VALUE RETURNS NULL WHICH
+                                                                                                 //WILL REPLACE THE ORIGINAL VALUE. THE SAME APPLIES TO ALL THE
+                                                                                                 // ONES I COMMENTED OUT.
         contentValues.put(USER_COLUMN_PASSWORD, databaseUsersModel.getUserColumnPassword());
         contentValues.put(USER_COLUMN_ADDRESS, databaseUsersModel.getUserColumnAddress());
-        contentValues.put(USER_COLUMN_UTA_ID, databaseUsersModel.getUserColumnUtaId());
+      //  contentValues.put(USER_COLUMN_UTA_ID, databaseUsersModel.getUserColumnUtaId());       //DOES NOT NEED TO BE UPDATED
 
         contentValues.put(USER_COLUMN_TIMESTAMP, databaseUsersModel.getUserColumnTimestamp());
-        contentValues.put(USER_COLUMN_STATUS, databaseUsersModel.getUserColumnStatus());
+      //  contentValues.put(USER_COLUMN_STATUS, databaseUsersModel.getUserColumnStatus());
 
         return sqLliteDatabase.update(USER_TABLE,contentValues, USER_COLUMN_USER_ID+" = "+userID,null)>0;
     }
@@ -226,6 +231,49 @@ public class DatabaseAdapter {
         contentValues.put(EVENT_HALL_ID, databaseEventsModel.getEventColumnHallId());
 
         return sqLliteDatabase.update(EVENT_TABLE,contentValues, EVENT_COLUMN_EVENT_ID+" = "+eventID,null)>0;
+    }
+
+    /**
+     * This method to check user exist or not
+     *
+     * @param utaId
+     * @param password
+     * @return true/false
+     */
+    public String checkUser(String utaId, String password) {
+
+        String category="Not Found";
+        // array of columns to fetch
+        String[] columns = {
+                USER_COLUMN_USER_ID,USER_COLUMN_CATEGORY
+        };
+        // selection criteria
+        String selection = USER_COLUMN_UTA_ID + " = ?" + " AND " + USER_COLUMN_PASSWORD + " = ?";
+
+        // selection arguments
+        String[] selectionArgs = {utaId, password};
+
+        // query user table with conditions
+        /**
+         * Here query function is used to fetch records from user table this function works like we use sql query.
+         * SQL query equivalent to this query function is
+         * SELECT user_id FROM user WHERE user_email = 'jack@androidtutorialshub.com' AND user_password = 'qwerty';
+         */
+        Cursor cursor = sqLliteDatabase.query(USER_TABLE, //Table to query
+                columns,                    //columns to return
+                selection,                  //columns for the WHERE clause
+                selectionArgs,              //The values for the WHERE clause
+                null,                       //group the rows
+                null,                       //filter by row groups
+                null);                      //The sort order
+
+        int cursorCount = cursor.getCount();
+        if (cursorCount > 0 && cursor.moveToFirst()) {
+                category = cursor.getString(1);
+            }
+
+        cursor.close();
+        return category;
     }
 
 

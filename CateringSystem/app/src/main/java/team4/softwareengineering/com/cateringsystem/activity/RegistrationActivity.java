@@ -96,7 +96,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 databaseAdapter.getUsers() is for fetching the users from the database
 
-                databaseAdapter.deleteUser() is for deletting a  user from the database
+                databaseAdapter.deleteUser() is for deleting a  user from the database
                  returns true if the deletion is done successfully
                  */
 
@@ -104,10 +104,10 @@ public class RegistrationActivity extends AppCompatActivity {
                     databaseAdapter.getUsers();
                     Toast.makeText(mContext,"Insertion successful",Toast.LENGTH_LONG).show();
                     // Uncomment below to see how deletion works
-                    if(databaseAdapter.deleteUser(databaseAdapter.getUsers().get(0).getUserColumnUserId())){
-                            databaseAdapter.getUsers();
-                        Toast.makeText(mContext,"Deletion successful",Toast.LENGTH_LONG).show();
-                    }
+                    //if(databaseAdapter.deleteUser(databaseAdapter.getUsers().get(0).getUserColumnUserId())){
+                    //        databaseAdapter.getUsers();
+                     //   Toast.makeText(mContext,"Deletion successful",Toast.LENGTH_LONG).show();
+                  //  }
                 }
             }
         });

@@ -9,14 +9,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import team4.softwareengineering.com.cateringsystem.R;
+import team4.softwareengineering.com.cateringsystem.database.DatabaseAdapter;
+import team4.softwareengineering.com.cateringsystem.model.DatabaseUsersModel;
 import team4.softwareengineering.com.cateringsystem.model.HallModel;
 import team4.softwareengineering.com.cateringsystem.utils.AppPreferences;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Context mContext;
     private Toolbar toolbar;
@@ -27,19 +30,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     Check flow
      */
 
-    private TextView btnAdmin,btnCaterer,btnStaff,btnUser,btnLogin;
-    private EditText etUserName,etPassword;
-    private TextView tvRegister,tvForgotPassword;
+    private TextView btnAdmin, btnCaterer, btnStaff, btnUser, btnLogin;
+    private EditText etUserName, etPassword;
+    private TextView tvRegister, tvForgotPassword;
+
+    private DatabaseAdapter databaseAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login2);
-        mContext= this;
+        mContext = this;
         init();
     }
 
     private void init() {
+        databaseAdapter = DatabaseAdapter.getDBAdapterInstance(mContext);
 
         btnAdmin = (TextView) findViewById(R.id.btnAdmin);
         btnCaterer = (TextView) findViewById(R.id.btnCaterer);
@@ -64,59 +70,80 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         tvTbTitle.setText(R.string.login);
 
 
-        if(AppPreferences.isFirstTime(mContext)){
-            AppPreferences.setHalls(mContext,getHallData());
-            // ftech halls
+        if (AppPreferences.isFirstTime(mContext)) {
+            AppPreferences.setHalls(mContext, getHallData());
+            // fetch halls
             ArrayList<HallModel> hallModels = AppPreferences.getHalls(mContext);
 //            AppPreferences.setFirstTime(mContext,false);
         }
-
-
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId() /*to get clicked view id**/) {
-            case R.id.btnAdmin:
-                startActivity(new Intent(LoginActivity.this,AdminHomeActivity.class));
-                break;
-            case R.id.btnCaterer:
+        public void onClick(View v){
 
-                startActivity(new Intent(LoginActivity.this,CatererHomePageActivity.class));
+                switch (v.getId() /*to get clicked view id**/) {
+                    case R.id.btnAdmin:
+                        startActivity(new Intent(LoginActivity.this, AdminHomeActivity.class));
+                        break;
+                    case R.id.btnCaterer:
 
-                break;
-            case R.id.btnStaff:
-                startActivity(new Intent(LoginActivity.this,CatererStaffHomePageActivity.class));
+                        startActivity(new Intent(LoginActivity.this, CatererHomePageActivity.class));
 
-                break;
+                        break;
+                    case R.id.btnStaff:
+                        startActivity(new Intent(LoginActivity.this, CatererStaffHomePageActivity.class));
 
-            case R.id.btnUser:
-                startActivity(new Intent(LoginActivity.this,UserHomePageActivity.class));
+                        break;
 
-                break;
-            case R.id.tvRegister:
-                startActivity(new Intent(LoginActivity.this,RegistrationActivity.class));
+                    case R.id.btnUser:
+                        startActivity(new Intent(LoginActivity.this, UserHomePageActivity.class));
 
-                break;
+                        break;
+                    case R.id.tvRegister:
+                        startActivity(new Intent(LoginActivity.this, RegistrationActivity.class));
 
-            case R.id.tvForgotPassword:
-          //      AppPreferences.getHalls(mContext);
-                startActivity(new Intent(LoginActivity.this,ForgotPasswordActivity.class));
-                break;
+                        break;
 
-            case R.id.btnLogin:
-               AppPreferences.setUtaId(mContext,"100155534376");
-                // check thi UTA id in database
-                // according to the category logging
-                AppPreferences.getUtaId(mContext);
-                break;
+                    case R.id.tvForgotPassword:
+                        //      AppPreferences.getHalls(mContext);
+                        startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
+                        break;
 
-            default:
-                break;
-        }
-    }
+                    case R.id.btnLogin:
+                        // AppPreferences.setUtaId(mContext, "100155534376");
+                        // get The User name and Password
+                        String utaId = etUserName.getText().toString();
+                        String password = etPassword.getText().toString();
+                        // check this UTA id in database
+                        String found = databaseAdapter.checkUser(utaId, password);
 
-    private ArrayList<HallModel> getHallData(){
+                        //how do we navigate to the home screen if user log in is succesful
+                        switch (found.toUpperCase()) {
+                            case "CATERER":
+                                startActivity(new Intent(LoginActivity.this, CatererHomePageActivity.class));
+                                break;
+                            case "STAFF":
+                                startActivity(new Intent(LoginActivity.this, CatererStaffHomePageActivity.class));
+                                break;
+                            case "USER":
+                                startActivity(new Intent(LoginActivity.this, UserHomePageActivity.class));
+                                break;
+                            case "ADMIN":
+                                startActivity(new Intent(LoginActivity.this, AdminHomeActivity.class));
+                                break;
+                            default:
+                                Toast.makeText(mContext, "User Name or Password does not match", Toast.LENGTH_LONG).show();
+                                break;
+                        }
+                        AppPreferences.setUtaId(mContext, utaId);
+                        // Toast.makeText(mContext, "Login successful", Toast.LENGTH_LONG).show();
+
+                    default:
+                        break;
+                }
+                }
+
+
+    private ArrayList<HallModel> getHallData() {
 
         ArrayList<HallModel> halls = new ArrayList<>();
 
@@ -158,3 +185,4 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         return halls;
     }
 }
+

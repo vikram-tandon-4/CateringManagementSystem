@@ -13,9 +13,16 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import team4.softwareengineering.com.cateringsystem.R;
 import team4.softwareengineering.com.cateringsystem.database.DatabaseAdapter;
 import team4.softwareengineering.com.cateringsystem.model.DatabaseUsersModel;
+import team4.softwareengineering.com.cateringsystem.utils.AppPreferences;
+
+import static android.widget.TextView.BufferType.EDITABLE;
 
 /**
  * Created by vikra on 3/24/2018.
@@ -31,6 +38,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
     private TextView btnUpdateProfile;
 
     private DatabaseAdapter databaseAdapter;
+    int userId = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,6 +47,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
         mContext= this;
         init();
+
 
     }
 
@@ -53,6 +62,22 @@ public class UpdateProfileActivity extends AppCompatActivity {
         etAddress = (EditText) findViewById(R.id.etAddress);
         etPassword = (EditText) findViewById(R.id.etPassword);
         btnUpdateProfile = (TextView) findViewById(R.id.btnUpdateProfile);
+
+
+        //set edit texts to the profile information of current user
+        for(DatabaseUsersModel databaseUser: databaseAdapter.getUsers()) {
+            if (databaseUser.getUserColumnUtaId().equalsIgnoreCase(AppPreferences.getUtaId(mContext))) {
+
+                etFirstName.setText(databaseUser.getUserColumnFirstName());
+                etLastName.setText(databaseUser.getUserColumnLastName());
+                etAddress.setText(databaseUser.getUserColumnAddress());
+                etEmail.setText(databaseUser.getUserColumnEmailId());
+                etPhoneNumber.setText(databaseUser.getUserColumnPhoneNumber());
+                etPassword.setText(databaseUser.getUserColumnPassword());
+                userId = databaseUser.getUserColumnUserId();
+                break;
+            }
+        }
 
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -85,22 +110,29 @@ public class UpdateProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                // I created a time stamp here
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+                String timeStamp = sdf.format(new Date());
 
-                DatabaseUsersModel databaseUsersModel = databaseAdapter.getUsers().get(0);
+                DatabaseUsersModel databaseUsersModel = new DatabaseUsersModel();
 
-                databaseUsersModel.setUserColumnFirstName("New First Name");
-                databaseUsersModel.setUserColumnLastName("New Last Name");
-                databaseUsersModel.setUserColumnAddress("New 404 Border");
-                databaseUsersModel.setUserColumnEmailId("New@gmail.com");
-                databaseUsersModel.setUserColumnPhoneNumber("987654567876567");
-                databaseUsersModel.setUserColumnPassword("passssssword");
-                databaseAdapter.getUsers();
+                databaseUsersModel.setUserColumnFirstName(etFirstName.getText().toString());
+                databaseUsersModel.setUserColumnLastName(etLastName.getText().toString());
+                databaseUsersModel.setUserColumnAddress(etAddress.getText().toString());
+                databaseUsersModel.setUserColumnEmailId(etEmail.getText().toString());
+                databaseUsersModel.setUserColumnPhoneNumber(etPhoneNumber.getText().toString());
+                databaseUsersModel.setUserColumnPassword(etPassword.getText().toString());
+                databaseUsersModel.setUserColumnTimestamp(timeStamp);
+               // databaseAdapter.getUsers();
 
                 // databaseAdapter.updateUserProfile() will return true if the updation is successful
                 // put debug points at this databaseAdapter.getUsers() to see updates
-                if(databaseAdapter.updateUserProfile(databaseAdapter.getUsers().get(0).getUserColumnUserId(),databaseUsersModel)){
-                    databaseAdapter.getUsers();
-                }
+
+                if(databaseAdapter.updateUserProfile(userId,databaseUsersModel)){
+                    //databaseAdapter.getUsers();    i commented this cos i dont see why we need to get users again
+                    Toast.makeText(mContext,"Update successful",Toast.LENGTH_LONG).show();
+            }
+
             }
         });
     }

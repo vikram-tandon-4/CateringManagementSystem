@@ -1,6 +1,9 @@
 package team4.softwareengineering.com.cateringsystem.model;
 
+import android.widget.DatePicker;
+
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by vikra on 4/19/2018.
@@ -17,6 +20,7 @@ public class DatabaseUsersModel implements Serializable {
     private String userColumnCategory;
     private String userColumnPassword;
     private String userColumnTimestamp;
+   // private Date userColumnTimestamp;
     private String userColumnStatus;
     private String userColumnAddress;
 
@@ -87,10 +91,9 @@ public class DatabaseUsersModel implements Serializable {
     public String getUserColumnTimestamp() {
         return userColumnTimestamp;
     }
-
-    public void setUserColumnTimestamp(String userColumnTimestamp) {
-        this.userColumnTimestamp = userColumnTimestamp;
-    }
+   public void setUserColumnTimestamp(String userColumnTimestamp) {
+       this.userColumnTimestamp = userColumnTimestamp;
+   }
 
     public String getUserColumnStatus() {
         return userColumnStatus;
