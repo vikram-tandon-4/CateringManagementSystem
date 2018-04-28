@@ -1,11 +1,8 @@
 package team4.softwareengineering.com.cateringsystem.activity;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,18 +10,18 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.DatePicker;
-import android.widget.EditText;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.List;
 
 import team4.softwareengineering.com.cateringsystem.R;
-import team4.softwareengineering.com.cateringsystem.adapter.CreatedEventsListAdapter;
 import team4.softwareengineering.com.cateringsystem.adapter.RequestedEventsListAdapter;
-import team4.softwareengineering.com.cateringsystem.model.CreatedEventModel;
+import team4.softwareengineering.com.cateringsystem.database.DatabaseAdapter;
+import team4.softwareengineering.com.cateringsystem.model.DatabaseEventsModel;
 import team4.softwareengineering.com.cateringsystem.model.RequestedEventModel;
 
 /**
@@ -38,8 +35,11 @@ public class RequestedEventListActivity extends AppCompatActivity {
     private TextView tvTbTitle;
     private RequestedEventsListAdapter mAdapter;
     private RecyclerView rvRequestedEvent;
-    private static EditText etStartTime,etEndTime;
-    private static boolean isStarttime=true;
+    private LinearLayout llDates;
+    //private static EditText etStartTime,etEndTime;
+   // private static boolean isStarttime=true;
+
+    private DatabaseAdapter databaseAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,31 +52,38 @@ public class RequestedEventListActivity extends AppCompatActivity {
     }
 
     private void init() {
+        llDates = (LinearLayout) findViewById(R.id.llDates);
+        databaseAdapter= DatabaseAdapter.getDBAdapterInstance(mContext);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tvTbTitle = (TextView) findViewById(R.id.tvTbTitle);
+        llDates.setVisibility(View.INVISIBLE);
+        llDates.setMinimumWidth(0);
+        ViewGroup.LayoutParams layoutParams = llDates.getLayoutParams();
+        layoutParams.width=0;
+        llDates.setLayoutParams(layoutParams);
 
-        etEndTime = (EditText) findViewById(R.id.etEndTime);
-        etStartTime = (EditText) findViewById(R.id.etStartTime);
+       // etEndTime = (EditText) findViewById(R.id.etEndTime);
+        //etStartTime = (EditText) findViewById(R.id.etStartTime);
+//
+//        etStartTime.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                isStarttime= true;
+//                DialogFragment newFragment = new RequestedEventListActivity.DatePickerFragment();
+//                newFragment.show(getSupportFragmentManager(), "datePicker");
+//            }
+//        });
 
-        etStartTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                isStarttime= true;
-                DialogFragment newFragment = new RequestedEventListActivity.DatePickerFragment();
-                newFragment.show(getSupportFragmentManager(), "datePicker");
-            }
-        });
-
-        etEndTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isStarttime= false;
-                DialogFragment newFragment = new RequestedEventListActivity.DatePickerFragment();
-                newFragment.show(getSupportFragmentManager(), "datePicker");
-            }
-        });
+//        etEndTime.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                isStarttime= false;
+//                DialogFragment newFragment = new RequestedEventListActivity.DatePickerFragment();
+//                newFragment.show(getSupportFragmentManager(), "datePicker");
+//            }
+//        });
 
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -115,55 +122,39 @@ public class RequestedEventListActivity extends AppCompatActivity {
 
         ArrayList<RequestedEventModel> events = new ArrayList<>();
 
-        RequestedEventModel requestedEventModel = new RequestedEventModel();
-        requestedEventModel.setEventId("E0103452018");
-        requestedEventModel.setEvent("Birthday");
-        events.add(requestedEventModel);
-
-        requestedEventModel = new RequestedEventModel();
-        requestedEventModel.setEventId("E01034532018");
-        requestedEventModel.setEvent("Farewell");
-        events.add(requestedEventModel);
-
-        requestedEventModel = new RequestedEventModel();
-        requestedEventModel.setEventId("E0105632018");
-        requestedEventModel.setEvent("Christmas");
-        events.add(requestedEventModel);
-
-        requestedEventModel = new RequestedEventModel();
-        requestedEventModel.setEventId("E0563032018");
-        requestedEventModel.setEvent("Birthday");
-        events.add(requestedEventModel);
-
-        requestedEventModel = new RequestedEventModel();
-        requestedEventModel.setEventId("E0103056018");
-        requestedEventModel.setEvent("Farewell");
-        events.add(requestedEventModel);
-
+        List<DatabaseEventsModel> dbEvents = databaseAdapter.getEvents();
+        for(int i =0;i<dbEvents.size();i++){
+            if(dbEvents.get(i).getEventColumnStatus().equals("PENDING")) {
+                RequestedEventModel requestedEventModel = new RequestedEventModel();
+                requestedEventModel.setEventId(dbEvents.get(i).getEventAssignedColumnId() + "");
+                requestedEventModel.setEvent(dbEvents.get(i).getEventColumnOccasionType());
+                events.add(requestedEventModel);
+            }
+        }
         return events;
     }
 
-    public static class DatePickerFragment extends DialogFragment
-            implements DatePickerDialog.OnDateSetListener {
+//    public static class DatePickerFragment extends DialogFragment
+//            implements DatePickerDialog.OnDateSetListener {
+//
+//        @Override
+//        public Dialog onCreateDialog(Bundle savedInstanceState) {
+//            final Calendar c = Calendar.getInstance();
+//            int year = c.get(Calendar.YEAR);
+//            int month = c.get(Calendar.MONTH);
+//            int day = c.get(Calendar.DAY_OF_MONTH);
+//            DatePickerDialog dialog = new DatePickerDialog(getActivity(), this, year, month, day);
+//            dialog.getDatePicker().setMaxDate(c.getTimeInMillis());
+//            return  dialog;
+//        }
 
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            final Calendar c = Calendar.getInstance();
-            int year = c.get(Calendar.YEAR);
-            int month = c.get(Calendar.MONTH);
-            int day = c.get(Calendar.DAY_OF_MONTH);
-            DatePickerDialog dialog = new DatePickerDialog(getActivity(), this, year, month, day);
-            dialog.getDatePicker().setMaxDate(c.getTimeInMillis());
-            return  dialog;
-        }
-
-        public void onDateSet(DatePicker view, int year, int month, int day) {
-            if(isStarttime){
-                etStartTime.setText(month+"/"+day+"/"+year);
-            }else{
-                etEndTime.setText(month+"/"+day+"/"+year);
-            }
-
-        }
+//        public void onDateSet(DatePicker view, int year, int month, int day) {
+//            if(isStarttime){
+//                etStartTime.setText(month+"/"+day+"/"+year);
+//            }else{
+//                etEndTime.setText(month+"/"+day+"/"+year);
+//            }
+//
+//        }
     }
-}
+

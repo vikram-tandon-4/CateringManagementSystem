@@ -58,7 +58,7 @@ public class CreatedEventsListAdapter extends RecyclerView.Adapter<CreatedEvents
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, final int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
 
 
@@ -69,7 +69,7 @@ public class CreatedEventsListAdapter extends RecyclerView.Adapter<CreatedEvents
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mContext.startActivity(new Intent(mContext, EventDetailsActivity.class));
+                mContext.startActivity(new Intent(mContext, EventDetailsActivity.class).putExtra("EventId",holder.tvEventId.getText().toString()));
             }
         });
 

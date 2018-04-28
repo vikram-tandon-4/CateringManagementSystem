@@ -91,7 +91,7 @@ public class ReservedEventsActivity extends AppCompatActivity {
         for(int i =0;i<dbEvents.size();i++){
             if(dbEvents.get(i).getEventColumnUserId().equals(AppPreferences.getUtaId(mContext))) {
                 ReservedEventsModel reservedEventModel = new ReservedEventsModel();
-                reservedEventModel.setEventId(dbEvents.get(i).getEventColumnId()+"");
+                reservedEventModel.setEventId(dbEvents.get(i).getEventAssignedColumnId());
                 reservedEventModel.setEventName(dbEvents.get(i).getEventColumnOccasionType());
                 reservedEventModel.setDate(dbEvents.get(i).getEventColumnDate());
                 reservedEventModel.setStatus(dbEvents.get(i).getEventColumnStatus());

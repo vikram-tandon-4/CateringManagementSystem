@@ -57,7 +57,7 @@ public class RequestedEventsListAdapter extends RecyclerView.Adapter<RequestedEv
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, final int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
 
 
@@ -67,7 +67,7 @@ public class RequestedEventsListAdapter extends RecyclerView.Adapter<RequestedEv
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mContext.startActivity(new Intent(mContext,SelectedEventDetailsActivity.class));
+                mContext.startActivity(new Intent(mContext,SelectedEventDetailsActivity.class).putExtra("EventId",holder.tvEventId.getText().toString()));
             }
         });
 

@@ -20,12 +20,17 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import team4.softwareengineering.com.cateringsystem.R;
 import team4.softwareengineering.com.cateringsystem.adapter.CreatedEventsListAdapter;
 import team4.softwareengineering.com.cateringsystem.adapter.ReservedEventsAdapter;
+import team4.softwareengineering.com.cateringsystem.database.DatabaseAdapter;
 import team4.softwareengineering.com.cateringsystem.model.CreatedEventModel;
+import team4.softwareengineering.com.cateringsystem.model.DatabaseEventsModel;
+import team4.softwareengineering.com.cateringsystem.model.RequestedEventModel;
 import team4.softwareengineering.com.cateringsystem.model.ReservedEventsModel;
+import team4.softwareengineering.com.cateringsystem.utils.AppPreferences;
 
 /**
  * Created by vikra on 3/24/2018.
@@ -40,6 +45,7 @@ public class CreatedEventListActivity extends AppCompatActivity {
     private RecyclerView rvCreateEvent;
     private static EditText etStartTime,etEndTime;
     private static boolean isStarttime=true;
+    private DatabaseAdapter databaseAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,6 +59,7 @@ public class CreatedEventListActivity extends AppCompatActivity {
 
     private void init() {
 
+        databaseAdapter = DatabaseAdapter.getDBAdapterInstance(mContext);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tvTbTitle = (TextView) findViewById(R.id.tvTbTitle);
 
@@ -115,35 +122,16 @@ public class CreatedEventListActivity extends AppCompatActivity {
 
         ArrayList<CreatedEventModel> events = new ArrayList<>();
 
-        CreatedEventModel createdEventModel = new CreatedEventModel();
-        createdEventModel.setStatus("Status: Booked");
-        createdEventModel.setEventId("E0103452018");
-        createdEventModel.setEvent("Birthday");
-        events.add(createdEventModel);
-
-        createdEventModel = new CreatedEventModel();
-        createdEventModel.setEventId("E01034532018");
-        createdEventModel.setEvent("Farewell");
-        createdEventModel.setStatus("Status: Cancelled");
-        events.add(createdEventModel);
-
-        createdEventModel = new CreatedEventModel();
-        createdEventModel.setEventId("E0105632018");
-        createdEventModel.setEvent("Christmas");
-        createdEventModel.setStatus("Status: Booked");
-        events.add(createdEventModel);
-
-        createdEventModel = new CreatedEventModel();
-        createdEventModel.setEventId("E0563032018");
-        createdEventModel.setEvent("Birthday");
-        createdEventModel.setStatus("Status: Cancelled");
-        events.add(createdEventModel);
-
-        createdEventModel = new CreatedEventModel();
-        createdEventModel.setEventId("E0103056018");
-        createdEventModel.setEvent("Farewell");
-        createdEventModel.setStatus("Status: Pending");
-        events.add(createdEventModel);
+        List<DatabaseEventsModel> dbEvents = databaseAdapter.getEvents();
+        for(int i =0;i<dbEvents.size();i++){
+            if(dbEvents.get(i).getEventColumnCatererId().equals(AppPreferences.getUtaId(mContext))) {
+                CreatedEventModel createdEventModel = new CreatedEventModel();
+                createdEventModel.setEventId(dbEvents.get(i).getEventAssignedColumnId() + "");
+                createdEventModel.setEvent(dbEvents.get(i).getEventColumnOccasionType());
+                createdEventModel.setStatus(dbEvents.get(i).getEventColumnStatus());
+                events.add(createdEventModel);
+            }
+        }
 
         return events;
     }

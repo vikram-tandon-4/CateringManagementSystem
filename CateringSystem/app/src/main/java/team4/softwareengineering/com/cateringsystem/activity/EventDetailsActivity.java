@@ -12,7 +12,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import team4.softwareengineering.com.cateringsystem.R;
+import team4.softwareengineering.com.cateringsystem.database.DatabaseAdapter;
+import team4.softwareengineering.com.cateringsystem.model.DatabaseEventsModel;
+import team4.softwareengineering.com.cateringsystem.model.RequestedEventModel;
 
 /**
  * Created by vikra on 3/24/2018.
@@ -26,7 +31,9 @@ public class EventDetailsActivity extends AppCompatActivity implements View.OnCl
 
     private Button btnAvailableHalls, btnAvailableStaff;
     private TextView tvEventName, tvEventId, tvPlace, tvPartySize, tvDate, tvTime,
-            tvDuration, tvOcassionType, tvMealType, tvDrinks, tvEntertainment;
+            tvDuration, tvOccasionType, tvMealType, tvDrinks, tvEntertainment,tvCost;
+    private DatabaseEventsModel dbEvents;
+    private DatabaseAdapter databaseAdapter;
 
 
     @Override
@@ -39,7 +46,8 @@ public class EventDetailsActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void init() {
-
+        dbEvents= new DatabaseEventsModel();
+        databaseAdapter = DatabaseAdapter.getDBAdapterInstance(mContext);
         btnAvailableHalls = (Button) findViewById(R.id.btnAvailableHalls);
         btnAvailableStaff = (Button) findViewById(R.id.btnAvailableStaff);
         btnAvailableHalls.setOnClickListener(this);
@@ -52,11 +60,30 @@ public class EventDetailsActivity extends AppCompatActivity implements View.OnCl
         tvTime = (TextView) findViewById(R.id.tvTime);
         tvDuration = (TextView) findViewById(R.id.tvDuration);
         tvPartySize = (TextView) findViewById(R.id.tvPartySize);
-        tvOcassionType = (TextView) findViewById(R.id.tvOcassionType);
+        tvOccasionType = (TextView) findViewById(R.id.tvOcassionType);
         tvMealType = (TextView) findViewById(R.id.tvMealType);
         tvDrinks = (TextView) findViewById(R.id.tvDrinks);
+        //tvCost=(TextView) findViewById(R.id.tvCost);
         tvEntertainment = (TextView) findViewById(R.id.tvEntertainment);
-
+        final String eventId = getIntent().getStringExtra("EventId");
+        final List<DatabaseEventsModel> dbEvents = databaseAdapter.getEvents();
+        for(int i=0;i<dbEvents.size();i++){
+            if((dbEvents.get(i).getEventAssignedColumnId()).equals(eventId)){
+                tvOccasionType.setText(dbEvents.get(i).getEventColumnOccasionType());
+                tvDuration.setText(dbEvents.get(i).getEventColumnDuration());
+                tvEventName.setText(dbEvents.get(i).getEventColumnOccasionType());
+                tvDate.setText(dbEvents.get(i).getEventColumnDate());
+                tvEventId.setText(dbEvents.get(i).getEventAssignedColumnId());
+                tvTime.setText(dbEvents.get(i).getEventColumnTime());
+                tvPlace.setText(dbEvents.get(i).getEventColumnLocation());
+                tvPartySize.setText(dbEvents.get(i).getEventColumnSizeOfParty()+"");
+                tvMealType.setText(dbEvents.get(i).getEventColumnMealType());
+                tvDrinks.setText(dbEvents.get(i).getEventColumnDrinks());
+                tvEntertainment.setText(dbEvents.get(i).getEventColumnEntertainment());
+                //tvCost.setText(tvCost.getText().toString()+dbEvents.get(i).getEventColumnEventCost()+"");
+                break;
+            }
+        }
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tvTbTitle = (TextView) findViewById(R.id.tvTbTitle);
 

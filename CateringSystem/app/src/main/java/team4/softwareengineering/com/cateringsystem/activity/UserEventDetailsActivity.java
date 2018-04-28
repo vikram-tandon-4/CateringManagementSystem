@@ -60,15 +60,16 @@ public class UserEventDetailsActivity extends AppCompatActivity {
         final String eventId = getIntent().getStringExtra("EventId");
         final List<DatabaseEventsModel> dbEvents = databaseAdapter.getEvents();
         int i = 0;
+        Toast.makeText(mContext,eventId,Toast.LENGTH_SHORT).show();
         DatabaseEventsModel databaseEventsModel = new DatabaseEventsModel();
         for(i=0;i<dbEvents.size();i++){
-            if((dbEvents.get(i).getEventColumnId()+"").equals(eventId)){
-                 databaseEventsModel = dbEvents.get(i);
+            if((dbEvents.get(i).getEventAssignedColumnId()+"").equals(eventId)){
+                databaseEventsModel = dbEvents.get(i);
                 tvOccasionType.setText(dbEvents.get(i).getEventColumnOccasionType());
                 tvDuration.setText(dbEvents.get(i).getEventColumnDuration());
                 tvEventName.setText(dbEvents.get(i).getEventColumnOccasionType());
                 tvDate.setText(dbEvents.get(i).getEventColumnDate());
-                tvEventId.setText(eventId);
+                tvEventId.setText(dbEvents.get(i).getEventAssignedColumnId());
                 tvTime.setText(dbEvents.get(i).getEventColumnTime());
                 tvPlace.setText(dbEvents.get(i).getEventColumnLocation());
                 tvCapacity.setText(dbEvents.get(i).getEventColumnSizeOfParty()+"");
