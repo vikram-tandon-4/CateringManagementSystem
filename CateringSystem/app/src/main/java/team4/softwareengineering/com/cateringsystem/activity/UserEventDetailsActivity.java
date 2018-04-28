@@ -21,6 +21,7 @@ import java.util.List;
 import team4.softwareengineering.com.cateringsystem.R;
 import team4.softwareengineering.com.cateringsystem.database.DatabaseAdapter;
 import team4.softwareengineering.com.cateringsystem.model.DatabaseEventsModel;
+import team4.softwareengineering.com.cateringsystem.model.ReservedEventsModel;
 
 /**
  * Created by vikra on 3/24/2018.
@@ -34,6 +35,7 @@ public class UserEventDetailsActivity extends AppCompatActivity {
 
     private TextView tvOccasionType,tvEventName,tvDuration,tvTime,tvPlace,tvCapacity,tvEventId,tvDate,tvCost;
     private DatabaseAdapter databaseAdapter;
+    private ReservedEventsModel reservedEventsModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,13 +59,13 @@ public class UserEventDetailsActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tvTbTitle = (TextView) findViewById(R.id.tvTbTitle);
-        final String eventId = getIntent().getStringExtra("EventId");
+        reservedEventsModel= (ReservedEventsModel)getIntent().getSerializableExtra("EventId");
         final List<DatabaseEventsModel> dbEvents = databaseAdapter.getEvents();
         int i = 0;
-        Toast.makeText(mContext,eventId,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(mContext,eventId,Toast.LENGTH_SHORT).show();
         DatabaseEventsModel databaseEventsModel = new DatabaseEventsModel();
         for(i=0;i<dbEvents.size();i++){
-            if((dbEvents.get(i).getEventAssignedColumnId()+"").equals(eventId)){
+            if((dbEvents.get(i).getEventAssignedColumnId()+"").equals(reservedEventsModel.getEventId())){
                 databaseEventsModel = dbEvents.get(i);
                 tvOccasionType.setText(dbEvents.get(i).getEventColumnOccasionType());
                 tvDuration.setText(dbEvents.get(i).getEventColumnDuration());
@@ -108,7 +110,7 @@ public class UserEventDetailsActivity extends AppCompatActivity {
 
                     case R.id.cancelEvent:
                         dm.setEventColumnStatus("Cancelled");
-                        if(databaseAdapter.updateEvent( Integer.parseInt(eventId),dm)){
+                        if(databaseAdapter.updateEvent( Integer.parseInt(reservedEventsModel.getDbId()),dm)){
                             Toast.makeText(mContext, "Event Cancelled Successfully",Toast.LENGTH_LONG).show();
                             finish();
                         }

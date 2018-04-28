@@ -12,6 +12,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import team4.softwareengineering.com.cateringsystem.R;
@@ -69,7 +70,7 @@ public class ReservedEventsAdapter extends RecyclerView.Adapter<ReservedEventsAd
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mContext.startActivity(new Intent(mContext,UserEventDetailsActivity.class).putExtra("EventId",holder.tvEventId.getText().toString()));
+                mContext.startActivity(new Intent(mContext,UserEventDetailsActivity.class).putExtra("EventId",(Serializable) reservedEventsModels.get(position)));
             }
         });
 

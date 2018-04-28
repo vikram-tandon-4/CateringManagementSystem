@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import team4.softwareengineering.com.cateringsystem.R;
+import team4.softwareengineering.com.cateringsystem.adapter.RequestedEventsListAdapter;
 import team4.softwareengineering.com.cateringsystem.adapter.ReservedEventsAdapter;
 import team4.softwareengineering.com.cateringsystem.database.DatabaseAdapter;
 import team4.softwareengineering.com.cateringsystem.model.DatabaseEventsModel;
@@ -84,6 +85,13 @@ public class ReservedEventsActivity extends AppCompatActivity {
         });
     }
 
+    protected void onResume() {
+        super.onResume();
+        mAdapter = new ReservedEventsAdapter(getEventsData(), mContext);
+        rvReservedEvents.setAdapter(mAdapter);
+    }
+
+
     private ArrayList<ReservedEventsModel> getEventsData(){
         ArrayList<ReservedEventsModel> events = new ArrayList<>();
 
@@ -96,6 +104,7 @@ public class ReservedEventsActivity extends AppCompatActivity {
                 reservedEventModel.setDate(dbEvents.get(i).getEventColumnDate());
                 reservedEventModel.setStatus(dbEvents.get(i).getEventColumnStatus());
                 reservedEventModel.setTime(dbEvents.get(i).getEventColumnTime());
+                reservedEventModel.setDbId(dbEvents.get(i).getEventColumnId()+"");
                 events.add(reservedEventModel);
             }
         }

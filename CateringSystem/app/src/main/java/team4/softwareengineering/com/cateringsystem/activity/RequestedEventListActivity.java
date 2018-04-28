@@ -118,6 +118,13 @@ public class RequestedEventListActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mAdapter = new RequestedEventsListAdapter(getEventsData(), mContext);
+        rvRequestedEvent.setAdapter(mAdapter);
+    }
+
     private ArrayList<RequestedEventModel> getEventsData(){
 
         ArrayList<RequestedEventModel> events = new ArrayList<>();
