@@ -260,6 +260,7 @@ Adding data to dropdowns
             int month = c.get(Calendar.MONTH);
             int day = c.get(Calendar.DAY_OF_MONTH);
             DatePickerDialog dialog = new DatePickerDialog(getActivity(), this, year, month, day);
+            c.add( Calendar.MONTH, 9 );
             dialog.getDatePicker().setMaxDate(c.getTimeInMillis());
             return  dialog;
         }

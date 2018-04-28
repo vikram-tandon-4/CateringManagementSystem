@@ -47,19 +47,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void init() {
         databaseAdapter = DatabaseAdapter.getDBAdapterInstance(mContext);
 
-//        btnAdmin = (TextView) findViewById(R.id.btnAdmin);
-//        btnCaterer = (TextView) findViewById(R.id.btnCaterer);
-//        btnStaff = (TextView) findViewById(R.id.btnStaff);
-//        btnUser = (TextView) findViewById(R.id.btnUser);
+        btnAdmin = (TextView) findViewById(R.id.btnAdmin);
+        btnCaterer = (TextView) findViewById(R.id.btnCaterer);
+        btnStaff = (TextView) findViewById(R.id.btnStaff);
+        btnUser = (TextView) findViewById(R.id.btnUser);
         tvRegister = (TextView) findViewById(R.id.tvRegister);
         tvForgotPassword = (TextView) findViewById(R.id.tvForgotPassword);
         etUserName = (EditText) findViewById(R.id.etUserName);
         etPassword = (EditText) findViewById(R.id.etPassword);
         btnLogin = (TextView) findViewById(R.id.btnLogin);
-//        btnAdmin.setOnClickListener(this);
-//        btnCaterer.setOnClickListener(this);
-//        btnStaff.setOnClickListener(this);
-//        btnUser.setOnClickListener(this);
+        btnAdmin.setOnClickListener(this);
+        btnCaterer.setOnClickListener(this);
+        btnStaff.setOnClickListener(this);
+        btnUser.setOnClickListener(this);
         tvRegister.setOnClickListener(this);
         tvForgotPassword.setOnClickListener(this);
         btnLogin.setOnClickListener(this);
@@ -81,23 +81,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         public void onClick(View v){
 
                 switch (v.getId() /*to get clicked view id**/) {
-//                    case R.id.btnAdmin:
-//                        startActivity(new Intent(LoginActivity.this, AdminHomeActivity.class));
-//                        break;
-//                    case R.id.btnCaterer:
-//
-//                        startActivity(new Intent(LoginActivity.this, CatererHomePageActivity.class));
-//
-//                        break;
-//                    case R.id.btnStaff:
-//                        startActivity(new Intent(LoginActivity.this, CatererStaffHomePageActivity.class));
-//
-//                        break;
-//
-//                    case R.id.btnUser:
-//                        startActivity(new Intent(LoginActivity.this, UserHomePageActivity.class));
-//
-//                        break;
+                    case R.id.btnAdmin:
+                        startActivity(new Intent(LoginActivity.this, AdminHomeActivity.class));
+                        break;
+                    case R.id.btnCaterer:
+
+                        startActivity(new Intent(LoginActivity.this, CatererHomePageActivity.class));
+
+                        break;
+                    case R.id.btnStaff:
+                        startActivity(new Intent(LoginActivity.this, CatererStaffHomePageActivity.class));
+
+                        break;
+
+                    case R.id.btnUser:
+                        startActivity(new Intent(LoginActivity.this, UserHomePageActivity.class));
+
+                        break;
                    case R.id.tvRegister:
                         startActivity(new Intent(LoginActivity.this, RegistrationActivity.class));
 
