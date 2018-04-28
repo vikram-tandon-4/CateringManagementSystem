@@ -3,6 +3,7 @@ package team4.softwareengineering.com.cateringsystem.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,12 +18,13 @@ import java.util.ArrayList;
 import team4.softwareengineering.com.cateringsystem.R;
 import team4.softwareengineering.com.cateringsystem.activity.EventDetailsActivity;
 import team4.softwareengineering.com.cateringsystem.model.CreatedEventModel;
+import team4.softwareengineering.com.cateringsystem.model.DatabaseEventsModel;
 import team4.softwareengineering.com.cateringsystem.model.ReservedEventsModel;
 
 
 public class CreatedEventsListAdapter extends RecyclerView.Adapter<CreatedEventsListAdapter.MyViewHolder> {
 
-    private ArrayList<CreatedEventModel> createdEventsListModels;
+    private ArrayList<DatabaseEventsModel> createdEventsListModels;
 
     private Context mContext;
 
@@ -45,9 +47,11 @@ public class CreatedEventsListAdapter extends RecyclerView.Adapter<CreatedEvents
     }
 
 
-    public CreatedEventsListAdapter(ArrayList<CreatedEventModel> createdEventModels, Context mContext) {
+    public CreatedEventsListAdapter(ArrayList<DatabaseEventsModel> createdEventModels, Context mContext) {
         this.createdEventsListModels = createdEventModels;
         this.mContext = mContext;
+
+
     }
 
     @Override
@@ -62,14 +66,16 @@ public class CreatedEventsListAdapter extends RecyclerView.Adapter<CreatedEvents
 
 
 
-        holder.tvEventName.setText(createdEventsListModels.get(position).getEvent());
-        holder.tvEventId.setText(createdEventsListModels.get(position).getEventId());
-        holder.tvStatus.setText(createdEventsListModels.get(position).getStatus());
+        holder.tvEventName.setText(createdEventsListModels.get(position).getEventColumnOccasionType());
+        holder.tvEventId.setText(createdEventsListModels.get(position).getEventAssignedColumnId());
+        holder.tvStatus.setText(createdEventsListModels.get(position).getEventColumnStatus());
 
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mContext.startActivity(new Intent(mContext, EventDetailsActivity.class).putExtra("EventId",holder.tvEventId.getText().toString()));
+                Bundle b = new Bundle();
+                b.putSerializable("EventId", createdEventsListModels.get(position));
+                mContext.startActivity(new Intent(mContext, EventDetailsActivity.class).putExtras(b));
             }
         });
 

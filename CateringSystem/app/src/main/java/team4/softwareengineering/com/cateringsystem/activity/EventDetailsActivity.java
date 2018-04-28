@@ -65,10 +65,11 @@ public class EventDetailsActivity extends AppCompatActivity implements View.OnCl
         tvDrinks = (TextView) findViewById(R.id.tvDrinks);
         //tvCost=(TextView) findViewById(R.id.tvCost);
         tvEntertainment = (TextView) findViewById(R.id.tvEntertainment);
-        final String eventId = getIntent().getStringExtra("EventId");
+        final DatabaseEventsModel event = (DatabaseEventsModel)getIntent().getSerializableExtra("EventId");
+        dbEvents=event;
         final List<DatabaseEventsModel> dbEvents = databaseAdapter.getEvents();
         for(int i=0;i<dbEvents.size();i++){
-            if((dbEvents.get(i).getEventAssignedColumnId()).equals(eventId)){
+            if((dbEvents.get(i).getEventAssignedColumnId()).equals(event.getEventAssignedColumnId())){
                 tvOccasionType.setText(dbEvents.get(i).getEventColumnOccasionType());
                 tvDuration.setText(dbEvents.get(i).getEventColumnDuration());
                 tvEventName.setText(dbEvents.get(i).getEventColumnOccasionType());
@@ -128,7 +129,9 @@ public class EventDetailsActivity extends AppCompatActivity implements View.OnCl
     public void onClick(View v) {
         switch (v.getId() /*to get clicked view id**/) {
             case R.id.btnAvailableHalls:
-                startActivity(new Intent(EventDetailsActivity.this,AvailableHallsActivity.class));
+                Bundle b = new Bundle();
+                b.putSerializable("EventId", dbEvents);
+                startActivity(new Intent(EventDetailsActivity.this,AvailableHallsActivity.class).putExtras(b));
                 break;
 
             case R.id.btnAvailableStaff:

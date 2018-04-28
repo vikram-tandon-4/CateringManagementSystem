@@ -150,7 +150,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         HallModel hallModel = new HallModel();
         hallModel.setCapacity("Capacity: 200");
         hallModel.setHallName("Liberty");
-        hallModel.setLocation("UTA");
+        hallModel.setLocation("Liberty");
         hallModel.setPrice("Price: $150/hr");
         halls.add(hallModel);
 

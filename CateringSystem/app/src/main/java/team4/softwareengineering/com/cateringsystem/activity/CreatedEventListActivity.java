@@ -118,22 +118,35 @@ public class CreatedEventListActivity extends AppCompatActivity {
         });
     }
 
-    private ArrayList<CreatedEventModel> getEventsData(){
+    private ArrayList<DatabaseEventsModel> getEventsData(){
 
         ArrayList<CreatedEventModel> events = new ArrayList<>();
 
+//        List<DatabaseEventsModel> dbEvents = databaseAdapter.getEvents();
+//        for(int i =0;i<dbEvents.size();i++){
+//            if(dbEvents.get(i).getEventColumnCatererId().equals(AppPreferences.getUtaId(mContext))) {
+//                CreatedEventModel createdEventModel = new CreatedEventModel();
+//                createdEventModel.setEventId(dbEvents.get(i).getEventAssignedColumnId() + "");
+//                createdEventModel.setEvent(dbEvents.get(i).getEventColumnOccasionType());
+//                createdEventModel.setStatus(dbEvents.get(i).getEventColumnStatus());
+//                events.add(createdEventModel);
+//            }
+//        }
+
         List<DatabaseEventsModel> dbEvents = databaseAdapter.getEvents();
+        ArrayList<DatabaseEventsModel> dbCatererEvents = new ArrayList<DatabaseEventsModel>();
         for(int i =0;i<dbEvents.size();i++){
             if(dbEvents.get(i).getEventColumnCatererId().equals(AppPreferences.getUtaId(mContext))) {
-                CreatedEventModel createdEventModel = new CreatedEventModel();
-                createdEventModel.setEventId(dbEvents.get(i).getEventAssignedColumnId() + "");
-                createdEventModel.setEvent(dbEvents.get(i).getEventColumnOccasionType());
-                createdEventModel.setStatus(dbEvents.get(i).getEventColumnStatus());
-                events.add(createdEventModel);
+//                CreatedEventModel createdEventModel = new CreatedEventModel();
+//                createdEventModel.setEventId(dbEvents.get(i).getEventAssignedColumnId() + "");
+//                createdEventModel.setEvent(dbEvents.get(i).getEventColumnOccasionType());
+//                createdEventModel.setStatus(dbEvents.get(i).getEventColumnStatus());
+                dbCatererEvents.add(dbEvents.get(i));
+//                events.add(createdEventModel);
             }
         }
 
-        return events;
+        return dbCatererEvents;
     }
     public static class DatePickerFragment extends DialogFragment
             implements DatePickerDialog.OnDateSetListener {

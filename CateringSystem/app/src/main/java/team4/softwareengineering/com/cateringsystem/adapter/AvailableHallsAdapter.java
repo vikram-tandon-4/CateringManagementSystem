@@ -14,24 +14,30 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import team4.softwareengineering.com.cateringsystem.R;
+import team4.softwareengineering.com.cateringsystem.database.DatabaseAdapter;
 import team4.softwareengineering.com.cateringsystem.model.AvailableHallModel;
+import team4.softwareengineering.com.cateringsystem.model.DatabaseEventsModel;
+import team4.softwareengineering.com.cateringsystem.model.HallModel;
 
 
 public class AvailableHallsAdapter extends RecyclerView.Adapter<AvailableHallsAdapter.MyViewHolder> {
 
-    private ArrayList<AvailableHallModel> hallsData;
+    private ArrayList<HallModel> hallsData;
 
     private Context mContext;
+    private DatabaseAdapter databaseAdapter;
+    private DatabaseEventsModel dbEvents;
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvHallName, tvPrice, tvCapacity;
+        public TextView tvHallName, tvPrice, tvCapacity,tvBook;
         CardView container;
 
         public MyViewHolder(View view) {
             super(view);
             tvHallName = (TextView) view.findViewById(R.id.tvHallName);
             tvPrice = (TextView) view.findViewById(R.id.tvPrice);
+            tvBook=(TextView) view.findViewById(R.id.tvBook);
             tvCapacity = (TextView) view.findViewById(R.id.tvCapacity);
             container = (CardView) view.findViewById(R.id.nameContainer);
         }
@@ -42,9 +48,11 @@ public class AvailableHallsAdapter extends RecyclerView.Adapter<AvailableHallsAd
     }
 
 
-    public AvailableHallsAdapter(ArrayList<AvailableHallModel> hallData, Context mContext) {
+    public AvailableHallsAdapter(ArrayList<HallModel> hallData, Context mContext, DatabaseEventsModel dbEvents) {
         this.hallsData = hallData;
         this.mContext = mContext;
+        databaseAdapter = DatabaseAdapter.getDBAdapterInstance(mContext);
+        this.dbEvents = dbEvents;
     }
 
     @Override
@@ -62,6 +70,16 @@ public class AvailableHallsAdapter extends RecyclerView.Adapter<AvailableHallsAd
         holder.tvHallName.setText(hallsData.get(position).getHallName());
         holder.tvPrice.setText(hallsData.get(position).getPrice());
         holder.tvCapacity.setText(hallsData.get(position).getCapacity());
+        holder.tvBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dbEvents.setEventColumnHallId(hallsData.get(position).getHallName());
+                dbEvents.setEventColumnLocation(hallsData.get(position).getLocation());
+                if(databaseAdapter.updateEvent(dbEvents.getEventColumnId(),dbEvents)){
+                    databaseAdapter.getEvents();
+                }
+            }
+        });
 
         setAnimation(holder.container, position);
     }

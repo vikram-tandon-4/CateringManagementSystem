@@ -3,6 +3,7 @@ package team4.softwareengineering.com.cateringsystem.activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -25,7 +26,10 @@ import team4.softwareengineering.com.cateringsystem.R;
 import team4.softwareengineering.com.cateringsystem.adapter.AvailableHallsAdapter;
 import team4.softwareengineering.com.cateringsystem.adapter.HallsAdapter;
 import team4.softwareengineering.com.cateringsystem.model.AvailableHallModel;
+import team4.softwareengineering.com.cateringsystem.model.DatabaseEventsModel;
 import team4.softwareengineering.com.cateringsystem.model.HallModel;
+import team4.softwareengineering.com.cateringsystem.model.ReviewResourcesModel;
+import team4.softwareengineering.com.cateringsystem.utils.AppPreferences;
 
 /**
  * Created by vikra on 3/24/2018.
@@ -52,7 +56,9 @@ public class AvailableHallsActivity extends AppCompatActivity {
 
     private void init() {
 
-
+        Intent i = getIntent();
+        Bundle bundle = i.getExtras();
+        DatabaseEventsModel dbEvents= (DatabaseEventsModel) bundle.getSerializable("EventId");
         etDate = (EditText) findViewById(R.id.etDate);
 
         etDate.setOnClickListener(new View.OnClickListener() {
@@ -81,7 +87,7 @@ public class AvailableHallsActivity extends AppCompatActivity {
         rvAvailableHall.setLayoutManager(mLayoutManager);
         rvAvailableHall.setItemAnimator(new DefaultItemAnimator());
 
-        mAdapter = new AvailableHallsAdapter(getHallData(), mContext);
+        mAdapter = new AvailableHallsAdapter(AppPreferences.getHalls(mContext), mContext,dbEvents);
         rvAvailableHall.setAdapter(mAdapter);
 
         toolbar.inflateMenu(R.menu.home);
