@@ -111,13 +111,19 @@ public class UserDetailsAdminActivity extends AppCompatActivity implements View.
         switch (v.getId() /*to get clicked view id**/) {
             case R.id.btnApprove:
                 databaseUsersModel.setUserColumnStatus(AppConstants.APPROVED);
-                if(databaseAdapter.updateUserProfile(databaseUsersModel.getUserColumnUserId(),databaseUsersModel))
-                databaseAdapter.getUsers();
+                if(databaseAdapter.updateUserProfile(databaseUsersModel.getUserColumnUserId(),databaseUsersModel)){
+                    databaseAdapter.getUsers();
+                    Toast.makeText(mContext,"System User Approved",Toast.LENGTH_LONG).show();
+                    finish();
+                }
+
                 break;
 
             case R.id.btnReject:
                 databaseAdapter.deleteUser(databaseUsersModel.getUserColumnUserId());
                 databaseAdapter.getUsers();
+                Toast.makeText(mContext,"System User Rejected",Toast.LENGTH_LONG).show();
+                finish();
                 break;
 
             default:

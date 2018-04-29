@@ -11,6 +11,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
@@ -46,6 +48,7 @@ public class CreatedEventListActivity extends AppCompatActivity {
     private static EditText etStartTime,etEndTime;
     private static boolean isStarttime=true;
     private DatabaseAdapter databaseAdapter;
+    private static boolean isComingBackFromPreviousScreen = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -92,7 +95,23 @@ public class CreatedEventListActivity extends AppCompatActivity {
                 newFragment.show(getSupportFragmentManager(), "datePicker");
             }
         });
+        etEndTime.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                mAdapter = new CreatedEventsListAdapter(getEventsData(), mContext);
+                rvCreateEvent.setAdapter(mAdapter);
+            }
+        });
         tvTbTitle.setText("Created Event List");
 
         rvCreateEvent = (RecyclerView)findViewById(R.id.rvCreateEvent);
@@ -100,8 +119,7 @@ public class CreatedEventListActivity extends AppCompatActivity {
         rvCreateEvent.setLayoutManager(mLayoutManager);
         rvCreateEvent.setItemAnimator(new DefaultItemAnimator());
 
-        mAdapter = new CreatedEventsListAdapter(getEventsData(), mContext);
-        rvCreateEvent.setAdapter(mAdapter);
+
 
         toolbar.inflateMenu(R.menu.home);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -116,6 +134,21 @@ public class CreatedEventListActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        isComingBackFromPreviousScreen = true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(isComingBackFromPreviousScreen){
+            mAdapter = new CreatedEventsListAdapter(getEventsData(), mContext);
+            rvCreateEvent.setAdapter(mAdapter);
+        }
     }
 
     private ArrayList<DatabaseEventsModel> getEventsData(){

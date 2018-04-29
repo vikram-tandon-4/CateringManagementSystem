@@ -74,6 +74,9 @@ public class EditUserActivity extends AppCompatActivity {
                 databaseUsersModel.setUserColumnCategory(spinnerCategory.getSelectedItem().toString());
 
                 databaseAdapter.updateUserProfile(databaseUsersModel.getUserColumnUserId(),databaseUsersModel);
+
+                Toast.makeText(mContext,"Update saved",Toast.LENGTH_LONG).show();
+                finish();
             }
         });
 

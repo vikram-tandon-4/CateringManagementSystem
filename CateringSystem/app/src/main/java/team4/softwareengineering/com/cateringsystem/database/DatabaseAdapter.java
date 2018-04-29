@@ -207,6 +207,7 @@ public class DatabaseAdapter {
         contentValues.put(USER_COLUMN_LAST_NAME, databaseUsersModel.getUserColumnLastName());
         contentValues.put(USER_COLUMN_EMAIL_ID, databaseUsersModel.getUserColumnEmailId());
         contentValues.put(USER_COLUMN_PHONE_NUMBER, databaseUsersModel.getUserColumnPhoneNumber());
+        contentValues.put(USER_COLUMN_STATUS, databaseUsersModel.getUserColumnStatus());
       // contentValues.put(USER_COLUMN_CATEGORY, databaseUsersModel.getUserColumnCategory());   //   I COMMENTED THIS BECAUSE WE DO NOT NEED TO UPDATE THIS.
                                                                                                 // AT THE TIME OF RUNNING THE GET VALUE RETURNS NULL WHICH
                                                                                                  //WILL REPLACE THE ORIGINAL VALUE. THE SAME APPLIES TO ALL THE

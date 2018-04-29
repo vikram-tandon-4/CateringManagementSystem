@@ -10,7 +10,9 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
+import android.widget.Checkable;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -20,7 +22,7 @@ import team4.softwareengineering.com.cateringsystem.model.AvailableStaffListMode
 
 public class AvailableStaffAdapter extends RecyclerView.Adapter<AvailableStaffAdapter.MyViewHolder> {
 
-    private ArrayList<AvailableStaffListModel> availableStaffListModels;
+    private static ArrayList<AvailableStaffListModel> availableStaffListModels;
 
     private Context mContext;
 
@@ -29,12 +31,14 @@ public class AvailableStaffAdapter extends RecyclerView.Adapter<AvailableStaffAd
         public TextView tvStaffName;
         public CheckBox cbSelectStaff;
         CardView container;
+        CheckBox checkBox;
 
         public MyViewHolder(View view) {
             super(view);
             tvStaffName = (TextView) view.findViewById(R.id.tvStaffName);
             cbSelectStaff = (CheckBox) view.findViewById(R.id.cbSelectStaff);
             container = (CardView) view.findViewById(R.id.nameContainer);
+            checkBox= (CheckBox) view.findViewById(R.id.cbSelectStaff);
         }
 
         public void clearAnimation() {
@@ -56,13 +60,24 @@ public class AvailableStaffAdapter extends RecyclerView.Adapter<AvailableStaffAd
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, final int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
 
 
         holder.tvStaffName.setText(availableStaffListModels.get(position).getStaffMemberName());
 
         setAnimation(holder.container, position);
+        holder.checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(holder.checkBox.isChecked()){
+                    availableStaffListModels.get(position).setSelected(true);
+                }
+                else{
+                    availableStaffListModels.get(position).setSelected(false);
+                }
+            }
+        });
     }
 
     @Override
@@ -81,5 +96,10 @@ public class AvailableStaffAdapter extends RecyclerView.Adapter<AvailableStaffAd
     public void onViewDetachedFromWindow(MyViewHolder holder) {
         super.onViewDetachedFromWindow(holder);
         (holder).clearAnimation();
+    }
+
+    public static ArrayList<AvailableStaffListModel> getStaff(){
+
+        return availableStaffListModels;
     }
 }

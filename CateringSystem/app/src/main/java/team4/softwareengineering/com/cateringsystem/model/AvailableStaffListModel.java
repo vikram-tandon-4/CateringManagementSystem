@@ -9,6 +9,16 @@ public class AvailableStaffListModel {
     private String staffMemberName;
     private boolean selected;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    private String id;
+
     public String getStaffMemberName() {
         return staffMemberName;
     }

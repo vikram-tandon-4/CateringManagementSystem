@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import team4.softwareengineering.com.cateringsystem.R;
 import team4.softwareengineering.com.cateringsystem.database.DatabaseAdapter;
+import team4.softwareengineering.com.cateringsystem.model.AvailableHallModel;
 import team4.softwareengineering.com.cateringsystem.model.DatabaseUsersModel;
 import team4.softwareengineering.com.cateringsystem.model.HallModel;
 import team4.softwareengineering.com.cateringsystem.utils.AppPreferences;
@@ -36,6 +37,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private DatabaseAdapter databaseAdapter;
 
+    private static String ADMIN_ID = "1234567";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +49,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void init() {
         databaseAdapter = DatabaseAdapter.getDBAdapterInstance(mContext);
-
+       // AppPreferences.setUtaId(mContext,"1001100110");
         btnAdmin = (TextView) findViewById(R.id.btnAdmin);
         btnCaterer = (TextView) findViewById(R.id.btnCaterer);
         btnStaff = (TextView) findViewById(R.id.btnStaff);
@@ -67,7 +70,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tvTbTitle = (TextView) findViewById(R.id.tvTbTitle);
 
-        tvTbTitle.setText(R.string.login);
+        tvTbTitle.setText("UTA Catering System");
 
 
         if (AppPreferences.isFirstTime(mContext)) {
@@ -109,33 +112,38 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         break;
 
                     case R.id.btnLogin:
-                        // AppPreferences.setUtaId(mContext, "100155534376");
-                        // get The User name and Password
-                        String utaId = etUserName.getText().toString();
-                        String password = etPassword.getText().toString();
-                        // check this UTA id in database
-                        String found = databaseAdapter.checkUser(utaId, password);
 
-                        //how do we navigate to the home screen if user log in is succesful
-                        switch (found.toUpperCase()) {
-                            case "CATERER":
-                                startActivity(new Intent(LoginActivity.this, CatererHomePageActivity.class));
-                                break;
-                            case "STAFF":
-                                startActivity(new Intent(LoginActivity.this, CatererStaffHomePageActivity.class));
-                                break;
-                            case "USER":
-                                startActivity(new Intent(LoginActivity.this, UserHomePageActivity.class));
-                                break;
-                            case "ADMIN":
-                                startActivity(new Intent(LoginActivity.this, AdminHomeActivity.class));
-                                break;
-                            default:
-                                Toast.makeText(mContext, "User Name or Password does not match", Toast.LENGTH_LONG).show();
-                                break;
+                        if(etUserName.getText().toString().equalsIgnoreCase(ADMIN_ID)){
+                            startActivity(new Intent(LoginActivity.this,AdminHomeActivity.class));
+                        }else {
+                            // AppPreferences.setUtaId(mContext, "100155534376");
+                            // get The User name and Password
+                            String utaId = etUserName.getText().toString();
+                            String password = etPassword.getText().toString();
+                            // check this UTA id in database
+                            String found = databaseAdapter.checkUser(utaId, password);
+
+                            //how do we navigate to the home screen if user log in is succesful
+                            switch (found.toUpperCase()) {
+                                case "CATERER":
+                                    startActivity(new Intent(LoginActivity.this, CatererHomePageActivity.class));
+                                    break;
+                                case "CATERER STAFF":
+                                    startActivity(new Intent(LoginActivity.this, CatererStaffHomePageActivity.class));
+                                    break;
+                                case "USER":
+                                    startActivity(new Intent(LoginActivity.this, UserHomePageActivity.class));
+                                    break;
+                                case "ADMIN":
+                                    startActivity(new Intent(LoginActivity.this, AdminHomeActivity.class));
+                                    break;
+                                default:
+                                    Toast.makeText(mContext, "User Name or Password does not match", Toast.LENGTH_LONG).show();
+                                    break;
+                            }
+                            AppPreferences.setUtaId(mContext, utaId);
+                            // Toast.makeText(mContext, "Login successful", Toast.LENGTH_LONG).show();
                         }
-                        AppPreferences.setUtaId(mContext, utaId);
-                        // Toast.makeText(mContext, "Login successful", Toast.LENGTH_LONG).show();
 
                     default:
                         break;
@@ -148,41 +156,42 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         ArrayList<HallModel> halls = new ArrayList<>();
 
         HallModel hallModel = new HallModel();
-        hallModel.setCapacity("Capacity: 200");
+        hallModel.setCapacity("Capacity: 75");
         hallModel.setHallName("Liberty");
         hallModel.setLocation("Liberty");
         hallModel.setPrice("Price: $150/hr");
         halls.add(hallModel);
 
         hallModel = new HallModel();
-        hallModel.setCapacity("Capacity: 300");
+        hallModel.setCapacity("Capacity: 25");
         hallModel.setHallName("KC");
         hallModel.setLocation("UTA");
-        hallModel.setPrice("Price: $250/hr");
+        hallModel.setPrice("Price: $50/hr");
         halls.add(hallModel);
 
         hallModel = new HallModel();
-        hallModel.setCapacity("Capacity: 800");
+        hallModel.setCapacity("Capacity: 25");
         hallModel.setHallName("Shard");
         hallModel.setLocation("UTA");
-        hallModel.setPrice("Price: $350/hr");
+        hallModel.setPrice("Price: $50/hr");
         halls.add(hallModel);
 
         hallModel = new HallModel();
-        hallModel.setCapacity("Capacity: 500");
+        hallModel.setCapacity("Capacity: 50");
         hallModel.setHallName("Arlington");
         hallModel.setLocation("UTA");
         hallModel.setPrice("Price: $100/hr");
         halls.add(hallModel);
 
         hallModel = new HallModel();
-        hallModel.setCapacity("Capacity: 300");
+        hallModel.setCapacity("Capacity: 100");
         hallModel.setHallName("Maverick");
         hallModel.setLocation("UTA");
-        hallModel.setPrice("Price: $170/hr");
+        hallModel.setPrice("Price: $200/hr");
         halls.add(hallModel);
 
         return halls;
     }
 }
+
 

@@ -132,10 +132,13 @@ public class EventDetailsActivity extends AppCompatActivity implements View.OnCl
                 Bundle b = new Bundle();
                 b.putSerializable("EventId", dbEvents);
                 startActivity(new Intent(EventDetailsActivity.this,AvailableHallsActivity.class).putExtras(b));
+                finish();
                 break;
 
             case R.id.btnAvailableStaff:
-                startActivity(new Intent(EventDetailsActivity.this,AvailableStaffListActivity.class));
+                Bundle b1 = new Bundle();
+                b1.putSerializable("EventId", dbEvents);
+                startActivity(new Intent(EventDetailsActivity.this,AvailableStaffListActivity.class).putExtras(b1));
                 break;
 
             default:

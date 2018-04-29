@@ -85,6 +85,7 @@ public class SearchUserDetailsInAdminActivity extends AppCompatActivity {
                         Intent intent = new Intent(SearchUserDetailsInAdminActivity.this,EditUserActivity.class);
                         intent.putExtra(AppConstants.EDIT_USER_ACTIVITY,databaseUsersModel);
                         startActivity(intent);
+                        finish();
                         return true;
 
                     case R.id.delete:
@@ -122,6 +123,7 @@ public class SearchUserDetailsInAdminActivity extends AppCompatActivity {
             public void onClick(View v) {
                 databaseAdapter.deleteUser(databaseUsersModel.getUserColumnUserId());
                 confirmDialog.dismiss();
+                finish();
             }
         });
         btnNo.setOnClickListener(new View.OnClickListener() {

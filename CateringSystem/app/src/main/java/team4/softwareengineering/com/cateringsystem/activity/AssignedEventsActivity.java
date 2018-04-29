@@ -21,6 +21,7 @@ import team4.softwareengineering.com.cateringsystem.adapter.ReservedEventsAdapte
 import team4.softwareengineering.com.cateringsystem.database.DatabaseAdapter;
 import team4.softwareengineering.com.cateringsystem.model.DatabaseEventsModel;
 import team4.softwareengineering.com.cateringsystem.model.ReservedEventsModel;
+import team4.softwareengineering.com.cateringsystem.utils.AppPreferences;
 
 /**
  * Created by vikra on 3/24/2018.
@@ -92,50 +93,10 @@ public class AssignedEventsActivity extends AppCompatActivity {
 
         for(DatabaseEventsModel databaseEventsModel: databaseAdapter.getEvents()){
 
-            if(databaseEventsModel.getEventColumnStaffId().contains("1001551001")){ // put UTA ID from shared preferences
+            if(databaseEventsModel.getEventColumnStaffId().contains(AppPreferences.getUtaId(mContext))){ // put UTA ID from shared preferences
                 reserved.add(databaseEventsModel);
             }
         }
-
-//        ReservedEventsModel reservedEventsModel = new ReservedEventsModel();
-//        reservedEventsModel.setDate("03/03/2018");
-//        reservedEventsModel.setEventId("E0103452018");
-//        reservedEventsModel.setEventName("Birthday");
-//        reservedEventsModel.setStatus("Status: Booked");
-//        reservedEventsModel.setTime("4:00 PM");
-//        reserved.add(reservedEventsModel);
-//
-//        reservedEventsModel = new ReservedEventsModel();
-//        reservedEventsModel.setDate("03/05/2018");
-//        reservedEventsModel.setEventId("E01034532018");
-//        reservedEventsModel.setEventName("Farewell");
-//        reservedEventsModel.setStatus("Status: Cancelled");
-//        reservedEventsModel.setTime("5:00 PM");
-//        reserved.add(reservedEventsModel);
-//
-//        reservedEventsModel = new ReservedEventsModel();
-//        reservedEventsModel.setDate("04/03/2018");
-//        reservedEventsModel.setEventId("E0105632018");
-//        reservedEventsModel.setEventName("Christmas");
-//        reservedEventsModel.setStatus("Status: Booked");
-//        reservedEventsModel.setTime("6:00 PM");
-//        reserved.add(reservedEventsModel);
-//
-//        reservedEventsModel = new ReservedEventsModel();
-//        reservedEventsModel.setDate("04/03/2018");
-//        reservedEventsModel.setEventId("E0563032018");
-//        reservedEventsModel.setEventName("Birthday");
-//        reservedEventsModel.setStatus("Status: Booked");
-//        reservedEventsModel.setTime("7:00 PM");
-//        reserved.add(reservedEventsModel);
-//
-//        reservedEventsModel = new ReservedEventsModel();
-//        reservedEventsModel.setDate("03/03/2018");
-//        reservedEventsModel.setEventId("E0103056018");
-//        reservedEventsModel.setEventName("Farewell");
-//        reservedEventsModel.setStatus("Status: Booked");
-//        reservedEventsModel.setTime("8:00 PM");
-//        reserved.add(reservedEventsModel);
 
         return reserved;
     }

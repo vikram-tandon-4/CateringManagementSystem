@@ -47,6 +47,7 @@ public class HallsActivity extends AppCompatActivity {
     private Button btnSearch;
     private DatabaseAdapter databaseAdapter;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,34 +115,34 @@ public class HallsActivity extends AppCompatActivity {
         HallModel hallModel = new HallModel();
 
         if (s.equals("Liberty")) {
-            hallModel.setCapacity("Capacity: 200");
+            hallModel.setCapacity("Capacity: 50");
             hallModel.setHallName("Liberty");
             hallModel.setLocation("UTA");
-            hallModel.setPrice("Price: $150/hr");
+            hallModel.setPrice("Price: $100/hr");
         }
         else if(s.equals("KC")) {
-            hallModel.setCapacity("Capacity: 300");
+            hallModel.setCapacity("Capacity: 25");
             hallModel.setHallName("KC");
             hallModel.setLocation("UTA");
-            hallModel.setPrice("Price: $250/hr");
+            hallModel.setPrice("Price: $50/hr");
         }
         else if(s.equals("Shard")) {
-            hallModel.setCapacity("Capacity: 800");
+            hallModel.setCapacity("Capacity: 25");
             hallModel.setHallName("Shard");
             hallModel.setLocation("UTA");
-            hallModel.setPrice("Price: $350/hr");
+            hallModel.setPrice("Price: $50/hr");
         }
         else if(s.equals("Arlington")) {
-            hallModel.setCapacity("Capacity: 500");
+            hallModel.setCapacity("Capacity: 50");
             hallModel.setHallName("Arlington");
             hallModel.setLocation("UTA");
             hallModel.setPrice("Price: $100/hr");
         }
         else if(s.equals("Maverick")){
-            hallModel.setCapacity("Capacity: 300");
+            hallModel.setCapacity("Capacity: 100");
             hallModel.setHallName("Maverick");
             hallModel.setLocation("UTA");
-            hallModel.setPrice("Price: $170/hr");
+            hallModel.setPrice("Price: $200/hr");
         }
         return hallModel;
     }
@@ -158,7 +159,7 @@ public class HallsActivity extends AppCompatActivity {
         availHall.add("Arlington");
         for(int i=0;i<events.size();i++){
             if(events.get(i).getEventColumnDate().equals(etDate.getText().toString()) && events.get(i).getEventColumnTime().equals(etTime.getText().toString())){
-                availHall.remove(events.get(i).getEventColumnHallId());
+               availHall.remove(events.get(i).getEventColumnHallId());
                 //id to be changed to name
             }
         }

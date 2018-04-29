@@ -69,8 +69,6 @@ public class RegistrationRequestActivity extends AppCompatActivity {
         rvRegistrationRequest.setLayoutManager(mLayoutManager);
         rvRegistrationRequest.setItemAnimator(new DefaultItemAnimator());
 
-        mAdapter = new RegistrationRequestAdapter(getRegistrationRequestData(), mContext);
-        rvRegistrationRequest.setAdapter(mAdapter);
 
         toolbar.inflateMenu(R.menu.home);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -85,6 +83,13 @@ public class RegistrationRequestActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mAdapter = new RegistrationRequestAdapter(getRegistrationRequestData(), mContext);
+        rvRegistrationRequest.setAdapter(mAdapter);
     }
 
     private ArrayList<DatabaseUsersModel>  getRegistrationRequestData(){

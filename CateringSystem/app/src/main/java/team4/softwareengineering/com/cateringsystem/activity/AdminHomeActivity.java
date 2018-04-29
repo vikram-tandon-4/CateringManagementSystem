@@ -77,6 +77,8 @@ public class AdminHomeActivity extends AppCompatActivity  implements View.OnClic
             @Override
             public void onClick(View v) {
                 confirmDialog.dismiss();
+                finishAffinity();
+                startActivity(new Intent(mContext, LoginActivity.class));
             }
         });
         btnNo.setOnClickListener(new View.OnClickListener() {

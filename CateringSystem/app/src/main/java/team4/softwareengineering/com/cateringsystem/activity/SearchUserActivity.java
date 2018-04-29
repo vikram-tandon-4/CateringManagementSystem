@@ -75,9 +75,6 @@ public class SearchUserActivity extends AppCompatActivity {
         rvSearch.setLayoutManager(mLayoutManager);
         rvSearch.setItemAnimator(new DefaultItemAnimator());
 
-        mAdapter = new SearchUserAdapter(databaseAdapter.getUsers(), mContext);
-        rvSearch.setAdapter(mAdapter);
-
         toolbar.inflateMenu(R.menu.home);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -108,5 +105,12 @@ public class SearchUserActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mAdapter = new SearchUserAdapter(databaseAdapter.getUsers(), mContext);
+        rvSearch.setAdapter(mAdapter);
     }
 }

@@ -1,6 +1,7 @@
 package team4.softwareengineering.com.cateringsystem.adapter;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -10,10 +11,12 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import team4.softwareengineering.com.cateringsystem.R;
+import team4.softwareengineering.com.cateringsystem.activity.AvailableHallsActivity;
 import team4.softwareengineering.com.cateringsystem.database.DatabaseAdapter;
 import team4.softwareengineering.com.cateringsystem.model.AvailableHallModel;
 import team4.softwareengineering.com.cateringsystem.model.DatabaseEventsModel;
@@ -74,9 +77,12 @@ public class AvailableHallsAdapter extends RecyclerView.Adapter<AvailableHallsAd
             @Override
             public void onClick(View v) {
                 dbEvents.setEventColumnHallId(hallsData.get(position).getHallName());
-                dbEvents.setEventColumnLocation(hallsData.get(position).getLocation());
+                dbEvents.setEventColumnLocation(hallsData.get(position).getHallName());
                 if(databaseAdapter.updateEvent(dbEvents.getEventColumnId(),dbEvents)){
                     databaseAdapter.getEvents();
+                    Toast.makeText(mContext,"Hall Booked",Toast.LENGTH_LONG).show();
+                    ((Activity)mContext).finish();
+
                 }
             }
         });

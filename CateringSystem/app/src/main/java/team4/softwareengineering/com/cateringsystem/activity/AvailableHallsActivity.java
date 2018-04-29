@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -43,7 +44,8 @@ public class AvailableHallsActivity extends AppCompatActivity {
     private AvailableHallsAdapter mAdapter;
     private RecyclerView rvAvailableHall;
     private static EditText etDate;
-
+    private DatabaseEventsModel dbEvents;
+    private Button btnSearch;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,10 +57,17 @@ public class AvailableHallsActivity extends AppCompatActivity {
     }
 
     private void init() {
-
+        btnSearch= (Button)findViewById(R.id.btnSearch);
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAdapter = new AvailableHallsAdapter(AppPreferences.getHalls(mContext), mContext,dbEvents);
+                rvAvailableHall.setAdapter(mAdapter);
+            }
+        });
         Intent i = getIntent();
         Bundle bundle = i.getExtras();
-        DatabaseEventsModel dbEvents= (DatabaseEventsModel) bundle.getSerializable("EventId");
+        dbEvents= (DatabaseEventsModel) bundle.getSerializable("EventId");
         etDate = (EditText) findViewById(R.id.etDate);
 
         etDate.setOnClickListener(new View.OnClickListener() {
@@ -87,8 +96,7 @@ public class AvailableHallsActivity extends AppCompatActivity {
         rvAvailableHall.setLayoutManager(mLayoutManager);
         rvAvailableHall.setItemAnimator(new DefaultItemAnimator());
 
-        mAdapter = new AvailableHallsAdapter(AppPreferences.getHalls(mContext), mContext,dbEvents);
-        rvAvailableHall.setAdapter(mAdapter);
+
 
         toolbar.inflateMenu(R.menu.home);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -110,33 +118,33 @@ public class AvailableHallsActivity extends AppCompatActivity {
         ArrayList<AvailableHallModel> halls = new ArrayList<>();
 
         AvailableHallModel availableHallModel = new AvailableHallModel();
-        availableHallModel.setCapacity("Capacity: 200");
+        availableHallModel.setCapacity("Capacity: 75");
         availableHallModel.setHallName("Liberty");
         availableHallModel.setPrice("Price: $150/hr");
         halls.add(availableHallModel);
 
         availableHallModel = new AvailableHallModel();
-        availableHallModel.setCapacity("Capacity: 300");
+        availableHallModel.setCapacity("Capacity: 25");
         availableHallModel.setHallName("KC");
-        availableHallModel.setPrice("Price: $250/hr");
+        availableHallModel.setPrice("Price: $50/hr");
         halls.add(availableHallModel);
 
         availableHallModel = new AvailableHallModel();
-        availableHallModel.setCapacity("Capacity: 800");
+        availableHallModel.setCapacity("Capacity: 25");
         availableHallModel.setHallName("Shard");
-        availableHallModel.setPrice("Price: $350/hr");
+        availableHallModel.setPrice("Price: $50/hr");
         halls.add(availableHallModel);
 
         availableHallModel = new AvailableHallModel();
-        availableHallModel.setCapacity("Capacity: 500");
+        availableHallModel.setCapacity("Capacity: 50");
         availableHallModel.setHallName("Arlington");
         availableHallModel.setPrice("Price: $100/hr");
         halls.add(availableHallModel);
 
         availableHallModel = new AvailableHallModel();
-        availableHallModel.setCapacity("Capacity: 300");
+        availableHallModel.setCapacity("Capacity: 100");
         availableHallModel.setHallName("Maverick");
-        availableHallModel.setPrice("Price: $170/hr");
+        availableHallModel.setPrice("Price: $200/hr");
         halls.add(availableHallModel);
 
         return halls;
@@ -152,6 +160,7 @@ public class AvailableHallsActivity extends AppCompatActivity {
             int month = c.get(Calendar.MONTH);
             int day = c.get(Calendar.DAY_OF_MONTH);
             DatePickerDialog dialog = new DatePickerDialog(getActivity(), this, year, month, day);
+            c.add( Calendar.MONTH, 9 );
             dialog.getDatePicker().setMaxDate(c.getTimeInMillis());
             return  dialog;
         }
