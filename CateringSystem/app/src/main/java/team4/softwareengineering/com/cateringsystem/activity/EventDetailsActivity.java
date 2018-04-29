@@ -119,9 +119,7 @@ public class EventDetailsActivity extends AppCompatActivity implements View.OnCl
                         return true;
                     case R.id.deleteEvent:
                         confirmationDialog();
-
                         return true;
-
                 }
                 return false;
             }
@@ -136,7 +134,7 @@ public class EventDetailsActivity extends AppCompatActivity implements View.OnCl
         final TextView btnYes = (TextView) confirmDialog.findViewById(R.id.okLogout);
         final TextView btnNo = (TextView) confirmDialog.findViewById(R.id.cancelLogout);
 
-        tvConfirmationText.setText("Are you sure you want to delete this user?");
+        tvConfirmationText.setText("Are you sure you want to delete this event?");
 
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
