@@ -115,10 +115,11 @@ public class EventDetailsActivity extends AppCompatActivity implements View.OnCl
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.logout:
-                        confirmationDialog();
+                        confirmationLDialog();
                         return true;
                     case R.id.deleteEvent:
-                        Toast.makeText(mContext, "Delete",Toast.LENGTH_LONG).show();
+                        confirmationDialog();
+
                         return true;
 
                 }
@@ -128,6 +129,32 @@ public class EventDetailsActivity extends AppCompatActivity implements View.OnCl
 
     }
     private void confirmationDialog() {
+        confirmDialog = Utils.showConfirmationDialog(mContext);
+        confirmDialog.show();
+
+        final TextView tvConfirmationText = (TextView) confirmDialog.findViewById(R.id.tvConfirmationText);
+        final TextView btnYes = (TextView) confirmDialog.findViewById(R.id.okLogout);
+        final TextView btnNo = (TextView) confirmDialog.findViewById(R.id.cancelLogout);
+
+        tvConfirmationText.setText("Are you sure you want to delete this user?");
+
+        btnYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                databaseAdapter.deleteEvent(dbEvents.getEventColumnId());
+                Toast.makeText(mContext, "Event Deleted",Toast.LENGTH_LONG).show();
+                confirmDialog.dismiss();
+                finish();
+            }
+        });
+        btnNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                confirmDialog.dismiss();
+            }
+        });
+    }
+    private void confirmationLDialog() {
         confirmDialog = Utils.showConfirmationDialog(mContext);
         confirmDialog.show();
 
