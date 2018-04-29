@@ -37,8 +37,6 @@ public class AdminHomeActivity extends AppCompatActivity  implements View.OnClic
 
     private void init() {
 
-
-
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tvTbTitle = (TextView) findViewById(R.id.tvTbTitle);
         tvSearchUsers = (TextView) findViewById(R.id.tvSearchUsers);
@@ -55,7 +53,6 @@ public class AdminHomeActivity extends AppCompatActivity  implements View.OnClic
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.logout:
-                        Toast.makeText(mContext, "Logout",Toast.LENGTH_LONG).show();
                         confirmationDialog();
                         return true;
 
@@ -76,6 +73,7 @@ public class AdminHomeActivity extends AppCompatActivity  implements View.OnClic
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(mContext, "Logging Out",Toast.LENGTH_LONG).show();
                 confirmDialog.dismiss();
                 finishAffinity();
                 startActivity(new Intent(mContext, LoginActivity.class));
@@ -96,9 +94,7 @@ public class AdminHomeActivity extends AppCompatActivity  implements View.OnClic
                 startActivity(new Intent(AdminHomeActivity.this,RegistrationRequestActivity.class));
                 break;
             case R.id.tvSearchUsers:
-
                 startActivity(new Intent(AdminHomeActivity.this,SearchUserActivity.class));
-
                 break;
 
             default:

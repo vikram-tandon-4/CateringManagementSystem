@@ -31,6 +31,7 @@ public class SearchUserDetailsInAdminActivity extends AppCompatActivity {
     private DatabaseAdapter databaseAdapter;
     private DatabaseUsersModel databaseUsersModel;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +79,7 @@ public class SearchUserDetailsInAdminActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.logout:
-                        Toast.makeText(mContext, "Logout",Toast.LENGTH_LONG).show();
+                        confirmationDialog();
                         return true;
 
                     case R.id.edit:
@@ -97,7 +98,7 @@ public class SearchUserDetailsInAdminActivity extends AppCompatActivity {
             }
         });
 
-         databaseUsersModel= (DatabaseUsersModel) getIntent().getSerializableExtra(AppConstants.SEARCH_USER_DETAILS);
+         databaseUsersModel = (DatabaseUsersModel) getIntent().getSerializableExtra(AppConstants.SEARCH_USER_DETAILS);
 
         tvUserName.setText(databaseUsersModel.getUserColumnUtaId());
         tvFirstName.setText(databaseUsersModel.getUserColumnFirstName());

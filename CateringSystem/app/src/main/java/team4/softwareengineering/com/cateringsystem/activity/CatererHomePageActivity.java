@@ -57,7 +57,6 @@ public class CatererHomePageActivity extends AppCompatActivity implements View.O
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.logout:
-                        Toast.makeText(mContext, "Logout",Toast.LENGTH_LONG).show();
                         confirmationDialog();
                         return true;
 
@@ -78,7 +77,10 @@ public class CatererHomePageActivity extends AppCompatActivity implements View.O
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(mContext, "Logging Out",Toast.LENGTH_LONG).show();
                 confirmDialog.dismiss();
+                finishAffinity();
+                startActivity(new Intent(mContext, LoginActivity.class));
             }
         });
         btnNo.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +90,6 @@ public class CatererHomePageActivity extends AppCompatActivity implements View.O
             }
         });
     }
-
     @Override
     public void onClick(View v) {
         switch (v.getId() /*to get clicked view id**/) {

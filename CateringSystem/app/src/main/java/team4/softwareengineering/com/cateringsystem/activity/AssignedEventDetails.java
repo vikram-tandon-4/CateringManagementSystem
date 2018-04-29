@@ -1,6 +1,8 @@
 package team4.softwareengineering.com.cateringsystem.activity;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +22,7 @@ import team4.softwareengineering.com.cateringsystem.adapter.ReservedEventsAdapte
 import team4.softwareengineering.com.cateringsystem.model.DatabaseEventsModel;
 import team4.softwareengineering.com.cateringsystem.model.ReservedEventsModel;
 import team4.softwareengineering.com.cateringsystem.utils.AppConstants;
+import team4.softwareengineering.com.cateringsystem.utils.Utils;
 
 /**
  * Created by vikra on 3/24/2018.
@@ -30,6 +33,7 @@ public class AssignedEventDetails extends AppCompatActivity {
     private Context mContext;
     private Toolbar toolbar;
     private TextView tvTbTitle;
+    private Dialog confirmDialog;
 
     private TextView tvEventName,tvEventId, tvPlace, tvCapacity, tvDate, tvTime, tvDuration, tvOcassionType;
 
@@ -73,7 +77,7 @@ public class AssignedEventDetails extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.logout:
-                        Toast.makeText(mContext, "Logout",Toast.LENGTH_LONG).show();
+                        confirmationDialog();
                         return true;
                 }
                 return false;
@@ -93,5 +97,29 @@ public class AssignedEventDetails extends AppCompatActivity {
         tvOcassionType.setText(databaseEventsModel.getEventColumnOccasionType());
 
     }
+    private void confirmationDialog() {
+        confirmDialog = Utils.showConfirmationDialog(mContext);
+        confirmDialog.show();
+
+        final TextView btnYes = (TextView) confirmDialog.findViewById(R.id.okLogout);
+        final TextView btnNo = (TextView) confirmDialog.findViewById(R.id.cancelLogout);
+
+        btnYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext, "Logging Out",Toast.LENGTH_LONG).show();
+                confirmDialog.dismiss();
+                finishAffinity();
+                startActivity(new Intent(mContext, LoginActivity.class));
+            }
+        });
+        btnNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                confirmDialog.dismiss();
+            }
+        });
+    }
+
 
 }

@@ -1,6 +1,8 @@
 package team4.softwareengineering.com.cateringsystem.activity;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +24,7 @@ import team4.softwareengineering.com.cateringsystem.database.DatabaseAdapter;
 import team4.softwareengineering.com.cateringsystem.model.AdminRegistrationRequestModel;
 import team4.softwareengineering.com.cateringsystem.model.DatabaseUsersModel;
 import team4.softwareengineering.com.cateringsystem.model.HallModel;
+import team4.softwareengineering.com.cateringsystem.utils.Utils;
 
 /**
  * Created by vikra on 3/24/2018.
@@ -34,6 +37,7 @@ public class RegistrationRequestActivity extends AppCompatActivity {
     private TextView tvTbTitle;
     private RegistrationRequestAdapter mAdapter;
     private RecyclerView rvRegistrationRequest;
+    private Dialog confirmDialog;
 
     private DatabaseAdapter databaseAdapter;
 
@@ -76,11 +80,34 @@ public class RegistrationRequestActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.logout:
-                        Toast.makeText(mContext, "Logout",Toast.LENGTH_LONG).show();
+                        confirmationDialog();
                         return true;
-
                 }
                 return false;
+            }
+        });
+    }
+    private void confirmationDialog() {
+
+        confirmDialog = Utils.showConfirmationDialog(mContext);
+        confirmDialog.show();
+
+        final TextView btnYes = (TextView) confirmDialog.findViewById(R.id.okLogout);
+        final TextView btnNo = (TextView) confirmDialog.findViewById(R.id.cancelLogout);
+
+        btnYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext, "Logging Out",Toast.LENGTH_LONG).show();
+                confirmDialog.dismiss();
+                finishAffinity();
+                startActivity(new Intent(mContext, LoginActivity.class));
+            }
+        });
+        btnNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                confirmDialog.dismiss();
             }
         });
     }
