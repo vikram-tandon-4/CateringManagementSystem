@@ -62,26 +62,10 @@ public class UserEventDetailsActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tvTbTitle = (TextView) findViewById(R.id.tvTbTitle);
         reservedEventsModel= (ReservedEventsModel)getIntent().getSerializableExtra("EventId");
-        final List<DatabaseEventsModel> dbEvents = databaseAdapter.getEvents();
-        int i = 0;
+
+
         //Toast.makeText(mContext,eventId,Toast.LENGTH_SHORT).show();
-        DatabaseEventsModel databaseEventsModel = new DatabaseEventsModel();
-        for(i=0;i<dbEvents.size();i++){
-            if((dbEvents.get(i).getEventAssignedColumnId()+"").equals(reservedEventsModel.getEventId())){
-                databaseEventsModel = dbEvents.get(i);
-                tvOccasionType.setText(dbEvents.get(i).getEventColumnOccasionType());
-                tvDuration.setText(dbEvents.get(i).getEventColumnDuration());
-                tvEventName.setText(dbEvents.get(i).getEventColumnOccasionType());
-                tvDate.setText(dbEvents.get(i).getEventColumnDate());
-                tvEventId.setText(dbEvents.get(i).getEventAssignedColumnId());
-                tvTime.setText(dbEvents.get(i).getEventColumnTime());
-                tvPlace.setText(dbEvents.get(i).getEventColumnLocation());
-                tvCapacity.setText(dbEvents.get(i).getEventColumnSizeOfParty()+"");
-                tvCost.setText(tvCost.getText().toString()+dbEvents.get(i).getEventColumnEventCost()+"");
-                break;
-            }
-        }
-        final DatabaseEventsModel dm = databaseEventsModel;
+
         //Toast.makeText(mContext,eventId,Toast.LENGTH_SHORT).show();
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -107,15 +91,11 @@ public class UserEventDetailsActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.logout:
-                        confirmationDialog();
+                        confirmationLogOutDialog();
                         return true;
 
                     case R.id.cancelEvent:
-                        dm.setEventColumnStatus("Cancelled");
-                        if(databaseAdapter.updateEvent( Integer.parseInt(reservedEventsModel.getDbId()),dm)){
-                            Toast.makeText(mContext, "Event Cancelled Successfully",Toast.LENGTH_LONG).show();
-                            finish();
-                        }
+                        confirmationDialog();
                         return true;
                 }
                 return false;
@@ -123,7 +103,7 @@ public class UserEventDetailsActivity extends AppCompatActivity {
         });
 
     }
-    private void confirmationDialog() {
+    private void confirmationLogOutDialog() {
         confirmDialog = Utils.showConfirmationDialog(mContext);
         confirmDialog.show();
 
@@ -137,6 +117,52 @@ public class UserEventDetailsActivity extends AppCompatActivity {
                 confirmDialog.dismiss();
                 finishAffinity();
                 startActivity(new Intent(mContext, LoginActivity.class));
+            }
+        });
+        btnNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                confirmDialog.dismiss();
+            }
+        });
+    }
+
+    private void confirmationDialog() {
+        confirmDialog = Utils.showConfirmationDialog(mContext);
+        confirmDialog.show();
+
+        final TextView tvConfirmationText = (TextView) confirmDialog.findViewById(R.id.tvConfirmationText);
+        final TextView btnYes = (TextView) confirmDialog.findViewById(R.id.okLogout);
+        final TextView btnNo = (TextView) confirmDialog.findViewById(R.id.cancelLogout);
+
+        tvConfirmationText.setText("Are you sure you want to cancel this request?");
+
+        btnYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final List<DatabaseEventsModel> dbEvents = databaseAdapter.getEvents();
+                DatabaseEventsModel databaseEventsModel = new DatabaseEventsModel();
+                for(int i=0;i<dbEvents.size();i++){
+                    if((dbEvents.get(i).getEventAssignedColumnId()+"").equals(reservedEventsModel.getEventId())){
+                        databaseEventsModel = dbEvents.get(i);
+                        tvOccasionType.setText(dbEvents.get(i).getEventColumnOccasionType());
+                        tvDuration.setText(dbEvents.get(i).getEventColumnDuration());
+                        tvEventName.setText(dbEvents.get(i).getEventColumnOccasionType());
+                        tvDate.setText(dbEvents.get(i).getEventColumnDate());
+                        tvEventId.setText(dbEvents.get(i).getEventAssignedColumnId());
+                        tvTime.setText(dbEvents.get(i).getEventColumnTime());
+                        tvPlace.setText(dbEvents.get(i).getEventColumnLocation());
+                        tvCapacity.setText(dbEvents.get(i).getEventColumnSizeOfParty()+"");
+                        tvCost.setText(tvCost.getText().toString()+dbEvents.get(i).getEventColumnEventCost()+"");
+                        break;
+                    }
+                }
+                final DatabaseEventsModel dm = databaseEventsModel;
+                dm.setEventColumnStatus("Cancelled");
+                if(databaseAdapter.updateEvent( Integer.parseInt(reservedEventsModel.getDbId()),dm)){
+                    Toast.makeText(mContext, "Event Cancelled Successfully",Toast.LENGTH_LONG).show();
+                    finish();
+                }
             }
         });
         btnNo.setOnClickListener(new View.OnClickListener() {
