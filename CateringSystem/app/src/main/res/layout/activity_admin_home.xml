@@ -21,7 +21,7 @@
             android:id="@+id/tvViewregistrationRequest"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="View Registeration Request"
+            android:text="View Registration Request"
             android:textColor="@android:color/white"
             android:gravity="center"
             android:layout_marginTop="50dp"

@@ -79,7 +79,7 @@ public class SearchUserDetailsInAdminActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.logout:
-                        confirmationDialog();
+                        confirmationLDialog();
                         return true;
 
                     case R.id.edit:
@@ -108,7 +108,29 @@ public class SearchUserDetailsInAdminActivity extends AppCompatActivity {
         tvAddress.setText(databaseUsersModel.getUserColumnAddress());
         tvCategory.setText(databaseUsersModel.getUserColumnCategory());
     }
+    private void confirmationLDialog() {
+        confirmDialog = Utils.showConfirmationDialog(mContext);
+        confirmDialog.show();
 
+        final TextView btnYes = (TextView) confirmDialog.findViewById(R.id.okLogout);
+        final TextView btnNo = (TextView) confirmDialog.findViewById(R.id.cancelLogout);
+
+        btnYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext, "Logging Out",Toast.LENGTH_LONG).show();
+                confirmDialog.dismiss();
+                finishAffinity();
+                startActivity(new Intent(mContext, LoginActivity.class));
+            }
+        });
+        btnNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                confirmDialog.dismiss();
+            }
+        });
+    }
     private void confirmationDialog() {
         confirmDialog = Utils.showConfirmationDialog(mContext);
         confirmDialog.show();
