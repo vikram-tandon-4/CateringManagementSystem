@@ -30,7 +30,6 @@ public class AdminHomeActivity extends AppCompatActivity  implements View.OnClic
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_home);
-
         mContext= this;
         init();
     }
@@ -62,7 +61,12 @@ public class AdminHomeActivity extends AppCompatActivity  implements View.OnClic
         });
 
     }
-
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        startActivity(intent);
+    }
     private void confirmationDialog() {
         confirmDialog = Utils.showConfirmationDialog(mContext);
         confirmDialog.show();

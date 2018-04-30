@@ -43,7 +43,6 @@ public class EventDetailsActivity extends AppCompatActivity implements View.OnCl
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.event_details);
-
         mContext= this;
         init();
     }

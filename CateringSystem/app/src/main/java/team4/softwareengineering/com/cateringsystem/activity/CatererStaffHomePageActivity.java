@@ -34,7 +34,12 @@ public class CatererStaffHomePageActivity extends AppCompatActivity implements V
         mContext= this;
         init();
     }
-
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        startActivity(intent);
+    }
     private void init() {
 
         tvViewAssignedEvents = (TextView) findViewById(R.id.tvViewAssignedEvents);

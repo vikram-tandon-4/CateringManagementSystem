@@ -65,7 +65,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
+        spinnerCategory = (Spinner) findViewById(R.id.spinnerCategory);
         tvTbTitle.setText(R.string.registration);
 
 
@@ -101,7 +101,7 @@ public class RegistrationActivity extends AppCompatActivity {
                  */
 
                 if(databaseAdapter.addUser(databaseUsersModel)){
-                    databaseAdapter.getUsers();
+                   // databaseAdapter.getUsers();
                     Toast.makeText(mContext,"Registration successful",Toast.LENGTH_LONG).show();
                     finish();
                     // Uncomment below to see how deletion works
@@ -112,8 +112,6 @@ public class RegistrationActivity extends AppCompatActivity {
                 }
             }
         });
-
-        spinnerCategory = (Spinner) findViewById(R.id.spinnerCategory);
         setSystemUserCategory();
     }
 

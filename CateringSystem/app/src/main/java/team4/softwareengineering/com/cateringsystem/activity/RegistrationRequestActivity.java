@@ -126,7 +126,7 @@ public class RegistrationRequestActivity extends AppCompatActivity {
 
 
         for(DatabaseUsersModel databaseUser: databaseAdapter.getUsers()){
-            if(databaseUser.getUserColumnStatus().equalsIgnoreCase("PENDING")){
+            if(databaseUser.getUserColumnStatus().equalsIgnoreCase("Pending")){
                 adminRegistrationRequestModels.add(databaseUser);
             }
         }

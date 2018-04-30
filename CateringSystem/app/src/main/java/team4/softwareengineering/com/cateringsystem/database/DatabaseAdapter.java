@@ -199,7 +199,9 @@ public class DatabaseAdapter {
     public boolean deleteUser(int userID) {
         return sqLliteDatabase.delete(USER_TABLE, USER_COLUMN_USER_ID + " = " + userID, null) > 0;
     }
-
+    public boolean deleteRequest(){
+        return sqLliteDatabase.delete(USER_TABLE,USER_COLUMN_CATEGORY+" is "+ null,null) > 0;
+    }
     public boolean updateUserProfile(int userID, DatabaseUsersModel databaseUsersModel){
         ContentValues contentValues=new ContentValues();
 
@@ -207,8 +209,7 @@ public class DatabaseAdapter {
         contentValues.put(USER_COLUMN_LAST_NAME, databaseUsersModel.getUserColumnLastName());
         contentValues.put(USER_COLUMN_EMAIL_ID, databaseUsersModel.getUserColumnEmailId());
         contentValues.put(USER_COLUMN_PHONE_NUMBER, databaseUsersModel.getUserColumnPhoneNumber());
-        contentValues.put(USER_COLUMN_STATUS, databaseUsersModel.getUserColumnStatus());
-      // contentValues.put(USER_COLUMN_CATEGORY, databaseUsersModel.getUserColumnCategory());   //   I COMMENTED THIS BECAUSE WE DO NOT NEED TO UPDATE THIS.
+        //contentValues.put(USER_COLUMN_CATEGORY, databaseUsersModel.getUserColumnCategory());   //   I COMMENTED THIS BECAUSE WE DO NOT NEED TO UPDATE THIS.
                                                                                                 // AT THE TIME OF RUNNING THE GET VALUE RETURNS NULL WHICH
                                                                                                  //WILL REPLACE THE ORIGINAL VALUE. THE SAME APPLIES TO ALL THE
                                                                                                  // ONES I COMMENTED OUT.
@@ -217,7 +218,25 @@ public class DatabaseAdapter {
       //  contentValues.put(USER_COLUMN_UTA_ID, databaseUsersModel.getUserColumnUtaId());       //DOES NOT NEED TO BE UPDATED
 
         contentValues.put(USER_COLUMN_TIMESTAMP, databaseUsersModel.getUserColumnTimestamp());
-      //  contentValues.put(USER_COLUMN_STATUS, databaseUsersModel.getUserColumnStatus());
+       // contentValues.put(USER_COLUMN_STATUS, databaseUsersModel.getUserColumnStatus());
+
+        return sqLliteDatabase.update(USER_TABLE,contentValues, USER_COLUMN_USER_ID+" = "+userID,null)>0;
+    }
+
+    public boolean updateUserProfileAdmin(int userID, DatabaseUsersModel databaseUsersModel){
+        ContentValues contentValues=new ContentValues();
+
+        contentValues.put(USER_COLUMN_FIRST_NAME, databaseUsersModel.getUserColumnFirstName());
+        contentValues.put(USER_COLUMN_LAST_NAME, databaseUsersModel.getUserColumnLastName());
+        contentValues.put(USER_COLUMN_EMAIL_ID, databaseUsersModel.getUserColumnEmailId());
+        contentValues.put(USER_COLUMN_PHONE_NUMBER, databaseUsersModel.getUserColumnPhoneNumber());
+        contentValues.put(USER_COLUMN_STATUS, databaseUsersModel.getUserColumnStatus());
+        contentValues.put(USER_COLUMN_CATEGORY, databaseUsersModel.getUserColumnCategory());   //   Admin can update these fields
+        contentValues.put(USER_COLUMN_PASSWORD, databaseUsersModel.getUserColumnPassword());
+        contentValues.put(USER_COLUMN_ADDRESS, databaseUsersModel.getUserColumnAddress());
+        contentValues.put(USER_COLUMN_UTA_ID, databaseUsersModel.getUserColumnUtaId());       //DOES NOT NEED TO BE UPDATED
+        contentValues.put(USER_COLUMN_TIMESTAMP, databaseUsersModel.getUserColumnTimestamp());
+        contentValues.put(USER_COLUMN_STATUS, databaseUsersModel.getUserColumnStatus());
 
         return sqLliteDatabase.update(USER_TABLE,contentValues, USER_COLUMN_USER_ID+" = "+userID,null)>0;
     }
@@ -249,10 +268,10 @@ public class DatabaseAdapter {
                 USER_COLUMN_USER_ID,USER_COLUMN_CATEGORY
         };
         // selection criteria
-        String selection = USER_COLUMN_UTA_ID + " = ?" + " AND " + USER_COLUMN_PASSWORD + " = ?";
+        String selection = USER_COLUMN_UTA_ID + " = ?" + " AND " + USER_COLUMN_PASSWORD + " = ? AND "+ USER_COLUMN_STATUS+" = ?";
 
         // selection arguments
-        String[] selectionArgs = {utaId, password};
+        String[] selectionArgs = {utaId, password,"approved"};
 
         // query user table with conditions
         /**

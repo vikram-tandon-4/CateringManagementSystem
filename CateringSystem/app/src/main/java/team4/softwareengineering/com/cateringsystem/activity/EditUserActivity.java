@@ -37,6 +37,7 @@ public class EditUserActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TextView tvTbTitle,tvSave;
     private EditText etUtaId, etFirstName, etLastName, etEmail, etPhoneNumber, etPassword;
+
     private DatabaseAdapter databaseAdapter;
     private Dialog confirmDialog;
 
@@ -62,7 +63,7 @@ public class EditUserActivity extends AppCompatActivity {
         etEmail = (EditText)findViewById(R.id.etEmail);
         etPhoneNumber = (EditText)findViewById(R.id.etPhoneNumber);
         etPassword = (EditText)findViewById(R.id.etPassword);
-
+        spinnerCategory = (Spinner) findViewById(R.id.spinnerCategory);
         tvSave = (TextView) findViewById(R.id.tvSave);
 
         tvSave.setOnClickListener(new View.OnClickListener() {
@@ -76,8 +77,7 @@ public class EditUserActivity extends AppCompatActivity {
                 databaseUsersModel.setUserColumnPhoneNumber(etPhoneNumber.getText().toString());
                 databaseUsersModel.setUserColumnPassword(etPassword.getText().toString());
                 databaseUsersModel.setUserColumnCategory(spinnerCategory.getSelectedItem().toString());
-
-                databaseAdapter.updateUserProfile(databaseUsersModel.getUserColumnUserId(),databaseUsersModel);
+                databaseAdapter.updateUserProfileAdmin(databaseUsersModel.getUserColumnUserId(),databaseUsersModel);
 
                 Toast.makeText(mContext,"Update saved",Toast.LENGTH_LONG).show();
                 finish();
